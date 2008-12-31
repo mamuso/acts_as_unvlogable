@@ -1,7 +1,8 @@
 class Videogrinder
   
   def initialize(url=nil)
-    @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url) rescue {}
+    raise ArgumentError, "We need a video url" if url.blank?
+    @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url)
   end
   
   def title
