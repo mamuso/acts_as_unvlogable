@@ -1,5 +1,6 @@
 # ----------------------------------------------
 #  Class for Youtube (youtube.com)
+#  http://www.youtube.com/watch?v=25AsfkriHQc
 # ----------------------------------------------
 
 

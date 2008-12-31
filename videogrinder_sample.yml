@@ -1,12 +1,12 @@
 # fill the gaps :)
 # 
 # 
-# youtube
+# youtube => http://code.google.com/intl/en-EN/apis/youtube/2.0/developers_guide_protocol.html#Developer_Key
 youtube_key: 
 
-# vimeo
+# vimeo => http://vimeo.com/api
 vimeo_key: 
 vimeo_secret: 
 
-# flickr
+# flickr => 
 flickr_key: 

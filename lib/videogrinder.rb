@@ -5,23 +5,23 @@ class Videogrinder
   end
   
   def title
-    @object.title rescue {}
+    @object.title rescue ""
   end
   
   def thumbnail
-    @object.thumbnail rescue {}
+    @object.thumbnail rescue ""
   end
   
   def embed_url
-    @object.embed_url rescue {}
+    @object.embed_url rescue ""
   end
 
   def embed_html(width=425, height=344, options={})
-    @object.embed_html(width, height, options) rescue {}
+    @object.embed_html(width, height, options) rescue ""
   end
   
   def flv
-    @object.flv rescue {}
+    @object.flv rescue ""
   end
   
   def video_details

@@ -1,5 +1,6 @@
 # ----------------------------------------------
 #  Class for Google Video (video.google.com)
+#  http://video.google.com/videoplay?docid=4798198171297333202&ei=Vq9aSeOmBYuGjQK-6Zy5CQ&q=pocoyo&hl=es
 # ----------------------------------------------
 
 
