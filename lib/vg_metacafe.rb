@@ -9,10 +9,14 @@ class VgMetacafe
   def initialize(url=nil)
     @url = url
     @args = parse_url(url)
+    
+    #is the video 'youtubed'?
+    @youtubed = @args[1].index("yt-").nil? ? false : true
+    @yt = @youtubed ? VgYoutube.new("http://www.youtube.com/watch?v=#{@args[1].sub('yt-', '')}") : ""
   end
   
   def title
-    @args[2].humanize unless @args[2].blank?
+    @youtubed ? @yt.title : (@args[2].humanize unless @args[2].blank?)
   end
   
   def thumbnail
@@ -28,11 +32,15 @@ class VgMetacafe
   end
   
   def flv
-    params = Hash.new
-    open(self.embed_url) {|f|
-      params = get_hash f.base_uri.request_uri.split("?")[1]
-    }
-    "#{CGI::unescape params['mediaURL']}?__gda__=#{params['gdaKey']}"
+    if @youtubed
+      @yt.flv
+    else
+      params = Hash.new
+      open(self.embed_url) {|f|
+        params = get_hash f.base_uri.request_uri.split("?")[1]
+      }
+      "#{CGI::unescape params['mediaURL']}?__gda__=#{params['gdaKey']}"
+    end
   end
   
   private
