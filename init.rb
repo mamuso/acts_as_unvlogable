@@ -7,3 +7,4 @@ require 'youtube'
 
 # Video classes
 require 'vg_youtube'
+require 'vg_google'

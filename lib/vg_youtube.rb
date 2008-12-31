@@ -1,8 +1,5 @@
 # ----------------------------------------------
-# 
-# 
-# 
-# 
+#  Class for Youtube (youtube.com)
 # ----------------------------------------------
 
 
@@ -13,7 +10,6 @@ class VgYoutube
     settings ||= YAML.load_file(RAILS_ROOT + '/config/videogrinder.yml') rescue {}
     object = YouTube::Client.new(key.nil? ? settings['youtube_key'] : key) rescue {}
     
-    # objects to build
     @url = url
     @video_id = parse_url(url)
     @details = object.video_details(@video_id)
