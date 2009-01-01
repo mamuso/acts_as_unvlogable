@@ -46,12 +46,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        assert_equal "Ninja cat comes closer while not moving!", @videotron.title
-        assert_not_nil @videotron.thumbnail
-        assert_not_nil @videotron.embed_url
-        assert_not_nil @videotron.embed_html
-        assert_not_nil @videotron.flv
-        assert_equal Hash, @videotron.video_details.class
+        check_video_attributes({:title => "Ninja cat comes closer while not moving!"})
       end
     end
 
@@ -68,14 +63,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        assert_equal "The Killers - Read My Mind", @videotron.title
-        assert_not_nil @videotron.thumbnail
-        assert_not_nil @videotron.flv
-        assert_equal Hash, @videotron.video_details.class
-        assert_nil @videotron.embed_url
-        assert_nil @videotron.embed_html
-        assert_nil @videotron.video_details[:embed_url]
-        assert_nil @videotron.video_details[:embed_html]
+        check_video_attributes({:title => "The Killers - Read My Mind", :noembed => true})
       end
     end
     
@@ -96,15 +84,11 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         assert_equal VgMetacafe, @videotron.instance_values['object'].class
         assert_equal "http://www.metacafe.com/watch/1135061/close_call_a320_caught_in_crosswinds/", @videotron.instance_values['object'].instance_values['url']
         assert_equal 3, @videotron.instance_values['object'].instance_values['args'].size
+        assert !@videotron.instance_values['object'].instance_values['youtubed']
       end
       
       should "return the video properties" do
-        assert_equal "Close call a320 caught in crosswinds", @videotron.title
-        assert_not_nil @videotron.thumbnail
-        assert_not_nil @videotron.embed_url
-        assert_not_nil @videotron.embed_html
-        assert_not_nil @videotron.flv
-        assert_equal Hash, @videotron.video_details.class
+        check_video_attributes({:title => "Close call a320 caught in crosswinds"})
       end
     end
     
@@ -112,4 +96,22 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
     
   end
   
+  
+  protected
+  
+  def check_video_attributes(options={})
+    assert_equal options[:title], @videotron.title unless (options.blank? || options[:title].blank?)
+    assert_not_nil @videotron.thumbnail
+    if options.blank? || options[:noembed].blank?
+      assert_not_nil @videotron.embed_url
+      assert_not_nil @videotron.embed_html
+    elsif options[:noembed]
+      assert_nil @videotron.embed_url
+      assert_nil @videotron.embed_html
+      assert_nil @videotron.video_details[:embed_url]
+      assert_nil @videotron.video_details[:embed_html]
+    end
+    assert_not_nil @videotron.flv
+    assert_equal Hash, @videotron.video_details.class
+  end
 end
