@@ -1,28 +1,29 @@
 class Videogrinder
   
-  def initialize(url=nil)
-    raise ArgumentError, "We need a video url" if url.blank?
-    @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url)
+  def initialize(url=nil, key=nil)
+    raise ArgumentError.new("We need a video url") if url.blank?
+    @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url, key) rescue nil
+            raise ArgumentError.new("Unsuported url or service") if @object.nil?
   end
   
   def title
-    @object.title rescue ""
+    @object.title rescue nil
   end
   
   def thumbnail
-    @object.thumbnail rescue ""
+    @object.thumbnail rescue nil
   end
   
   def embed_url
-    @object.embed_url rescue ""
+    @object.embed_url rescue nil
   end
 
   def embed_html(width=425, height=344, options={})
-    @object.embed_html(width, height, options) rescue ""
+    @object.embed_html(width, height, options) rescue nil
   end
   
   def flv
-    @object.flv rescue ""
+    @object.flv rescue nil
   end
   
   def video_details
