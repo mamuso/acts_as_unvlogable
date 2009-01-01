@@ -12,7 +12,7 @@ class VgMetacafe
     
     #is the video 'youtubed'?
     @youtubed = @args[1].index("yt-").nil? ? false : true
-    @yt = @youtubed ? VgYoutube.new("http://www.youtube.com/watch?v=#{@args[1].sub('yt-', '')}") : ""
+    @yt = @youtubed ? VgYoutube.new("http://www.youtube.com/watch?v=#{@args[1].sub('yt-', '')}", options) : nil
   end
   
   def title

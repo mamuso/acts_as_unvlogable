@@ -14,7 +14,7 @@ class VgGoogle
   end
   
   def title
-    REXML::XPath.first(@feed, "//item/title")[0]
+    REXML::XPath.first(@feed, "//item/title")[0].to_s
   end
   
   def thumbnail

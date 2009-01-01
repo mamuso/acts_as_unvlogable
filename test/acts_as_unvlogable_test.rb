@@ -72,19 +72,48 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://www.youtube.com/watch?v=inexistente", {:key => "RCofu-vAmeY"}) }
       end
     end
+
+
+
+# ----------------------------------------------------------
+#   Testing google video
+# ----------------------------------------------------------
+    context "with an existent google video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://video.google.com/videoplay?docid=4798198171297333202&ei=Vq9aSeOmBYuGjQK-6Zy5CQ") # => Pocoyo. Musica Maestro
+      end
+      should "initialize a VgGoogle instance" do
+        assert_equal VgGoogle, @videotron.instance_values['object'].class
+        assert_equal "http://video.google.com/videoplay?docid=4798198171297333202&ei=Vq9aSeOmBYuGjQK-6Zy5CQ", @videotron.instance_values['object'].instance_values['url']
+        assert_equal 4798198171297333202, @videotron.instance_values['object'].instance_values['video_id']
+        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Pocoyo. Musica Maestro"})
+      end
+    end
     
+    context "with an invalid google video url" do
+      should "raise an ArgumentError exception" do
+        assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://www.google.es/search?q=wadus") }
+      end
+    end
+
+
 # ----------------------------------------------------------
 #   Testing metacafe
 # ----------------------------------------------------------
     context "with an existent metacafe url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.metacafe.com/watch/1135061/close_call_a320_caught_in_crosswinds/") # => Close Call! A320 Caught in Crosswinds 
+        @videotron = UnvlogIt.new("http://www.metacafe.com/watch/1135061/close_call_a320_caught_in_crosswinds/", {:key => "RCofu-vAmeY"}) # => Close Call! A320 Caught in Crosswinds 
       end
       should "initialize a VgMetacafe instance" do
         assert_equal VgMetacafe, @videotron.instance_values['object'].class
         assert_equal "http://www.metacafe.com/watch/1135061/close_call_a320_caught_in_crosswinds/", @videotron.instance_values['object'].instance_values['url']
         assert_equal 3, @videotron.instance_values['object'].instance_values['args'].size
         assert !@videotron.instance_values['object'].instance_values['youtubed']
+        assert_nil @videotron.instance_values['object'].instance_values['yt']
       end
       
       should "return the video properties" do
@@ -92,6 +121,22 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
     end
     
+    context "with an existent 'youtubed' metacafe url" do
+      setup do
+        @videotron = UnvlogIt.new("http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/", {:key => "RCofu-vAmeY"}) # => Close Call! A320 Caught in Crosswinds 
+      end
+      should "initialize a VgMetacafe instance" do
+        assert_equal VgMetacafe, @videotron.instance_values['object'].class
+        assert_equal "http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/", @videotron.instance_values['object'].instance_values['url']
+        assert_equal 3, @videotron.instance_values['object'].instance_values['args'].size
+        assert @videotron.instance_values['object'].instance_values['youtubed']
+        assert VgYoutube, @videotron.instance_values['object'].instance_values['yt'].class
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Pop Rocks and Coke Myth"})
+      end
+    end
     
     
   end
@@ -100,7 +145,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
   protected
   
   def check_video_attributes(options={})
-    assert_equal options[:title], @videotron.title unless (options.blank? || options[:title].blank?)
+    assert_equal "#{options[:title]}", @videotron.title unless (options.blank? || options[:title].blank?)
     assert_not_nil @videotron.thumbnail
     if options.blank? || options[:noembed].blank?
       assert_not_nil @videotron.embed_url
