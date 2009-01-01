@@ -13,6 +13,7 @@ require 'youtube'
 require 'vg_youtube'
 require 'vg_google'
 require 'vg_metacafe'
+require 'vg_dailymotion'
 
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
@@ -140,7 +141,26 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
     
     
   end
-  
+
+
+# ----------------------------------------------------------
+#   Testing dailymotion
+# ----------------------------------------------------------
+    context "with an dailymotion video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport") # => parkour dayyy
+      end
+      should "initialize a VgDailymotion instance" do
+        assert_equal VgDailymotion, @videotron.instance_values['object'].class
+        assert_equal "http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "x7u5kn_parkour-dayyy_sport", @videotron.instance_values['object'].instance_values['video_id']
+        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "parkour dayyy"})
+      end
+    end
   
   protected
   
