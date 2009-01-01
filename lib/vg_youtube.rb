@@ -8,7 +8,7 @@ class VgYoutube
   
   def initialize(url=nil, key=nil)
     # general settings
-    settings ||= YAML.load_file(RAILS_ROOT + '/config/videogrinder.yml') rescue {}
+    settings ||= YAML.load_file(RAILS_ROOT + '/config/unvlogable.yml') rescue {}
     object = YouTube::Client.new(key.nil? ? settings['youtube_key'] : key) rescue {}
     
     @url = url

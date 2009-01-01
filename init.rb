@@ -1,5 +1,5 @@
 # Main class
-require 'videogrinder'
+require 'acts_as_unvlogable'
 
 # Gems & other herbs
 require 'open-uri'

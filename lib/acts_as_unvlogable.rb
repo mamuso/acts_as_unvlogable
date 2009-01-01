@@ -1,4 +1,4 @@
-class Videogrinder
+class UnvlogIt
   
   def initialize(url=nil, key=nil)
     raise ArgumentError.new("We need a video url") if url.blank?
