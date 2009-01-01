@@ -6,7 +6,7 @@
 
 class VgGoogle
   
-  def initialize(url=nil)
+  def initialize(url=nil, options={})
     @url = url
     @video_id = parse_url(url)
     res = Net::HTTP.get(URI.parse("http://video.google.com/videofeed?fgvns=1&fai=1&docid=#{@video_id}"))

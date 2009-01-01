@@ -8,3 +8,4 @@ require 'youtube'
 # Video classes
 require 'vg_youtube'
 require 'vg_google'
+require 'vg_metacafe'

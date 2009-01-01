@@ -6,7 +6,7 @@
 
 class VgMetacafe
   
-  def initialize(url=nil)
+  def initialize(url=nil, options={})
     @url = url
     @args = parse_url(url)
     

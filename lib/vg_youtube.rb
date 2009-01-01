@@ -6,10 +6,10 @@
 
 class VgYoutube
   
-  def initialize(url=nil, key=nil)
+  def initialize(url=nil, options={})
     # general settings
     settings ||= YAML.load_file(RAILS_ROOT + '/config/unvlogable.yml') rescue {}
-    object = YouTube::Client.new(key.nil? ? settings['youtube_key'] : key) rescue {}
+    object = YouTube::Client.new(options.nil? || options[:key].nil? ? settings['youtube_key'] : options[:key]) rescue {}
     
     @url = url
     @video_id = parse_url(url)

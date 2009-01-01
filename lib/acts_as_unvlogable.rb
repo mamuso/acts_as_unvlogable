@@ -1,8 +1,8 @@
 class UnvlogIt
   
-  def initialize(url=nil, key=nil)
+  def initialize(url=nil, options={})
     raise ArgumentError.new("We need a video url") if url.blank?
-    @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url, key) rescue nil
+    @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url, options) rescue nil
             raise ArgumentError.new("Unsuported url or service") if @object.nil?
   end
   
