@@ -8,6 +8,7 @@ $LOAD_PATH << File.dirname(__FILE__) + '/../lib'
 require 'acts_as_unvlogable'
 # Gems & other herbs
 require 'open-uri'
+require 'hpricot'
 require 'youtube'
 # Video classes
 require 'vg_youtube'
@@ -15,6 +16,8 @@ require 'vg_google'
 require 'vg_metacafe'
 require 'vg_dailymotion'
 require 'vg_collegehumor'
+require 'vg_blip'
+require 'vg_mtvmusic'
 
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
@@ -183,6 +186,46 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         check_video_attributes({:title => "Brohemian Rhapsody"})
       end
     end
+
+
+# ----------------------------------------------------------
+#   Testing blip.tv
+# ----------------------------------------------------------
+    context "with an blip.tv video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://blip.tv/file/678407/") # => Toy Break 26 : Adult Toys
+      end
+      should "initialize a VgBlip instance" do
+        assert_equal VgBlip, @videotron.instance_values['object'].class
+        assert_equal "http://blip.tv/file/678407/", @videotron.instance_values['object'].instance_values['url']
+        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Toy Break 26 : Adult Toys"})
+      end
+    end
+
+
+# ----------------------------------------------------------
+#   Testing mtvmusic.com
+# ----------------------------------------------------------
+    context "with an mtvmusic.com video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://www.mtvmusic.com/astley_rick/videos/55086/never_gonna_give_you_up.jhtml") # => Never Gonna Give You Up
+      end
+      should "initialize a VgMtvmusic instance" do
+        assert_equal VgMtvmusic, @videotron.instance_values['object'].class
+        assert_equal "http://www.mtvmusic.com/astley_rick/videos/55086/never_gonna_give_you_up.jhtml", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "55086", @videotron.instance_values['object'].instance_values['video_id']
+        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Never Gonna Give You Up"})
+      end
+    end
+
 
   protected
   
