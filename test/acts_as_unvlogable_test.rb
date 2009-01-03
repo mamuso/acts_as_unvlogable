@@ -23,6 +23,7 @@ require 'vg_mtvmusic'
 require 'vg_myspace'
 require 'vg_11870'
 require 'vg_dalealplay'
+require 'vg_flickr'
 
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
@@ -278,7 +279,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with an dalealplay.com video url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.dalealplay.com/informaciondecontenido.php?con=80280") # => rocabilis
+        @videotron = UnvlogIt.new("http://www.dalealplay.com/informaciondecontenido.php?con=80280") # => Camelos Semos  Jonathan  Tú si que vales
       end
       should "initialize a VgDalealplay instance" do
         assert_equal VgDalealplay, @videotron.instance_values['object'].class
@@ -291,6 +292,28 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         check_video_attributes({:title => "Camelos Semos  Jonathan  Tú si que vales "})
       end
     end
+
+
+
+# ----------------------------------------------------------
+#   Testing flickr.com
+# ----------------------------------------------------------
+    context "with an flickr.com video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://www.flickr.com/photos/andina/3158687163/in/photostream/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) # => Visto en la Tate Modern
+      end
+      should "initialize a VgFlickr instance" do
+        assert_equal VgFlickr, @videotron.instance_values['object'].class
+        assert_equal "http://www.flickr.com/photos/andina/3158687163/in/photostream/", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "3158687163", @videotron.instance_values['object'].instance_values['video_id']
+        assert_not_nil @videotron.instance_values['object'].instance_values['details']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Visto en la Tate Modern"})
+      end
+    end
+
 
 
   protected

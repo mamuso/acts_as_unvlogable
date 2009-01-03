@@ -369,16 +369,6 @@ class Flickr
     end
     
     
-    # unvlog
-    def media
-      @media.nil? ? getInfo.media : @media
-    end
-    
-    def secret
-      @secret.nil? ? getInfo.secret : @secret
-    end
-    
-    
 
     private
 
@@ -592,6 +582,17 @@ class Flickr
       title
     end
     
+    
+    # unvlog
+    def media
+      @media || getInfo("media")
+    end
+    
+    def secret
+      @secret || getInfo("secret")
+    end
+    
+    
     private
 
       # Implements flickr.photos.getInfo
@@ -600,6 +601,8 @@ class Flickr
         info = @client.photos_getInfo('photo_id'=>@id)['photo']
         @got_info = true
         info.each { |k,v| instance_variable_set("@#{k}", v)}
+        @media = info['media']
+        @secret = info['secret']
         @owner = User.new(info['owner']['nsid'], info['owner']['username'], nil, nil, @api_key)
         @tags = info['tags']['tag']
         @notes = info['notes']['note']#.collect { |note| Note.new(note.id) }
