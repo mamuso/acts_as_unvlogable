@@ -3,7 +3,9 @@ require 'acts_as_unvlogable'
 # Gems & other herbs
 require 'open-uri'
 require 'hpricot'
+# Included gems
 require 'youtube'
+require 'flickr'
 # Video classes
 require 'vg_youtube'
 require 'vg_google'
