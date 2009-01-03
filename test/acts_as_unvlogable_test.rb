@@ -22,6 +22,7 @@ require 'vg_blip'
 require 'vg_mtvmusic'
 require 'vg_myspace'
 require 'vg_11870'
+require 'vg_dalealplay'
 
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
@@ -268,6 +269,26 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       
       should "return the video properties" do
         check_video_attributes({:title => "Chic & Basic Born"})
+      end
+    end
+
+
+# ----------------------------------------------------------
+#   Testing dalealplay.com
+# ----------------------------------------------------------
+    context "with an dalealplay.com video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://www.dalealplay.com/informaciondecontenido.php?con=80280") # => rocabilis
+      end
+      should "initialize a VgDalealplay instance" do
+        assert_equal VgDalealplay, @videotron.instance_values['object'].class
+        assert_equal "http://www.dalealplay.com/informaciondecontenido.php?con=80280", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "80280", @videotron.instance_values['object'].instance_values['video_id']
+        assert_not_nil @videotron.instance_values['object'].instance_values['page']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Camelos Semos  Jonathan  Tú si que vales "})
       end
     end
 
