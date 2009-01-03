@@ -26,12 +26,12 @@ class UnvlogIt
     @object.flv rescue nil
   end
   
-  def video_details
+  def video_details(width=425, height=344)
     {
       :title => @object.title,
       :thumbnail => @object.thumbnail,
       :embed_url => @object.embed_url,
-      :embed_html => @object.embed_html,
+      :embed_html => @object.embed_html(width, height),
       :flv => @object.flv
     }
   end

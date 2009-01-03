@@ -28,7 +28,7 @@ class VgMetacafe
   end
 
   def embed_html(width=425, height=344, options={})
-    "<embed src='http://www.metacafe.com/fplayer/#{@args[1]}/#{@args[2]}.swf' width='#{width}' height='#{height}' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash'></embed>"
+    "<embed src='#{embed_url}' width='#{width}' height='#{height}' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash'></embed>"
   end
   
   def flv
