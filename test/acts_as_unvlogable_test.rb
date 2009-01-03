@@ -19,6 +19,7 @@ require 'vg_collegehumor'
 require 'vg_blip'
 require 'vg_mtvmusic'
 require 'vg_myspace'
+require 'vg_11870'
 
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
@@ -230,7 +231,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 
 
 # ----------------------------------------------------------
-#   Testing mtvmusic.com
+#   Testing vids.myspace.com
 # ----------------------------------------------------------
     context "with an vids.myspace.com video url" do
       setup do
@@ -245,6 +246,26 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       
       should "return the video properties" do
         check_video_attributes({:title => "rocabilis"})
+      end
+    end
+
+
+# ----------------------------------------------------------
+#   Testing 11870.com
+# ----------------------------------------------------------
+    context "with an 11870.com video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://11870.com/pro/chic-basic-born/media/b606abfe") # => rocabilis
+      end
+      should "initialize a Vg11870 instance" do
+        assert_equal Vg11870, @videotron.instance_values['object'].class
+        assert_equal "http://11870.com/pro/chic-basic-born/media/b606abfe", @videotron.instance_values['object'].instance_values['url']
+        assert_not_nil @videotron.instance_values['object'].instance_values['page']
+        assert_not_nil @videotron.instance_values['object'].instance_values['flashvars']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Chic & Basic Born"})
       end
     end
 
