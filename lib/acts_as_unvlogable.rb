@@ -1,3 +1,20 @@
+# Included gems
+require 'youtube'
+require 'flickr'
+# Video classes
+require 'vg_youtube'
+require 'vg_google'
+require 'vg_metacafe'
+require 'vg_dailymotion'
+require 'vg_collegehumor'
+require 'vg_blip'
+require 'vg_mtvmusic'
+require 'vg_myspace'
+require 'vg_11870'
+require 'vg_dalealplay'
+require 'vg_flickr'
+
+
 class UnvlogIt
   
   def initialize(url=nil, options={})
