@@ -301,6 +301,29 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
     end
 
 
+# ----------------------------------------------------------
+#   Testing qik.com
+# ----------------------------------------------------------
+    context "with an qik.com video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://qik.com/video/340982") # => Visto en la Tate Modern
+      end
+      should "initialize a VgQik instance" do
+        assert_equal VgQik, @videotron.instance_values['object'].class
+        assert_equal "http://qik.com/video/340982", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "340982", @videotron.instance_values['object'].instance_values['video_id']
+        assert_not_nil @videotron.instance_values['object'].instance_values['page']
+        assert_not_nil @videotron.instance_values['object'].instance_values['feed_url']
+        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Honolulu Day 8: USS Arizona at Pearl Harbor"})
+      end
+    end
+
+
+
 
   protected
   

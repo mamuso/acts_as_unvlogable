@@ -13,6 +13,7 @@ require 'vg_myspace'
 require 'vg_11870'
 require 'vg_dalealplay'
 require 'vg_flickr'
+require 'vg_qik'
 
 
 class UnvlogIt
@@ -20,7 +21,7 @@ class UnvlogIt
   def initialize(url=nil, options={})
     raise ArgumentError.new("We need a video url") if url.blank?
     @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url, options) rescue nil
-            raise ArgumentError.new("Unsuported url or service") if @object.nil?
+                raise ArgumentError.new("Unsuported url or service") if @object.nil?
   end
   
   def title
@@ -32,7 +33,7 @@ class UnvlogIt
   end
   
   def embed_url
-    @object.embed_url rescue nil
+    @object.embed_url #rescue nil
   end
 
   def embed_html(width=425, height=344, options={})
