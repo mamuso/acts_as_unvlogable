@@ -14,6 +14,7 @@ require 'vg_11870'
 require 'vg_dalealplay'
 require 'vg_flickr'
 require 'vg_qik'
+require 'vg_marca'
 
 
 class UnvlogIt

@@ -26,7 +26,7 @@ class VgBlip
   end
 
   def embed_html(width=425, height=344, options={})
-    "<embed src='#{embed_url}' type='application/x-shockwave-flash' width='#{width}' height='#{height} allowscriptaccess='always' allowfullscreen='true'></embed>"
+    "<embed src='#{embed_url}' type='application/x-shockwave-flash' width='#{width}' height='#{height}' allowscriptaccess='always' allowfullscreen='true'></embed>"
   end
   
   def flv

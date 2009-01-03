@@ -1,0 +1,55 @@
+# ----------------------------------------------
+#  Class for Marca.tv (www.marca.tv)
+#  http://www.marca.com/tv/?v=DN23wG8c1Rj
+# ----------------------------------------------
+
+
+class VgMarca
+  
+  def initialize(url=nil, options={})
+    @url = url
+    @video_id = parse_url(url)
+    res =  Net::HTTP.get(URI.parse("http://www.marca.com/consolamultimedia/marcaTV/elementos/#{@video_id[0,1]}/#{@video_id[1,1]}/#{@video_id[2,100]}.xml"))
+    @feed = REXML::Document.new(res)    
+  end
+  
+  def title
+    REXML::XPath.first( @feed, "//titulo" )[0].to_s
+  end
+  
+  def thumbnail
+    REXML::XPath.first( @feed, "//foto" )[0].to_s
+  end
+  
+  def embed_url
+    "http://www.marca.com/componentes/flash/embed.swf?ba=0&cvol=1&bt=1&lg=1&vID=#{@video_id}&ba=1"
+  end
+
+  def embed_html(width=425, height=344, options={})
+    "<embed width='#{width}' height='#{height}' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' allowfullscreen='true' quality='high' src='#{embed_url}'/>"
+  end
+  
+  def flv
+    REXML::XPath.first(@feed, "//media")[0].to_s
+  end
+  
+  
+  protected
+  
+  def parse_url(url)
+    uri = URI.parse(url)
+    args = uri.query
+    video_id = ''
+    if args and args.split('&').size >= 1
+      args.split('&').each do |arg|
+        k,v = arg.split('=')
+        video_id = v and break if k == 'v'
+      end
+      raise unless video_id
+      video_id
+    else
+      raise
+    end
+  end
+  
+end
