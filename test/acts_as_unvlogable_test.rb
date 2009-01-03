@@ -18,6 +18,7 @@ require 'vg_dailymotion'
 require 'vg_collegehumor'
 require 'vg_blip'
 require 'vg_mtvmusic'
+require 'vg_myspace'
 
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
@@ -223,6 +224,27 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       
       should "return the video properties" do
         check_video_attributes({:title => "Never Gonna Give You Up"})
+      end
+    end
+
+
+
+# ----------------------------------------------------------
+#   Testing mtvmusic.com
+# ----------------------------------------------------------
+    context "with an vids.myspace.com video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431") # => rocabilis
+      end
+      should "initialize a VgMyspace instance" do
+        assert_equal VgMyspace, @videotron.instance_values['object'].class
+        assert_equal "http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "27111431", @videotron.instance_values['object'].instance_values['video_id']
+        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "rocabilis"})
       end
     end
 

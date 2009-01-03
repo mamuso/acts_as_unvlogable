@@ -15,6 +15,15 @@ To include [this video](http://www.youtube.com/watch?v=GPQnbtldFyo) in [this pos
         @aha.thumbnail => "http://i4.ytimg.com/vi/GPQnbtldFyo/default.jpg"
         @aha.embed_url => "http://www.youtube.com/v/GPQnbtldFyo"
         @aha.embed_html(width, height) => "<object [...]</object>"
+        @aha.flv => "http://...flv"
+        # all together :)
+        @aha.video_details(width, height) => {
+                                                :title => ...,
+                                                :thumbnail => ...,
+                                                :embed_url => ...,
+                                                :embed_html => ...,
+                                                :flv => ...
+                                              }
         
 There is also a method to know where to download the flv.
 
