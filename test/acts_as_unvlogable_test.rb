@@ -1,7 +1,6 @@
 require 'test/unit'
 require 'rubygems'
 require 'shoulda'
-require 'active_support'
 
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib'
 # Main class
@@ -245,7 +244,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with an 11870.com video url" do
       setup do
-        @videotron = UnvlogIt.new("http://11870.com/pro/chic-basic-born/media/b606abfe") # => rocabilis
+        @videotron = UnvlogIt.new("http://11870.com/pro/chic-basic-born/media/b606abfe") # => Chic & Basic Born
       end
       should "initialize a Vg11870 instance" do
         assert_equal Vg11870, @videotron.instance_values['object'].class

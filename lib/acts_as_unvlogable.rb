@@ -1,6 +1,8 @@
 # Included gems
 require 'youtube'
 require 'flickr'
+# String extension
+require 'string_extend'
 # Video classes
 require 'vg_youtube'
 require 'vg_google'
