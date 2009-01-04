@@ -1,5 +1,5 @@
 # Included gems
-require 'youtube'
+require 'youtube_g'
 require 'flickr'
 # String extension
 require 'string_extend'
@@ -38,7 +38,7 @@ class UnvlogIt
   end
   
   def embed_url
-    @object.embed_url #rescue nil
+    @object.embed_url rescue nil
   end
 
   def embed_html(width=425, height=344, options={})

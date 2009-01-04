@@ -32,7 +32,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with an existent youtube url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=muLIPWjks_M", {:key => "RCofu-vAmeY"}) # => Ninja cat comes closer while not moving!
+        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=muLIPWjks_M") # => Ninja cat comes closer while not moving!
       end
       should "initialize a VgYoutube instance" do
         assert_equal VgYoutube, @videotron.instance_values['object'].class
@@ -49,7 +49,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 
     context "with an existent youtube url that can not be embedded" do
       setup do
-        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=3Oec8RuwVVs", {:key => "RCofu-vAmeY"}) # => The Killers - Read My Mind
+        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=3Oec8RuwVVs") # => The Killers - Read My Mind
       end
       should "initialize a VgYoutube instance" do
         assert_equal VgYoutube, @videotron.instance_values['object'].class
@@ -65,7 +65,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
     
     context "with an inexistent youtube url" do
       should "raise an ArgumentError" do
-        assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://www.youtube.com/watch?v=inexistente", {:key => "RCofu-vAmeY"}) }
+        assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://www.youtube.com/watch?v=inexistente") }
       end
     end
 
@@ -102,7 +102,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with an existent metacafe url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.metacafe.com/watch/1135061/close_call_a320_caught_in_crosswinds/", {:key => "RCofu-vAmeY"}) # => Close Call! A320 Caught in Crosswinds 
+        @videotron = UnvlogIt.new("http://www.metacafe.com/watch/1135061/close_call_a320_caught_in_crosswinds/") # => Close Call! A320 Caught in Crosswinds 
       end
       should "initialize a VgMetacafe instance" do
         assert_equal VgMetacafe, @videotron.instance_values['object'].class
@@ -119,7 +119,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
     
     context "with an existent 'youtubed' metacafe url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/", {:key => "RCofu-vAmeY"}) # => Close Call! A320 Caught in Crosswinds 
+        @videotron = UnvlogIt.new("http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/") # => Close Call! A320 Caught in Crosswinds 
       end
       should "initialize a VgMetacafe instance" do
         assert_equal VgMetacafe, @videotron.instance_values['object'].class
