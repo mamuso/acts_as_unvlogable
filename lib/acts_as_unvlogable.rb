@@ -59,8 +59,6 @@ class UnvlogIt
     }
   end
   
-  private
-  
   def get_domain(url)
     host = URI::parse(url).host.split(".")
     unless host.size == 1
