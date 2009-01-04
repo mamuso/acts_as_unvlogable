@@ -35,7 +35,7 @@ Install it!
 
         script/plugin install git://github.com/mamuso/acts_as_unvlogable.git
         
-2. Optionally you can create the `config/unvlogable.yml` to store keys for the different services. You have in the plugin a [sample file](http://github.com/mamuso/acts_as_unvlogable/tree/master/unvlogable_sample.yml)
+2. Optionally you can create the `config/unvlogable.yml` to store keys for the different services. You have in the plugin a [sample file](http://github.com/mamuso/acts_as_unvlogable/tree/master/unvlogable_sample.yml). At this moment you only need specify keys for youtube and flickr.
 
 
 Use it!
