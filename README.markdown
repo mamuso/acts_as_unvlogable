@@ -4,7 +4,7 @@ Acts as unvlogable
 What the hell is this!
 ----------------------
 
-This is the plugin that we use in [unvlog.com](http://unvlog.com) to manage the supported video services. Is an easy way to obtain a few basics about a video only through its url.
+This is the plugin that we use in [unvlog.com](http://unvlog.com) to manage the supported video services. It is an easy way to obtain a few basics about a video only through its url.
 
 A quick example:
 
@@ -42,11 +42,11 @@ Use it!
 -------
 
 
-The idea is make it as simple as possible. For a given video URL as "http://vimeo.com/1785993":http://vimeo.com/1785993:
+The idea is make it as simple as possible. For a given video URL as <http://vimeo.com/1785993>:
 
         videotron = UnvlogIt.new("http://vimeo.com/1785993")
 
-Then we have methods to know the 'basics' for use this video on our application.
+Then we have methods to know the 'basics' for use this video on your application.
 
 -   **title:** A method to know the title of the video on the service.
   
