@@ -48,38 +48,61 @@ The idea is make it as simple as possible. For a given video URL as "http://vime
 
 Then we have methods to know the 'basics' for use this video on our application.
 
-  * **title:** A method to know the title of the video on the service.
+-   **title:** A method to know the title of the video on the service.
   
           videotron.title
           => "Beached"
 
-  * **thumbnail:** An image representation of the video. Each service has a different size, but... it works :)
+-   **thumbnail:** An image representation of the video. Each service has a different size, but... it works :)
 
           videotron.thumbnail
           => "http://bc1.vimeo.com/vimeo/thumbs/143104745_640.jpg"
 
-  * **embed_url:** The url (with flashvars) of the video player.
+-   **embed_url:** The url (with flashvars) of the video player.
 
           videotron.embed_url
           => "http://vimeo.com/moogaloop.swf?clip_id=1785993 [...] &show_portrait=1"
 
-  * **embed_html(width, height):** Uses the embed_url to build an oembed string. The default width x height is 425 x 344, but we can specify a different one.
+-   **embed_html(width, height):** Uses the embed_url to build an oembed string. The default width x height is 425 x 344, but we can specify a different one.
 
           videotron.embed_html(400, 300)
           => "<object width='400' height='300'><param name='mo [...] 300'></embed></object>"
 
-  * **flv:** Gets the flv url. In this edition we implement this method in all the services, but is possible that we can't get the flv in some scenarios. Remember that in some services the flv url expires and in most of their terms don't allow use the flv without its player.
+-   **flv:** Gets the flv url. In this edition we implement this method in all the services, but is possible that we can't get the flv in some scenarios. Remember that in some services the flv url expires and in most of their terms don't allow use the flv without its player.
 
           videotron.flv
           => "http://www.vimeo.com/moogaloop/play/clip:1785993/ [...] 8ee400/video.flv"
 
-  * **video_details(width, height):** All together :), returns all the previous elements in a hash. Width and height can be specified to build the embed_html.
+-   **video_details(width, height):** All together :), returns all the previous elements in a hash. Width and height can be specified to build the embed_html.
 
           videotron.video_details
           => "{ [...] }"
 
 
+Supported services
+------------------
+
+At this moment we support the following video services:
+
+-   [Youtube](http://www.youtube.com/)
+-   [Google video](http://video.google.com/)
+-   [Vimeo](http://vimeo.com/)
+-   [Flickr (videos)](http://flickr.com/)
+-   [Metacafe](http://metacafe.com/)
+-   [Dailymotion](http://dailymotion.com/)
+-   [Collegehumor](http://collegehumor.com/)
+-   [Blip.tv](http://blip.tv/)
+-   [Myspace](http://vids.myspace.com/)
+-   [Ted Talks](http://www.ted.com/talks/)
+-   [11870.com](http://11870.com/)
+-   [Qik](http://qik.com/)
+-   [Marca.tv](http://www.marca.tv/)
+-   [Dalealplay](http://www.dalealplay.com/)
+
+We are always open to incude new services.
+
 And... what else?
 -----------------
-If you find a bug or want to suggest a new video service, please post us [a ticket](http://tickets.unvlog.com/projects/show/acts-as-unvlogable).
+If you find a bug or want to suggest a new video service, please tell it to us in [a ticket](http://tickets.unvlog.com/projects/show/acts-as-unvlogable).
 
+Thanks!!
