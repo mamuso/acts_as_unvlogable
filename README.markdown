@@ -41,5 +41,7 @@ Install it!
 And... what else?
 -----------------
 
-To know the supported services and particular uses we will do (in a near future :D) a complete documentation in [the wiki](https://github.com/mamuso/acts_as_unvlogable/wikis)
+To know the supported services and particular uses we will do (in a near future :D) a complete documentation in [the wiki](https://github.com/mamuso/acts_as_unvlogable/wikis). 
+
+If you find a bug or want to suggest a new video service, please post us [a ticket](http://tickets.unvlog.com/projects/show/acts-as-unvlogable).
 
