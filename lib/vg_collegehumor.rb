@@ -26,7 +26,7 @@ class VgCollegehumor
   end
 
   def embed_html(width=425, height=344, options={})
-    "<object type='application/x-shockwave-flash' data='#{embed_url}' width='#{width}' height='#{height}><param name='allowfullscreen' value='true'/><param name='wmode' value='transparent'/><param name='AllowScriptAccess' value='true'/><param name='movie' quality='best' value='#{embed_url}'/><embed src='#{embed_url}' type='application/x-shockwave-flash' wmode='transparent' width='#{width}' height='#{height} allowScriptAccess='always'></embed></object>"
+    "<object type='application/x-shockwave-flash' data='#{embed_url}' width='#{width}' height='#{height}'><param name='allowfullscreen' value='true'/><param name='wmode' value='transparent'/><param name='AllowScriptAccess' value='true'/><param name='movie' quality='best' value='#{embed_url}'/><embed src='#{embed_url}' type='application/x-shockwave-flash' wmode='transparent' width='#{width}' height='#{height}' allowScriptAccess='always'></embed></object>"
   end
   
   def flv

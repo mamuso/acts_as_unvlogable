@@ -345,6 +345,33 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 
 
 
+# ----------------------------------------------------------
+#   Testing ted talks
+# ----------------------------------------------------------
+    context "with an ted talks video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://www.ted.com/index.php/talks/benjamin_wallace_on_the_price_of_happiness.html") # => Benjamin Wallace: Does happiness have a price tag?
+      end
+      should "initialize a VgTed instance" do
+        assert_equal VgTed, @videotron.instance_values['object'].class
+        assert_equal "http://www.ted.com/index.php/talks/benjamin_wallace_on_the_price_of_happiness.html", @videotron.instance_values['object'].instance_values['url']
+        assert_not_nil @videotron.instance_values['object'].instance_values['page']
+        assert_not_nil @videotron.instance_values['object'].instance_values['flashvars']
+        assert_not_nil @videotron.instance_values['object'].instance_values['args']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "Benjamin Wallace: Does happiness have a price tag?"})
+      end
+    end
+    
+    context "with an invalid ted talks video url" do
+      should "raise an ArgumentError exception" do
+        assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://www.ted.com/index.php/wadus.html") }
+      end
+    end
+
+
 
 
   protected
