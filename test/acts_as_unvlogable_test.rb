@@ -142,7 +142,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing dailymotion
 # ----------------------------------------------------------
-    context "with an dailymotion video url" do
+    context "with a dailymotion video url" do
       setup do
         @videotron = UnvlogIt.new("http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport") # => parkour dayyy
       end
@@ -163,7 +163,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing collegehumor
 # ----------------------------------------------------------
-    context "with an collegehumor video url" do
+    context "with a collegehumor video url" do
       setup do
         @videotron = UnvlogIt.new("http://www.collegehumor.com/video:1781938") # => Brohemian Rhapsody
       end
@@ -183,7 +183,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing blip.tv
 # ----------------------------------------------------------
-    context "with an blip.tv video url" do
+    context "with a blip.tv video url" do
       setup do
         @videotron = UnvlogIt.new("http://blip.tv/file/678407/") # => Toy Break 26 : Adult Toys
       end
@@ -202,7 +202,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing mtvmusic.com
 # ----------------------------------------------------------
-    context "with an mtvmusic.com video url" do
+    context "with a mtvmusic.com video url" do
       setup do
         @videotron = UnvlogIt.new("http://www.mtvmusic.com/astley_rick/videos/55086/never_gonna_give_you_up.jhtml") # => Never Gonna Give You Up
       end
@@ -223,7 +223,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing vids.myspace.com
 # ----------------------------------------------------------
-    context "with an vids.myspace.com video url" do
+    context "with a vids.myspace.com video url" do
       setup do
         @videotron = UnvlogIt.new("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431") # => rocabilis
       end
@@ -263,7 +263,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing dalealplay.com
 # ----------------------------------------------------------
-    context "with an dalealplay.com video url" do
+    context "with a dalealplay.com video url" do
       setup do
         @videotron = UnvlogIt.new("http://www.dalealplay.com/informaciondecontenido.php?con=80280") # => Camelos Semos  Jonathan  Tú si que vales
       end
@@ -284,7 +284,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing flickr.com
 # ----------------------------------------------------------
-    context "with an flickr.com video url" do
+    context "with a flickr.com video url" do
       setup do
         @videotron = UnvlogIt.new("http://www.flickr.com/photos/andina/3158687163/in/photostream/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) # => Visto en la Tate Modern
       end
@@ -304,7 +304,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing qik.com
 # ----------------------------------------------------------
-    context "with an qik.com video url" do
+    context "with a qik.com video url" do
       setup do
         @videotron = UnvlogIt.new("http://qik.com/video/340982") # => Honolulu Day 8: USS Arizona at Pearl Harbor
       end
@@ -327,7 +327,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing www.marca.tv
 # ----------------------------------------------------------
-    context "with an www.marca.tv video url" do
+    context "with a www.marca.tv video url" do
       setup do
         @videotron = UnvlogIt.new("http://www.marca.com/tv/?v=DN23wG8c1Rj") # => Pau entra por la puerta grande en el club de los 10.000
       end
@@ -348,7 +348,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
 #   Testing ted talks
 # ----------------------------------------------------------
-    context "with an ted talks video url" do
+    context "with a ted talks video url" do
       setup do
         @videotron = UnvlogIt.new("http://www.ted.com/index.php/talks/benjamin_wallace_on_the_price_of_happiness.html") # => Benjamin Wallace: Does happiness have a price tag?
       end
@@ -372,6 +372,24 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
     end
 
 
+# ----------------------------------------------------------
+#   Testing vimeo
+# ----------------------------------------------------------
+    context "with a vimeo video url" do
+      setup do
+        @videotron = UnvlogIt.new("http://vimeo.com/2354261") # => People are strange
+      end
+      should "initialize a VgVimeo instance" do
+        assert_equal VgVimeo, @videotron.instance_values['object'].class
+        assert_equal "http://vimeo.com/2354261", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "2354261", @videotron.instance_values['object'].instance_values['video_id']
+        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
+      end
+      
+      should "return the video properties" do
+        check_video_attributes({:title => "People are strange"})
+      end
+    end
 
 
   protected
