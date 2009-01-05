@@ -1,28 +1,14 @@
 # Included gems
 require 'youtube_g'
-require 'flickr'
+require 'acts_as_unvlogable/flickr'
 # Extensions
 if defined?(ActiveSupport).nil?
-  require 'string_extend'
-  require 'object_extend'
+  require 'acts_as_unvlogable/string_extend'
+  require 'acts_as_unvlogable/object_extend'
 end
 # Video classes
-require 'vg_youtube'
-require 'vg_google'
-require 'vg_metacafe'
-require 'vg_dailymotion'
-require 'vg_collegehumor'
-require 'vg_blip'
-require 'vg_mtvmusic'
-require 'vg_myspace'
-require 'vg_11870'
-require 'vg_dalealplay'
-require 'vg_flickr'
-require 'vg_qik'
-require 'vg_marca'
-require 'vg_ted'
-require 'vg_vimeo'
-
+videolibs = File.join("**", "acts_as_unvlogable", "vg_*.rb")
+Dir.glob(videolibs).each {|file| require file}
 
 class UnvlogIt
   

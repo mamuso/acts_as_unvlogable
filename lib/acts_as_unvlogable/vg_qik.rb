@@ -12,8 +12,8 @@ class VgQik
     @page = Hpricot(open("http://qik.com/video/#{@video_id}"))
     emb = @page.search('//input[@value^="<object"]').first.attributes['value']
     tx = Hpricot(emb)
-    @feed_url =  CGI::parse(tx.search('//embed').first.attributes['flashvars'].to_s)["rssURL"]
-    res =  Net::HTTP.get(URI.parse(@feed_url))
+    @feed_url =  CGI::parse(tx.search('//embed').first.attributes['flashvars'].to_s)["rssURL"].to_s
+    res =  Net::HTTP.get(URI::parse(@feed_url))
     @feed = REXML::Document.new(res)
   end
   

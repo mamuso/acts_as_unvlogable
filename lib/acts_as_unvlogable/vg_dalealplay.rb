@@ -10,7 +10,7 @@ class VgDalealplay
   
   def initialize(url=nil, options={})
     @url = url
-    @video_id = parse_url(url)
+    @video_id = @url.query_param('con')
     @page = Hpricot(open(url))
   end
   
@@ -34,14 +34,4 @@ class VgDalealplay
     "http://videos.dalealplay.com/contenidos3/#{CGI::parse(URI::parse(embed_url).query)['file']}"
   end
   
-  protected
-  
-  def parse_url(url)
-      uri = URI.parse(url)
-      video_id = nil
-      if uri.query && !url.index('informaciondecontenido').nil?
-        video_id = CGI.parse(uri.query)['con']
-      end
-      video_id
-  end
 end

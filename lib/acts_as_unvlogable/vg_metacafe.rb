@@ -39,7 +39,7 @@ class VgMetacafe
       open(self.embed_url) {|f|
         params = CGI::parse(f.base_uri.request_uri.split("?")[1])
       }
-      "#{CGI::unescape params['mediaURL']}?__gda__=#{params['gdaKey']}"
+      CGI::unescape "#{ params['mediaURL']}?__gda__=#{params['gdaKey']}"
     end
   end
   
