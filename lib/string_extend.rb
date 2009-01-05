@@ -1,6 +1,6 @@
 # This removes the activesupport dependency
 
-class String  
+class String
   def camelize(first_letter_in_uppercase = true)
      if first_letter_in_uppercase
        self.to_s.gsub(/\/(.?)/) { "::#{$1.upcase}" }.gsub(/(?:^|_)(.)/) { $1.upcase }
@@ -18,8 +18,10 @@ class String
     Object.module_eval("::#{$1}", __FILE__, __LINE__)
   end
   
-  def humanize
-    self.to_s.gsub(/_id$/, "").gsub(/_/, " ").capitalize
+  def query_param(param_name)
+    raise ArgumentError.new("param name can't be nil")
+    
+    uri = URI.parse(self)
+    (CGI::parse(uri.query)[param_name] if uri.query) || nil
   end
-  
 end
