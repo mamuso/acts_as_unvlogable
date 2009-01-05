@@ -8,7 +8,7 @@ class VgMyspace
   
   def initialize(url=nil, options={})
     @url = url
-    @video_id = parse_url(url)
+    @video_id = @url.query_param('videoid')
     res = Net::HTTP.get(URI.parse("http://mediaservices.myspace.com/services/rss.ashx?type=video&videoID=#{@video_id}"))
     @feed = REXML::Document.new(res)
   end
@@ -31,13 +31,6 @@ class VgMyspace
   
   def flv
     REXML::XPath.first(@feed, "//media:content").attributes['url']
-  end
-  
-  private
-  
-  def parse_url(url)
-    uri = URI.parse(url)
-    (CGI::parse(uri.query)['videoid'] if uri.query) || nil
   end
   
 end

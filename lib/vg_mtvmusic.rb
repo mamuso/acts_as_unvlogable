@@ -11,7 +11,7 @@ class VgMtvmusic
   
   def initialize(url=nil, options={})
     @url = url
-    @video_id = parse_url(url)
+    @video_id = @url.query_param('id') || URI.parse(@url).path.split("/")[3]
     @feed = nil
 
     # veeeeeery ugly
@@ -48,13 +48,6 @@ class VgMtvmusic
     res =  Net::HTTP.get(URI.parse("http://api-media.mtvnservices.com/player/embed/includes/mediaGen.jhtml?uri=mgid:uma:video:api.mtvnservices.com:#{@video_id}&vid=#{@video_id}&ref=#{CGI::escape "{ref}"}"))
     search = REXML::Document.new(res)
     REXML::XPath.first(search, "//rendition/src")[0]
-  end
-  
-  private
-  
-  def parse_url(url)
-      uri = URI.parse(url)
-      (CGI::parse(uri.query)['id'] if uri.query) || uri.path.split("/")[3]
   end
   
 end

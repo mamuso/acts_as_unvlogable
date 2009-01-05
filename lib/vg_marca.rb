@@ -8,7 +8,7 @@ class VgMarca
   
   def initialize(url=nil, options={})
     @url = url
-    @video_id = parse_url(url)
+    @video_id = @url.query_param('v')
     res =  Net::HTTP.get(URI.parse("http://www.marca.com/consolamultimedia/marcaTV/elementos/#{@video_id[0,1]}/#{@video_id[1,1]}/#{@video_id[2,100]}.xml"))
     @feed = REXML::Document.new(res)    
   end
@@ -31,14 +31,6 @@ class VgMarca
   
   def flv
     REXML::XPath.first(@feed, "//media")[0].to_s
-  end
-  
-  
-  protected
-  
-  def parse_url(url)
-    uri = URI.parse(url)
-    (CGI::parse(uri.query)['v'] if uri.query) || nil
   end
   
 end

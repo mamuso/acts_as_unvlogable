@@ -8,7 +8,7 @@ class VgGoogle
   
   def initialize(url=nil, options={})
     @url = url
-    @video_id = parse_url(url)
+    @video_id = @url.query_param('docid')
     res = Net::HTTP.get(URI.parse("http://video.google.com/videofeed?fgvns=1&fai=1&docid=#{@video_id}"))
     @feed = REXML::Document.new(res)
   end
@@ -32,12 +32,5 @@ class VgGoogle
   def flv
     REXML::XPath.first(@feed, "//media:content[@type='video/x-flv']").attributes['url']
   end
-  
-  private
-  
-  def parse_url(url)
-      uri = URI.parse(url)
-      (CGI::parse(uri.query)['docid'] if uri.query) || nil
-  end
-  
+
 end

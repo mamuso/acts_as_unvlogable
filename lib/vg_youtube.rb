@@ -9,7 +9,7 @@ class VgYoutube
   def initialize(url=nil, options={})
     object = YouTubeG::Client.new rescue {}
     @url = url
-    @video_id = parse_url(url)
+    @video_id = @url.query_param('v')
     @details = object.video_by(@video_id)
     raise if @details.blank?
   end
@@ -38,13 +38,6 @@ class VgYoutube
     doc = URI::parse(@url).read
     t = doc.split("&t=")[1].split("&")[0]
     "http://www.youtube.com/get_video.php?video_id=#{@video_id}&t=#{t}"
-  end
-  
-  private
-  
-  def parse_url(url)
-    uri = URI.parse(url)
-    (CGI::parse(uri.query)['v'] if uri.query) || nil    
   end
   
 end
