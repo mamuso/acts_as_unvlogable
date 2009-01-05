@@ -31,36 +31,17 @@ class VgDalealplay
   end
   
   def flv
-    "http://videos.dalealplay.com/contenidos3/#{get_hash(URI::parse(embed_url).query)['file']}"
+    "http://videos.dalealplay.com/contenidos3/#{CGI::parse(URI::parse(embed_url).query)['file']}"
   end
   
   protected
   
   def parse_url(url)
       uri = URI.parse(url)
-      args = uri.query
-      video_id = ''
-      if args && !url.index('informaciondecontenido').nil?
-        args.split('&').each do |arg|
-          k,v = arg.split('=')
-          video_id = v and break if k == 'con'
-        end
-        raise unless video_id
-      else
-        raise
+      video_id = nil
+      if uri.query && !url.index('informaciondecontenido').nil?
+        video_id = CGI.parse(uri.query)['con']
       end
       video_id
-    rescue
-      nil
   end
-  
-  def get_hash(string)
-    hash = Hash.new
-    string.split("&").each do |elemement|
-      pieces = elemement.split("=")
-      hash[pieces[0]] = pieces[1]
-    end
-    hash.delete_if { |key, value| value.nil? }
-  end
-  
 end

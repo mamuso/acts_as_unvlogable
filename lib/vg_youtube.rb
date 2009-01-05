@@ -44,20 +44,7 @@ class VgYoutube
   
   def parse_url(url)
     uri = URI.parse(url)
-    args = uri.query
-    video_id = ''
-    if args and args.split('&').size >= 1
-      args.split('&').each do |arg|
-        k,v = arg.split('=')
-        video_id = v and break if k == 'v'
-      end
-      raise unless video_id
-    else
-      raise
-    end
-    video_id
-  rescue
-    nil    
+    (CGI::parse(uri.query)['v'] if uri.query) || nil    
   end
   
 end

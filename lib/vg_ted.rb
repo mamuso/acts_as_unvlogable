@@ -13,7 +13,7 @@ class VgTed
     emb = @page.search("//input[@id='embedCode']").first.attributes['value']
     tx = Hpricot(emb)
     @flashvars = tx.search('//embed').first.attributes['flashvars'].to_s
-    @args = get_hash(@flashvars)
+    @args = CGI::parse(@flashvars)
   end
   
   def title
@@ -36,15 +36,4 @@ class VgTed
     @args['vu']
   end
   
-  protected
-  
-  def get_hash(string)
-    hash = Hash.new
-    string.split("&").each do |elemement|
-      pieces = elemement.split("=")
-      hash[pieces[0]] = pieces[1]
-    end
-    hash.delete_if { |key, value| value.nil? }
-  end
-
 end

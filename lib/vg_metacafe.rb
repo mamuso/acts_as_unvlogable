@@ -37,7 +37,7 @@ class VgMetacafe
     else
       params = Hash.new
       open(self.embed_url) {|f|
-        params = get_hash f.base_uri.request_uri.split("?")[1]
+        params = CGI::parse(f.base_uri.request_uri.split("?")[1])
       }
       "#{CGI::unescape params['mediaURL']}?__gda__=#{params['gdaKey']}"
     end
@@ -61,15 +61,5 @@ class VgMetacafe
     rescue
       nil
   end
-  
-  def get_hash(string)
-    hash = Hash.new
-    string.split("&").each do |elemement|
-      pieces = elemement.split("=")
-      hash[pieces[0]] = pieces[1]
-    end
-    hash.delete_if { |key, value| value.nil? }
-  end
-  
   
 end

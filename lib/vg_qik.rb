@@ -12,7 +12,7 @@ class VgQik
     @page = Hpricot(open("http://qik.com/video/#{@video_id}"))
     emb = @page.search('//input[@value^="<object"]').first.attributes['value']
     tx = Hpricot(emb)
-    @feed_url =  get_hash(tx.search('//embed').first.attributes['flashvars'].to_s)["rssURL"]
+    @feed_url =  CGI::parse(tx.search('//embed').first.attributes['flashvars'].to_s)["rssURL"]
     res =  Net::HTTP.get(URI.parse(@feed_url))
     @feed = REXML::Document.new(res)
   end
@@ -40,30 +40,15 @@ class VgQik
   protected
   
   def parse_url(url)
-    video_id = ''
+    video_id = nil
     if url.split('#').size > 1
-      url.split('#').each do |arg|
-        k,v = arg.split('=')
-        video_id = v and break if k == 'v'
-      end
+      pieces = url.split(/#|=/)
+      hash = Hash[*pieces]
+      video_id = hash['v']
     else
       video_id = url.split("/")[4]
     end
-    raise unless video_id
     video_id
-    rescue
-      nil
   end
-  
-  
-  def get_hash(string)
-    hash = Hash.new
-    string.split("&").each do |elemement|
-      pieces = elemement.split('=')
-      hash[pieces[0]] = "#{pieces[1]}"
-    end
-    hash.delete_if { |key, value| value.nil? }
-  end
-  
   
 end

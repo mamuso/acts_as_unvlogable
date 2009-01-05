@@ -55,19 +55,7 @@ class VgMtvmusic
   def parse_url(url)
       uri = URI.parse(url)
       args = uri.query
-      video_id = nil
-      if args and args.split('&').size >= 1
-        args.split('&').each do |arg|
-          k,v = arg.split('=')
-          video_id = v and break if k == 'id'
-        end
-      else
-        video_id = URI::parse(url).path.split("/")[3]
-      end
-      raise if video_id.nil?
-      video_id
-    rescue
-      nil
+      (CGI::parse(uri.query)['id'] if uri.query) || uri.path.split("/")[3]
   end
   
 end

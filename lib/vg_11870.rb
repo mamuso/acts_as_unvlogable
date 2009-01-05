@@ -9,7 +9,7 @@ class Vg11870
   def initialize(url=nil, options={})
     @url = url
     @page = Hpricot(open(url))
-    @flashvars = get_hash(@page.to_s.split("var flashvars = {")[1].split("};")[0]).delete_if {|key, value| key == "displaywidth" }
+    @flashvars = get_hash(/var flashvars = \{(.+)\}/.match(@page.to_s)[1])
     @flashvars['logo'] = "http://11870.com#{@flashvars['logo']}" unless @flashvars['logo'].blank?
   end
   
@@ -37,12 +37,9 @@ class Vg11870
   protected
   
   def get_hash(string)
-    hash = Hash.new
-    string.split(",").each do |elemement|
-      pieces = elemement.split(': "')
-      hash[pieces[0]] = "#{pieces[1]}".gsub('"', '').to_s
-    end
-    hash.delete_if { |key, value| value.nil? }
+    pieces = string.gsub('"', '').split(/,|:\s/)
+    hash = Hash[*pieces]
+    hash.delete_if { |key, value| value.nil? || key == "displaywidth" }
   end
   
 end

@@ -37,20 +37,7 @@ class VgGoogle
   
   def parse_url(url)
       uri = URI.parse(url)
-      args = uri.query
-      video_id = ''
-      if args and args.split('&').size >= 1
-        args.split('&').each do |arg|
-          k,v = arg.split('=')
-          video_id = v.to_i and break if k == 'docid'
-        end
-        raise unless video_id
-      else
-        raise
-      end
-      video_id
-    rescue
-      nil
+      (CGI::parse(uri.query)['docid'] if uri.query) || nil
   end
   
 end

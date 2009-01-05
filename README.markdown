@@ -41,7 +41,7 @@ Install it!
 Dependencies
 ------------
 
-The plugin depends on [youtube-g](http://rubyforge.org/projects/youtube-g/) and [hpricot](https://code.whytheluckystiff.net/hpricot/).
+The plugin depends on [youtube-g](http://rubyforge.org/projects/youtube-g/), [xml-simple](http://xml-simple.rubyforge.org/) and [hpricot](https://code.whytheluckystiff.net/hpricot/).
 
 We have included a modified version of the flickr gem to skip the gem dependency and manage video capabilities.
 
