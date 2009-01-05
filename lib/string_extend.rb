@@ -2,7 +2,7 @@
 
 class String
   def blank?
-    self == ''
+    respond_to?(:empty?) ? empty? : !self
   end
   
   def camelize(first_letter_in_uppercase = true)
