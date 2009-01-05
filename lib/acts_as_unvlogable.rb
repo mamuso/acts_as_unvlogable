@@ -3,9 +3,10 @@ require 'youtube_g'
 require 'acts_as_unvlogable/flickr'
 # Extensions
 if defined?(ActiveSupport).nil?
-  require 'acts_as_unvlogable/string_extend'
-  require 'acts_as_unvlogable/object_extend'
+  require 'acts_as_unvlogable/string_base'
+  require 'acts_as_unvlogable/object_base'
 end
+require 'acts_as_unvlogable/string_extend'
 # Video classes
 videolibs = File.join("**", "acts_as_unvlogable", "vg_*.rb")
 Dir.glob(videolibs).each {|file| require file}
