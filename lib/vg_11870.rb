@@ -22,7 +22,8 @@ class Vg11870
   end
   
   def embed_url
-    "http://11870.com/multimedia/flvplayer.swf?#{@flashvars.to_query}" 
+    query = @flashvars.map {|k,v| "&#{k}=#{v}"}
+    "http://11870.com/multimedia/flvplayer.swf?#{query}"
   end
 
   def embed_html(width=425, height=344, options={})

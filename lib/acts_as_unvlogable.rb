@@ -1,8 +1,11 @@
 # Included gems
 require 'youtube_g'
 require 'flickr'
-# String extension
-require 'string_extend'
+# Extensions
+if defined?(ActiveSupport).nil?
+  require 'string_extend'
+  require 'object_extend'
+end
 # Video classes
 require 'vg_youtube'
 require 'vg_google'

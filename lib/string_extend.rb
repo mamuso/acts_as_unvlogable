@@ -1,10 +1,6 @@
 # This removes the activesupport dependency
 
-class String
-  def blank?
-    respond_to?(:empty?) ? empty? : !self
-  end
-  
+class String  
   def camelize(first_letter_in_uppercase = true)
      if first_letter_in_uppercase
        self.to_s.gsub(/\/(.?)/) { "::#{$1.upcase}" }.gsub(/(?:^|_)(.)/) { $1.upcase }
@@ -21,4 +17,9 @@ class String
 
     Object.module_eval("::#{$1}", __FILE__, __LINE__)
   end
+  
+  def humanize
+    self.to_s.gsub(/_id$/, "").gsub(/_/, " ").capitalize
+  end
+  
 end
