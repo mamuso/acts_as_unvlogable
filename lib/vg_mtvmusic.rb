@@ -54,7 +54,6 @@ class VgMtvmusic
   
   def parse_url(url)
       uri = URI.parse(url)
-      args = uri.query
       (CGI::parse(uri.query)['id'] if uri.query) || uri.path.split("/")[3]
   end
   
