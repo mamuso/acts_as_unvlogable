@@ -17,7 +17,7 @@ class VgTed
       "&#{i[0]}=#{i[1].gsub('");', '')}"
     }.join
     emb = "#{url}?#{emb.gsub(" ", "")}"
-    @flashvars = "vu=http://video.ted.com/talks/embed/#{emb.query_param('hs').split("/")[-1].split("-stream-")[0]}-embed-PARTNER_high.flv&su=http://images.ted.com/images/ted/tedindex/embed-posters/#{emb.query_param('hs').split("/")[-1].split("-stream-")[0].gsub("_", "-")}.embed_thumbnail.jpg"
+    @flashvars = "vu=http://video.ted.com/talks/embed/#{emb.query_param('hs').split("/")[-1].split("-stream-")[0]}-embed#{"-PARTNER" unless emb.query_param('hs').index("PARTNER").nil?}_high.flv&su=http://images.ted.com/images/ted/tedindex/embed-posters/#{emb.query_param('hs').split("/")[-1].split("-stream-")[0].gsub("_", "-")}.embed_thumbnail.jpg"
     @args = CGI::parse(@flashvars)
   end
   
