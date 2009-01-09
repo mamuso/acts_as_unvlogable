@@ -26,7 +26,7 @@ class VgTed
   end
   
   def thumbnail
-    @args['su']
+    "#{@args['su']}"
   end
   
   def embed_url
@@ -38,7 +38,7 @@ class VgTed
   end
   
   def flv
-    @args['vu']
+    "#{@args['vu'].to_s}"
   end
   
 end
