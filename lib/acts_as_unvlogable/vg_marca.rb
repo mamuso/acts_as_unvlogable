@@ -9,7 +9,7 @@ class VgMarca
   def initialize(url=nil, options={})
     @url = url
     @video_id = @url.query_param('v')
-    res =  Net::HTTP.get(URI.parse("http://www.marca.com/consolamultimedia/marcaTV/elementos/#{@video_id[0,1]}/#{@video_id[1,1]}/#{@video_id[2,100]}.xml"))
+    res =  Net::HTTP.get(URI.parse("http://estaticos.marca.com/consolamultimedia/marcaTV/elementos/#{@video_id[0,1]}/#{@video_id[1,1]}/#{@video_id[2,100]}.xml"))
     @feed = REXML::Document.new(res)    
   end
   
