@@ -9,21 +9,21 @@ class VgDailymotion
   def initialize(url=nil, options={})
     @url = url
     @video_id = parse_url(url)
-    res = Net::HTTP.get(URI.parse("http://www.dailymotion.com/atom/video/#{@video_id}"))
+    res = Net::HTTP.get(URI.parse("http://www.dailymotion.com/rss/video/#{@video_id}"))
     @feed = REXML::Document.new(res)
   end
   
   def title
-    REXML::XPath.first(@feed, "//title")[0].to_s.gsub("Dailymotion - ", "")
+    REXML::XPath.first(@feed, "//item/title")[0].to_s
   end
   
   def thumbnail
-    th = URI.parse REXML::XPath.first(@feed, "//link[@type='image/jpeg']").attributes['href']
+    th = URI.parse REXML::XPath.first(@feed, "//media:thumbnail").attributes['url']
     "http://#{th.host}/dyn/preview/160x120/#{th.path.split("/").pop}"
   end
   
   def embed_url
-    REXML::XPath.first(@feed, "//link[@type='application/x-shockwave-flash']").attributes['href']
+    REXML::XPath.first(@feed, "//media:content[@type='application/x-shockwave-flash']").attributes['url']
   end
 
   def embed_html(width=425, height=344, options={})
@@ -31,7 +31,7 @@ class VgDailymotion
   end
   
   def flv
-    REXML::XPath.first(@feed, "//link[@type='video/x-flv']").attributes['href']
+    REXML::XPath.first(@feed, "//media:content[@type='video/x-flv']").attributes['url']
   end
   
   private

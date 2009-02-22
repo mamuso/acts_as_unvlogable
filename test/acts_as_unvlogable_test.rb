@@ -153,7 +153,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Parkour Dayyy"})
+        check_video_attributes({:title => "parkour dayyy"})
       end
     end
 
