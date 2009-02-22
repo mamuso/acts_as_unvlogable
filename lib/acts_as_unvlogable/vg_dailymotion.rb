@@ -14,7 +14,7 @@ class VgDailymotion
   end
   
   def title
-    REXML::XPath.first(@feed, "//title")[0].to_s
+    REXML::XPath.first(@feed, "//title")[0].to_s.gsub("Dailymotion - ", "")
   end
   
   def thumbnail

@@ -15,7 +15,7 @@ class VgDalealplay
   end
   
   def title
-    (Iconv.iconv 'utf-8', 'iso-8859-1', @page.search("//title").inner_html.split(" - www.dalealplay.com")[0]).to_s
+    (Iconv.iconv 'utf-8', 'iso-8859-1', @page.search("//title").inner_html.split("   www dalealplay com")[0]).to_s
   end
   
   def thumbnail
