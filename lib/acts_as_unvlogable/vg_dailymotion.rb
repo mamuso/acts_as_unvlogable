@@ -41,7 +41,7 @@ class VgDailymotion
       path = uri.path
       videoargs = ''
       if path
-        videoargs = path.match(/x.*/)[0]
+        videoargs = path.split('/video/')[1].split("/")[0]
         raise unless videoargs.size > 0
       else
         raise
