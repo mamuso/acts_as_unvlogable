@@ -48,19 +48,9 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 
 
     context "with an existent youtube url that can not be embedded" do
-      setup do
-        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=3Oec8RuwVVs") # => The Killers - Read My Mind
-      end
-      should "initialize a VgYoutube instance" do
-        assert_equal VgYoutube, @videotron.instance_values['object'].class
-        assert_equal "http://www.youtube.com/watch?v=3Oec8RuwVVs", @videotron.instance_values['object'].instance_values['url']
-        assert_equal "3Oec8RuwVVs", @videotron.instance_values['object'].instance_values['video_id']
-        assert_not_nil @videotron.instance_values['object'].instance_values['details']
-      end
-      
-      should "return the video properties" do
-        check_video_attributes({:title => "The Killers - Read My Mind", :noembed => true})
-      end
+        should "raise an ArgumentError" do
+          assert_raise(ArgumentError, "Embedding disabled by request") { UnvlogIt.new("http://www.youtube.com/watch?v=3Oec8RuwVVs") }# => The Killers - Read My Mind 
+        end
     end
     
     context "with an inexistent youtube url" do
