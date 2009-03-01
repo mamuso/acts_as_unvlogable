@@ -19,6 +19,7 @@ class UnvlogIt
     raise ArgumentError.new("We need a video url") if url.blank?
     @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url, options) rescue nil
                 raise ArgumentError.new("Unsuported url or service") if @object.nil?
+                raise ArgumentError.new("Embedding disabled by request") if @object.instance_variable_get("@details").noembed
   end
   
   def title
