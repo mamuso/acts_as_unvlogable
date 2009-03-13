@@ -10,14 +10,9 @@ class VgTed
     @url = url
     raise unless URI::parse(url).path.split("/").include? "talks"
     @page = Hpricot(open(url))
-    embedder = @page.to_s.split("new SWFObject")[1].split("so.addParam")[0].gsub("\n", "").gsub("\t", "").split("so.addVariable(\"")
-    embedder.shift
-    emb =embedder.map {|k| 
-      i = k.split("\",\"")
-      "&#{i[0]}=#{i[1].gsub('");', '')}"
-    }.join
-    emb = "#{url}?#{emb.gsub(" ", "")}"
-    @flashvars = "vu=http://video.ted.com/talks/embed/#{emb.query_param('hs').split("/")[-1].split("-stream-")[0]}-embed#{"-PARTNER" unless emb.query_param('hs').index("PARTNER").nil?}_high.flv&su=http://images.ted.com/images/ted/tedindex/embed-posters/#{emb.query_param('hs').split("/")[-1].split("-stream-")[0].gsub("_", "-")}.embed_thumbnail.jpg"
+    id = @page.to_s.split("/id/")[1].split("\"")[0]
+    @page = Hpricot(open("http://www.ted.com/talks/embed/id/#{id}"))
+    @flashvars = CGI::unescapeHTML(@page.to_s).split("param name=\"flashvars\" value=\"")[1].split("\"")[0]
     @args = CGI::parse(@flashvars)
   end
   
