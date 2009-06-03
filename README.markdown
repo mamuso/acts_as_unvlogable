@@ -106,6 +106,7 @@ At this moment we support the following video services:
 -   [Qik](http://qik.com/)
 -   [Marca.tv](http://www.marca.tv/)
 -   [Dalealplay](http://www.dalealplay.com/)
+-   [RuTube](http://www.rutube.ru/)
 
 We are always open to incude new services.
 
