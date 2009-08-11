@@ -43,6 +43,10 @@ class UnvlogIt
   def flv
     @object.flv rescue nil
   end
+
+  def service
+    @object.service rescue nil
+  end
   
   def video_details(width=425, height=344)
     {
@@ -50,9 +54,11 @@ class UnvlogIt
       :thumbnail => @object.thumbnail,
       :embed_url => @object.embed_url,
       :embed_html => @object.embed_html(width, height),
-      :flv => @object.flv
+      :flv => @object.flv,
+      :service => @object.service
     }
   end
+
   
   def get_domain(url)
     host = URI::parse(url).host.split(".")

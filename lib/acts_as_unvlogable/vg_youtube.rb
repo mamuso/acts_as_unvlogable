@@ -41,5 +41,9 @@ class VgYoutube
     t = doc.split("&t=")[1].split("&")[0]
     "http://www.youtube.com/get_video.php?video_id=#{@video_id}&t=#{t}"
   end
-  
+
+  def service
+    "Youtube"
+  end
+
 end

@@ -44,6 +44,10 @@ class VgFlickr
    stream = REXML::XPath.first(video_feed_xml, "//DATA/SEQUENCE-ITEM/STREAM")
    "#{stream.attributes['APP']}#{stream.attributes['FULLPATH']}"
   end
+
+  def service
+    "Flickr"
+  end
   
   private
   

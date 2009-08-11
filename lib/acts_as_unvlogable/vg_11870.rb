@@ -34,6 +34,10 @@ class Vg11870
     @flashvars['file']
   end
   
+  def service
+    "11870.com"
+  end
+  
   protected
   
   def get_hash(string)

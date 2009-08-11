@@ -36,7 +36,11 @@ class VgQik
   def flv
     REXML::XPath.first(@feed, "//item/media:content[@type='video/x-flv']").attributes['url']
   end
-  
+
+  def service
+    "Qik"
+  end
+
   protected
   
   def parse_url(url)

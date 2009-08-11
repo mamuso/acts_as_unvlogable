@@ -32,5 +32,9 @@ class VgMarca
   def flv
     REXML::XPath.first(@feed, "//media")[0].to_s
   end
+
+  def service
+    "Marca.tv"
+  end
   
 end

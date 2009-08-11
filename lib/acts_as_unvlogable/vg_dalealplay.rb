@@ -33,5 +33,9 @@ class VgDalealplay
   def flv
     "http://videos.dalealplay.com/contenidos3/#{CGI::parse(URI::parse(embed_url).query)['file']}"
   end
+
+  def service
+    "dalealplay"
+  end
   
 end

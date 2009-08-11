@@ -32,6 +32,10 @@ class VgCollegehumor
   def flv
     REXML::XPath.first(@feed, "//video/file")[0]
   end
+
+  def service
+    "CollegeHumor"
+  end
   
   private
   

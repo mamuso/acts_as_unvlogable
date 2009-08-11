@@ -49,5 +49,9 @@ class VgMtvmusic
     search = REXML::Document.new(res)
     REXML::XPath.first(search, "//rendition/src")[0]
   end
-  
+
+  def service
+    "MTV Music"
+  end
+
 end

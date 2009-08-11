@@ -42,7 +42,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Ninja cat comes closer while not moving!"})
+        check_video_attributes({:title => "Ninja cat comes closer while not moving!", :service => "Youtube"})
       end
     end
 
@@ -76,7 +76,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Pocoyo. Musica Maestro"})
+        check_video_attributes({:title => "Pocoyo. Musica Maestro", :service => "Google Video"})
       end
     end
     
@@ -103,7 +103,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Close call a320 caught in crosswinds"})
+        check_video_attributes({:title => "Close call a320 caught in crosswinds", :service => "Metacafe"})
       end
     end
     
@@ -120,7 +120,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Pop Rocks and Coke Myth"})
+        check_video_attributes({:title => "Pop Rocks and Coke Myth", :service => "Metacafe"})
       end
     end
     
@@ -143,7 +143,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "parkour dayyy"})
+        check_video_attributes({:title => "parkour dayyy", :service => "Dailymotion"})
       end
     end
 
@@ -164,7 +164,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Brohemian Rhapsody"})
+        check_video_attributes({:title => "Brohemian Rhapsody", :service => "CollegeHumor"})
       end
     end
 
@@ -183,7 +183,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Toy Break 26 : Adult Toys"})
+        check_video_attributes({:title => "Toy Break 26 : Adult Toys", :service => "Blip.tv"})
       end
     end
 
@@ -203,7 +203,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Never Gonna Give You Up"})
+        check_video_attributes({:title => "Never Gonna Give You Up", :service => "MTV Music"})
       end
     end
 
@@ -224,7 +224,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "rocabilis"})
+        check_video_attributes({:title => "rocabilis", :service => "Myspace"})
       end
     end
 
@@ -244,7 +244,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Chic & Basic Born"})
+        check_video_attributes({:title => "Chic & Basic Born", :service => "11870.com"})
       end
     end
 
@@ -264,7 +264,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Camelos Semos  Jonathan  Tú si que vales "})
+        check_video_attributes({:title => "Camelos Semos  Jonathan  Tú si que vales ", :service => "dalealplay"}) 
       end
     end
 
@@ -285,7 +285,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Visto en la Tate Modern"})
+        check_video_attributes({:title => "Visto en la Tate Modern", :service => "Flickr"})
       end
     end
 
@@ -307,7 +307,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Honolulu Day 8: USS Arizona at Pearl Harbor"})
+        check_video_attributes({:title => "Honolulu Day 8: USS Arizona at Pearl Harbor", :service => "Qik"})
       end
     end
 
@@ -328,7 +328,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Pau entra por la puerta grande en el club de los 10.000"})
+        check_video_attributes({:title => "Pau entra por la puerta grande en el club de los 10.000", :service => "Marca.tv"})
       end
     end
 
@@ -350,7 +350,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Benjamin Wallace: Does happiness have a price tag?"})
+        check_video_attributes({:title => "Benjamin Wallace: Does happiness have a price tag?", :service => "Ted Talks"})
       end
     end
     
@@ -376,7 +376,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "People are strange"})
+        check_video_attributes({:title => "People are strange", :service => "Vimeo"})
       end
     end
 
@@ -384,6 +384,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
   protected
   
   def check_video_attributes(options={})
+    assert_equal "#{options[:service]}", @videotron.service unless (options.blank? || options[:service].blank?)
     assert_equal "#{options[:title]}", @videotron.title unless (options.blank? || options[:title].blank?)
     assert_not_nil @videotron.thumbnail
     if options.blank? || options[:noembed].blank?

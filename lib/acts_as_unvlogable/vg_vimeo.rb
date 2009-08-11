@@ -29,14 +29,17 @@ class VgVimeo
   def embed_html(width=425, height=344, options={})
     "<object width='#{width}' height='#{height}'><param name='movie' value='#{embed_url}'></param><param name='allowFullScreen' value='true'></param><param name='allowscriptaccess' value='always'></param><embed src='#{embed_url}' type='application/x-shockwave-flash' allowscriptaccess='always' allowfullscreen='true' width='#{width}' height='#{height}'></embed></object>"
   end
-  
-  
+
   def flv
     request_signature = REXML::XPath.first( @feed, "//request_signature" )[0]
     request_signature_expires = REXML::XPath.first( @feed, "//request_signature_expires" )[0]
     "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/video.flv"
   end
-  
+
+  def service
+    "Vimeo"
+  end
+
   protected
 
   def parse_url(url)

@@ -42,7 +42,11 @@ class VgMetacafe
       CGI::unescape "#{ params['mediaURL']}?__gda__=#{params['gdaKey']}"
     end
   end
-  
+
+  def service
+    "Metacafe"
+  end
+
   private
   
   def parse_url(url)

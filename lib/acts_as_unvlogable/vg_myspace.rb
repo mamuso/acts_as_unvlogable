@@ -32,5 +32,9 @@ class VgMyspace
   def flv
     REXML::XPath.first(@feed, "//media:content").attributes['url']
   end
-  
+
+  def service
+    "Myspace"
+  end
+
 end
