@@ -60,6 +60,11 @@ Then we have methods to know the 'basics' for use this video on your application
   
           videotron.title
           => "Beached"
+          
+-   __service:__ A method to know the name of the video provider service.
+
+        videotron.service
+        => "Vimeo"
 
 -   __thumbnail:__ An image representation of the video. Each service has a different size, but... it works :)
 

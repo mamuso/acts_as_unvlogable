@@ -384,8 +384,8 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
   protected
   
   def check_video_attributes(options={})
-    assert_equal "#{options[:service]}", @videotron.service unless (options.blank? || options[:service].blank?)
     assert_equal "#{options[:title]}", @videotron.title unless (options.blank? || options[:title].blank?)
+    assert_equal "#{options[:service]}", @videotron.service unless (options.blank? || options[:service].blank?)
     assert_not_nil @videotron.thumbnail
     if options.blank? || options[:noembed].blank?
       assert_not_nil @videotron.embed_url
