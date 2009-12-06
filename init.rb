@@ -1,5 +1,6 @@
 # Main class
 require 'acts_as_unvlogable'
-# Gems & other herbs
+# Gems & libs
 require 'open-uri'
 require 'hpricot'
+require 'iconv'

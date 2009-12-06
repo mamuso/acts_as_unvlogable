@@ -16,8 +16,8 @@ class VgMtvmusic
 
     # veeeeeery ugly
     page = Hpricot(open(url))
-    searchterms = page.search("//title").first.inner_html.split("-")
-    res =  Net::HTTP.get(URI.parse("http://api.mtvnservices.com/1/video/search/?term=#{searchterms[1].gsub(' ', '%20')}#{searchterms[2].gsub(' ', '%20')}"))
+    searchterms = page.search("//title").first.inner_html.split("Music Video")
+    res =  Net::HTTP.get(URI.parse("http://api.mtvnservices.com/1/video/search/?term=#{searchterms[0].gsub(' ', '%20')}"))
     search = REXML::Document.new(res)
     entries = search.elements.to_a("//entry")
     entries.each do |entry|

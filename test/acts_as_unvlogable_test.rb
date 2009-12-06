@@ -275,17 +275,17 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with a flickr.com video url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.flickr.com/photos/andina/3158687163/in/photostream/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) # => Visto en la Tate Modern
+        @videotron = UnvlogIt.new("http://www.flickr.com/photos/jerovital/4152225414/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) # => la primera vela
       end
       should "initialize a VgFlickr instance" do
         assert_equal VgFlickr, @videotron.instance_values['object'].class
-        assert_equal "http://www.flickr.com/photos/andina/3158687163/in/photostream/", @videotron.instance_values['object'].instance_values['url']
-        assert_equal "3158687163", @videotron.instance_values['object'].instance_values['video_id']
+        assert_equal "http://www.flickr.com/photos/jerovital/4152225414/", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "4152225414", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['details']
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Visto en la Tate Modern", :service => "Flickr"})
+        check_video_attributes({:title => "flipando en los columpios", :service => "Flickr"})
       end
     end
 

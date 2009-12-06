@@ -14,7 +14,8 @@ class VgGoogle
   end
   
   def title
-    REXML::XPath.first(@feed, "//item/title")[0].to_s
+    title = Hpricot(open("http://video.google.com/videoplay?docid=#{@video_id}"))
+    title.search("//div[@id='video-title']")[0].html.to_s
   end
   
   def thumbnail
