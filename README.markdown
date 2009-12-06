@@ -117,6 +117,6 @@ We are always open to incude new services.
 
 And... what else?
 -----------------
-If you find a bug or want to suggest a new video service, please tell it to us in [a ticket](http://tickets.unvlog.com/projects/show/acts-as-unvlogable).
+If you find a bug or want to suggest a new video service, please tell it to us in [a ticket](http://github.com/mamuso/acts_as_unvlogable/issues).
 
 Thanks!!

@@ -18,8 +18,7 @@ class VgDailymotion
   end
   
   def thumbnail
-    th = URI.parse REXML::XPath.first(@feed, "//media:thumbnail").attributes['url']
-    "http://#{th.host}/dyn/preview/160x120/#{th.path.split("/").pop}"
+    REXML::XPath.first(@feed, "//media:thumbnail").attributes['url'].gsub("preview_large", "preview_medium")
   end
   
   def embed_url
