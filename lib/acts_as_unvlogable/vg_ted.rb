@@ -11,8 +11,8 @@ class VgTed
     raise unless URI::parse(url).path.split("/").include? "talks"
     @page = Hpricot(open(url))
     id = @page.to_s.split("/id/")[1].split("\"")[0]
-    @page = Hpricot(open("http://www.ted.com/talks/embed/id/#{id}"))
-    @flashvars = CGI::unescapeHTML(@page.to_s).split("param name=\"flashvars\" value=\"")[1].split("\"")[0]
+    @emb = Hpricot(open("http://www.ted.com/talks/embed/id/#{id}"))
+    @flashvars = CGI::unescapeHTML(@emb.to_s).split("param name=\"flashvars\" value=\"")[1].split("\"")[0]
     @args = CGI::parse(@flashvars)
   end
   
