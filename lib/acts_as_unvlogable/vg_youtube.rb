@@ -38,8 +38,7 @@ class VgYoutube
   
   def flv
     doc = URI::parse("http://www.youtube.com/get_video_info?&video_id=#{@video_id}").read
-    t = doc.split("&token=")[1].split("&")[0]
-    "http://www.youtube.com/get_video.php?video_id=#{@video_id}&t=#{t}"
+    CGI::unescape(doc.split("&fmt_url_map=")[1].split("&")[0]).split("|")[1].split(",")[0]
   end
 
   def service
