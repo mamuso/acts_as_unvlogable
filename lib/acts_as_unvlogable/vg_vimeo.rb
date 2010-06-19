@@ -23,7 +23,7 @@ class VgVimeo
   end
   
   def duration
-    REXML::XPath.first( @feed, "//duration" )[0].to_i
+    REXML::XPath.first( @feed, "//duration" )[0].to_s.to_i
   end
   
   def embed_url
