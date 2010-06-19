@@ -47,6 +47,10 @@ class VgRutube
     nil
   end
 
+  def duration
+    nil
+  end
+
   def service
     "Rutube"
   end

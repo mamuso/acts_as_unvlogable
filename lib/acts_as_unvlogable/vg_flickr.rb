@@ -49,6 +49,10 @@ class VgFlickr
     nil
   end
 
+  def duration
+    nil
+  end
+
   def service
     "Flickr"
   end

@@ -22,6 +22,10 @@ class VgVimeo
     REXML::XPath.first( @feed, "//thumbnail" )[0].to_s
   end
   
+  def duration
+    REXML::XPath.first( @feed, "//duration" )[0].to_i
+  end
+  
   def embed_url
     "http://vimeo.com/moogaloop.swf?clip_id=#{@video_id}&server=vimeo.com&fullscreen=1&show_title=1&show_byline=1&show_portrait=1"
   end

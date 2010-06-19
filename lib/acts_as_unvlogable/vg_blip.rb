@@ -20,6 +20,10 @@ class VgBlip
     REXML::XPath.first(@feed, "//blip:smallThumbnail")[0]
   end
   
+  def duration
+    nil
+  end
+  
   def embed_url
     emb = REXML::XPath.first(@feed, "//media:player")[0].to_s
     emb.split("src=\"")[1].split("\"")[0]

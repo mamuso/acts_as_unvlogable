@@ -37,6 +37,10 @@ class VgDailymotion
     nil
   end
 
+  def duration
+    nil
+  end
+
   def service
     "Dailymotion"
   end

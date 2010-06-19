@@ -34,6 +34,10 @@ class VgMtvmusic
   def thumbnail
     REXML::XPath.first(@feed, "//media:thumbnail").attributes['url']
   end
+ 
+  def duration
+    nil
+  end
   
   def embed_url
     REXML::XPath.first(@feed, "//media:content[@type='application/x-shockwave-flash']").attributes['url']

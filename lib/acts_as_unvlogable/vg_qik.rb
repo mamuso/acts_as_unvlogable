@@ -41,6 +41,10 @@ class VgQik
     nil
   end
 
+  def duration
+    nil
+  end
+
   def service
     "Qik"
   end

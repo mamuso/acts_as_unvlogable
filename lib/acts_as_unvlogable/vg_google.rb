@@ -22,6 +22,10 @@ class VgGoogle
     REXML::XPath.first(@feed, "//media:thumbnail").attributes['url']
   end
   
+  def duration
+    nil
+  end
+  
   def embed_url
     "http://video.google.com/googleplayer.swf?docid=#{@video_id}&fs=true"
   end

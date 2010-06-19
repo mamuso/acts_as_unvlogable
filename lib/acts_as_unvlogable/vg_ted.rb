@@ -24,6 +24,10 @@ class VgTed
     "#{@args['su']}"
   end
   
+  def duration
+    nil
+  end
+  
   def embed_url
       "http://video.ted.com/assets/player/swf/EmbedPlayer.swf?#{@flashvars}"
   end

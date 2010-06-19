@@ -37,6 +37,10 @@ class VgCollegehumor
     nil
   end
 
+  def duration
+    nil
+  end
+
   def service
     "CollegeHumor"
   end

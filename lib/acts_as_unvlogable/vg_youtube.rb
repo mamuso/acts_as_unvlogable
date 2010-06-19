@@ -22,6 +22,10 @@ class VgYoutube
     @details.thumbnails.first.url
   end
   
+  def duration
+    @details.duration
+  end
+  
   def embed_url
     @details.media_content.first.url if @details.noembed == false
   end
