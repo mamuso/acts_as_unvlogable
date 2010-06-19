@@ -50,6 +50,10 @@ class VgMtvmusic
     REXML::XPath.first(search, "//rendition/src")[0]
   end
 
+  def download_url
+    nil
+  end
+
   def service
     "MTV Music"
   end

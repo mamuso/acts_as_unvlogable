@@ -33,6 +33,10 @@ class VgBlip
     REXML::XPath.first(@feed, "//enclosure").attributes['url']
   end
 
+  def download_url
+    nil
+  end
+
   def service
     "Blip.tv"
   end

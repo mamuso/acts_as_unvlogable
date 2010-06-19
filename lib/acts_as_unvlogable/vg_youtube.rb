@@ -40,6 +40,10 @@ class VgYoutube
     doc = URI::parse("http://www.youtube.com/get_video_info?&video_id=#{@video_id}").read
     CGI::unescape(doc.split("&fmt_url_map=")[1].split("&")[0]).split("|")[1].split(",")[0]
   end
+  
+  def download_url
+    flv
+  end
 
   def service
     "Youtube"

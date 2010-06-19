@@ -43,6 +43,10 @@ class VgRutube
     "http://bl.rutube.ru/#{movie_hash}.iflv"
   end
 
+  def download_url
+    nil
+  end
+
   def service
     "Rutube"
   end

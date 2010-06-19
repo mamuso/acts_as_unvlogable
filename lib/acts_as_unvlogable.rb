@@ -55,6 +55,7 @@ class UnvlogIt
       :embed_url => @object.embed_url,
       :embed_html => @object.embed_html(width, height),
       :flv => @object.flv,
+      :download_url => @object.download_url,
       :service => @object.service
     }
   end

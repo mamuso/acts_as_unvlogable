@@ -33,6 +33,10 @@ class Vg11870
   def flv
     @flashvars['file']
   end
+ 
+  def download_url
+    nil
+  end
   
   def service
     "11870.com"

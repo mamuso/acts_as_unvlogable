@@ -33,6 +33,10 @@ class VgMarca
     REXML::XPath.first(@feed, "//media")[0].to_s
   end
 
+  def download_url
+    nil
+  end
+
   def service
     "Marca.tv"
   end

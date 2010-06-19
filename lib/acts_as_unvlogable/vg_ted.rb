@@ -35,6 +35,10 @@ class VgTed
   def flv
     "#{@args['vu'].to_s}"
   end
+  
+  def download_url
+    nil
+  end
 
   def service
     "Ted Talks"

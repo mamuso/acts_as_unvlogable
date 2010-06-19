@@ -33,6 +33,10 @@ class VgMyspace
     REXML::XPath.first(@feed, "//media:content").attributes['url']
   end
 
+  def download_url
+    nil
+  end
+
   def service
     "Myspace"
   end

@@ -45,6 +45,10 @@ class VgFlickr
    "#{stream.attributes['APP']}#{stream.attributes['FULLPATH']}"
   end
 
+  def download_url
+    nil
+  end
+
   def service
     "Flickr"
   end

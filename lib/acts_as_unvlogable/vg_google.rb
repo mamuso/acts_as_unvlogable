@@ -34,6 +34,10 @@ class VgGoogle
     REXML::XPath.first(@feed, "//media:content[@type='video/x-flv']").attributes['url']
   end
 
+  def download_url
+    nil
+  end
+
   def service
     "Google Video"
   end
