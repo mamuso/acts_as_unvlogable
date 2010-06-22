@@ -22,6 +22,10 @@ class VgVimeo
     REXML::XPath.first( @feed, "//thumbnail" )[0].to_s
   end
   
+  def duration
+    REXML::XPath.first( @feed, "//duration" )[0].to_s.to_i
+  end
+  
   def embed_url
     "http://vimeo.com/moogaloop.swf?clip_id=#{@video_id}&server=vimeo.com&fullscreen=1&show_title=1&show_byline=1&show_portrait=1"
   end
@@ -34,6 +38,12 @@ class VgVimeo
     request_signature = REXML::XPath.first( @feed, "//request_signature" )[0]
     request_signature_expires = REXML::XPath.first( @feed, "//request_signature_expires" )[0]
     "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/video.flv"
+  end
+  
+  def download_url
+    request_signature = REXML::XPath.first( @feed, "//request_signature" )[0]
+    request_signature_expires = REXML::XPath.first( @feed, "//request_signature_expires" )[0]
+    "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/?q=hd"
   end
 
   def service

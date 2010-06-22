@@ -32,6 +32,10 @@ class UnvlogIt
     @object.thumbnail rescue nil
   end
   
+  def duration # duration is in seconds
+    @object.duration rescue nil
+  end
+  
   def embed_url
     @object.embed_url rescue nil
   end
@@ -42,6 +46,10 @@ class UnvlogIt
   
   def flv
     @object.flv rescue nil
+  end
+  
+  def download_url
+    @object.download_url rescue nil
   end
 
   def service
@@ -55,7 +63,9 @@ class UnvlogIt
       :embed_url => @object.embed_url,
       :embed_html => @object.embed_html(width, height),
       :flv => @object.flv,
-      :service => @object.service
+      :download_url => @object.download_url,
+      :service => @object.service,
+      :duration => @object.duration
     }
   end
 

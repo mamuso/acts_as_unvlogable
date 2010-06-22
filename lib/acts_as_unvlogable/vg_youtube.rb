@@ -23,6 +23,10 @@ class VgYoutube
     @details.thumbnails.first.url
   end
   
+  def duration
+    @details.duration
+  end
+  
   def embed_url
     @details.media_content.first.url if @details.noembed == false
   end
@@ -40,6 +44,10 @@ class VgYoutube
   def flv
     doc = URI::parse("http://www.youtube.com/get_video_info?&video_id=#{@video_id}").read
     CGI::unescape(doc.split("&fmt_url_map=")[1].split("&")[0]).split("|")[1].split(",")[0]
+  end
+  
+  def download_url
+    flv
   end
 
   def service
