@@ -11,6 +11,7 @@ class VgYoutube
     @url = url
     @video_id = @url.query_param('v')
     @details = object.video_by(@video_id)
+    @details.instance_variable_set(:@noembed, false)
     raise if @details.blank?
   end
   
