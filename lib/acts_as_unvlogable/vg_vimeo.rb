@@ -37,7 +37,7 @@ class VgVimeo
   def flv
     request_signature = REXML::XPath.first( @feed, "//request_signature" )[0]
     request_signature_expires = REXML::XPath.first( @feed, "//request_signature_expires" )[0]
-    "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/video.flv"
+    "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/"
   end
   
   def download_url
