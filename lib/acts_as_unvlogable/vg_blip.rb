@@ -17,7 +17,7 @@ class VgBlip
   end
   
   def thumbnail
-    REXML::XPath.first(@feed, "//blip:smallThumbnail")[0]
+    REXML::XPath.first(@feed, "//blip:smallThumbnail")[0].to_s
   end
   
   def duration
