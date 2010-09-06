@@ -8,9 +8,8 @@ if defined?(ActiveSupport).nil?
 end
 require 'acts_as_unvlogable/string_extend'
 
-RAILS_ROOT='.' if !defined? RAILS_ROOT
 # Video classes
-videolibs = File.join(RAILS_ROOT, "**", "acts_as_unvlogable", "vg_*.rb")
+videolibs = File.join(File.dirname(__FILE__), "acts_as_unvlogable", "vg_*.rb")
 Dir.glob(videolibs).each {|file| require file}
 
 class UnvlogIt
