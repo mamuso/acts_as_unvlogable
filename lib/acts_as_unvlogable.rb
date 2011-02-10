@@ -1,5 +1,5 @@
 # Included gems
-require 'youtube_g'
+require 'youtube_it'
 require 'acts_as_unvlogable/flickr'
 # Extensions
 if defined?(ActiveSupport).nil?
