@@ -52,10 +52,14 @@ class VgVimeo
 
   protected
 
+  # formats: http://vimeo.com/<video_id> or http://vimeo.com/channels/hd#<video_id>
   def parse_url(url)
       uri = URI.parse(url)
       path = uri.path
       videoargs = ''
+            
+      return uri.fragment if uri.fragment
+      
       if uri.path and path.split("/").size > 0
         videoargs = path.split("/")
         raise unless videoargs.size > 0
