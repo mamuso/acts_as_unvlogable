@@ -14,6 +14,10 @@ class VgVimeo
     @feed = REXML::Document.new(res)
   end
   
+  def video_id
+    @video_id
+  end
+  
   def title
     REXML::XPath.first( @feed, "//caption" )[0].to_s
   end

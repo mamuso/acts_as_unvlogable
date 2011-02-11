@@ -39,6 +39,10 @@ class UnvlogIt
   def embed_url
     @object.embed_url rescue nil
   end
+  
+  def video_id
+    @object.video_id rescue nil
+  end
 
   def embed_html(width=425, height=344, options={})
     @object.embed_html(width, height, options) rescue nil
