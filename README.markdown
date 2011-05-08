@@ -31,9 +31,9 @@ With this plugin we have an unique way to manage multiple services :)
 Install it!
 -----------
 
-1. That is a plugin, then you need to do:
+1. Install it as a gem:
 
-        script/plugin install git://github.com/mamuso/acts_as_unvlogable.git
+        gem "acts_as_unvlogable"
         
 2. Optionally you can create the `config/unvlogable.yml` to store keys for the different services. You have in the plugin a [sample file](http://github.com/mamuso/acts_as_unvlogable/tree/master/unvlogable_sample.yml). At this moment you only need specify keys for flickr.
 
@@ -41,7 +41,7 @@ Install it!
 Dependencies
 ------------
 
-The plugin depends on [youtube-g](http://rubyforge.org/projects/youtube-g/), [xml-simple](http://xml-simple.rubyforge.org/) and [hpricot](https://code.whytheluckystiff.net/hpricot/).
+The plugin depends on [youtube-it](https://github.com/kylejginavan/youtube_it), [xml-simple](http://xml-simple.rubyforge.org/) and [hpricot](https://code.whytheluckystiff.net/hpricot/).
 
 We have included a modified version of the flickr gem to skip the gem dependency and manage video capabilities.
 
@@ -98,7 +98,6 @@ Supported services
 At this moment we support the following video services:
 
 -   [Youtube](http://www.youtube.com/)
--   [Google video](http://video.google.com/)
 -   [Vimeo](http://vimeo.com/)
 -   [Flickr (videos)](http://flickr.com/)
 -   [Metacafe](http://metacafe.com/)
@@ -108,10 +107,19 @@ At this moment we support the following video services:
 -   [Myspace](http://vids.myspace.com/)
 -   [Ted Talks](http://www.ted.com/talks/)
 -   [11870.com](http://11870.com/)
--   [Qik](http://qik.com/)
 -   [Marca.tv](http://www.marca.tv/)
 -   [Dalealplay](http://www.dalealplay.com/)
 -   [RuTube](http://www.rutube.ru/)
+
+Broken services
+---------------
+
+These services were implemented but due to changes in the website they don't work anymore. Any patch for fixing them would be great ;)
+
+-   [Qik](http://qik.com/)
+-   [MTV](http://www.mtvhive.com/)
+
+You can detect new broken services when running the tests.
 
 We are always open to incude new services.
 

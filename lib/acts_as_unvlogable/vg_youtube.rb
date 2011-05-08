@@ -7,7 +7,7 @@
 class VgYoutube
   
   def initialize(url=nil, options={})
-    object = YouTubeIt::Client.new rescue {}
+    object = YouTubeIt::Client.new({})
     @url = url
     @video_id = @url.query_param('v')
     @details = object.video_by(@video_id)

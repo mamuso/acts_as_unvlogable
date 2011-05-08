@@ -1,12 +1,18 @@
-# Included gems
-require 'youtube_it'
-require 'acts_as_unvlogable/flickr'
+require "rubygems"
+require "bundler/setup"
+
+require "xmlsimple"
+require "youtube_it"
+require "hpricot"
+require "iconv"
+
+require "acts_as_unvlogable/flickr"
 # Extensions
 if defined?(ActiveSupport).nil?
-  require 'acts_as_unvlogable/string_base'
-  require 'acts_as_unvlogable/object_base'
+  require "acts_as_unvlogable/string_base"
+  require "acts_as_unvlogable/object_base"
 end
-require 'acts_as_unvlogable/string_extend'
+require "acts_as_unvlogable/string_extend"
 
 # Video classes
 videolibs = File.join(File.dirname(__FILE__), "acts_as_unvlogable", "vg_*.rb")
@@ -17,10 +23,10 @@ class UnvlogIt
   def initialize(url=nil, options={})
     raise ArgumentError.new("We need a video url") if url.blank?
     @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url, options) rescue nil
-                raise ArgumentError.new("Unsuported url or service") and return if @object.nil?
-                unless @object.instance_variable_get("@details").nil? || !@object.instance_variable_get("@details").respond_to?("noembed")
-                  raise ArgumentError.new("Embedding disabled by request") and return if @object.instance_variable_get("@details").noembed
-                end
+    raise ArgumentError.new("Unsuported url or service") and return if @object.nil?
+    unless @object.instance_variable_get("@details").nil? || !@object.instance_variable_get("@details").respond_to?("noembed")
+      raise ArgumentError.new("Embedding disabled by request") and return if @object.instance_variable_get("@details").noembed
+    end
   end
   
   def title

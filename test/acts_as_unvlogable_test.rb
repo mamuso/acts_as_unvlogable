@@ -1,15 +1,10 @@
 require 'test/unit'
-require 'rubygems'
-require 'shoulda'
 
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib'
 # Main class
 require 'acts_as_unvlogable'
 # Gems & other herbs
-require 'open-uri'
-require 'hpricot'
-
-
+require 'shoulda'
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
   
@@ -32,20 +27,19 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with an existent youtube url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=muLIPWjks_M") # => Ninja cat comes closer while not moving!
+        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=WZYzvcqgim0") # => The Super Fast Cat Attacks - Ninja Cat
       end
       should "initialize a VgYoutube instance" do
         assert_equal VgYoutube, @videotron.instance_values['object'].class
-        assert_equal "http://www.youtube.com/watch?v=muLIPWjks_M", @videotron.instance_values['object'].instance_values['url']
-        assert_equal "muLIPWjks_M", @videotron.instance_values['object'].instance_values['video_id']
+        assert_equal "http://www.youtube.com/watch?v=WZYzvcqgim0", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "WZYzvcqgim0", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['details']
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Ninja cat comes closer while not moving!", :service => "Youtube"})
+        check_video_attributes({:title => "The Super Fast Cat Attacks - Ninja Cat", :service => "Youtube"})
       end
     end
-
 
     context "with an existent youtube url that can not be embedded" do
         should "raise an ArgumentError" do
@@ -58,34 +52,6 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://www.youtube.com/watch?v=inexistente") }
       end
     end
-
-
-
-# ----------------------------------------------------------
-#   Testing google video
-# ----------------------------------------------------------
-    context "with an existent google video url" do
-      setup do
-        @videotron = UnvlogIt.new("http://video.google.com/videoplay?docid=4798198171297333202&ei=Vq9aSeOmBYuGjQK-6Zy5CQ") # => Pocoyo. Musica Maestro
-      end
-      should "initialize a VgGoogle instance" do
-        assert_equal VgGoogle, @videotron.instance_values['object'].class
-        assert_equal "http://video.google.com/videoplay?docid=4798198171297333202&ei=Vq9aSeOmBYuGjQK-6Zy5CQ", @videotron.instance_values['object'].instance_values['url']
-        assert_equal "4798198171297333202", @videotron.instance_values['object'].instance_values['video_id']
-        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
-      end
-      
-      should "return the video properties" do
-        check_video_attributes({:title => "Pocoyo. Musica Maestro", :service => "Google Video"})
-      end
-    end
-    
-    context "with an invalid google video url" do
-      should "raise an ArgumentError exception" do
-        assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://www.google.es/search?q=wadus") }
-      end
-    end
-
 
 # ----------------------------------------------------------
 #   Testing metacafe
@@ -193,17 +159,17 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with a mtvmusic.com video url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.mtvmusic.com/astley_rick/videos/55086/never_gonna_give_you_up.jhtml") # => Never Gonna Give You Up
+        @videotron = UnvlogIt.new("http://www.mtvhive.com/artist/twin_shadow/videos/640381/slow_live") # => Twin Shadow » Slow (Live)
       end
       should "initialize a VgMtvmusic instance" do
         assert_equal VgMtvmusic, @videotron.instance_values['object'].class
-        assert_equal "http://www.mtvmusic.com/astley_rick/videos/55086/never_gonna_give_you_up.jhtml", @videotron.instance_values['object'].instance_values['url']
-        assert_equal "55086", @videotron.instance_values['object'].instance_values['video_id']
+        assert_equal "http://www.mtvhive.com/artist/twin_shadow/videos/640381/slow_live", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "640381", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Never Gonna Give You Up", :service => "MTV Music"})
+        check_video_attributes({:title => "Twin Shadow » Slow (Live)", :service => "MTV Music"})
       end
     end
 
@@ -264,7 +230,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Camelos Semos  Jonathan  Tú si que vales ", :service => "dalealplay"}) 
+        check_video_attributes({:title => "Camelos.Semos. Jonathan. Tú si que vales.", :service => "dalealplay"}) 
       end
     end
 
