@@ -1,6 +1,6 @@
 # ----------------------------------------------
-#  Class for Youtube (youtube.com)
-#  http://www.youtube.com/watch?v=25AsfkriHQc
+#  Class for Vimeo (vimeo.com)
+#  http://vimeo.com/5362441
 # ----------------------------------------------
 
 
