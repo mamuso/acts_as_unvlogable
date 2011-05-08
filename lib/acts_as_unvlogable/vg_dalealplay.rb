@@ -26,12 +26,20 @@ class VgDalealplay
     @page.search("//link[@rel='video_src']").first.attributes["href"].sub("autoStart=true", "autoStart=false")
   end
 
+  def duration
+    nil
+  end
+
   def embed_html(width=425, height=344, options={})
     "<object type='application/x-shockwave-flash' width='#{width}' height='#{height}' data='#{embed_url}'><param name='quality' value='best' />	<param name='allowfullscreen' value='true' /><param name='scale' value='showAll' /><param name='movie' value='http#{embed_url}' /></object>"
   end
   
   def flv
     "http://videos.dalealplay.com/contenidos3/#{CGI::parse(URI::parse(embed_url).query)['file']}"
+  end
+
+  def download_url
+    nil
   end
 
   def service

@@ -22,6 +22,10 @@ class VgGoogle
     REXML::XPath.first(@feed, "//media:thumbnail").attributes['url']
   end
   
+  def duration
+    nil
+  end
+  
   def embed_url
     "http://video.google.com/googleplayer.swf?docid=#{@video_id}&fs=true"
   end
@@ -32,6 +36,10 @@ class VgGoogle
   
   def flv
     REXML::XPath.first(@feed, "//media:content[@type='video/x-flv']").attributes['url']
+  end
+
+  def download_url
+    nil
   end
 
   def service

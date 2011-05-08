@@ -37,6 +37,14 @@ class VgQik
     REXML::XPath.first(@feed, "//item/media:content[@type='video/x-flv']").attributes['url']
   end
 
+  def download_url
+    nil
+  end
+
+  def duration
+    nil
+  end
+
   def service
     "Qik"
   end

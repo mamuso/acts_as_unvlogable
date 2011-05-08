@@ -14,12 +14,20 @@ class VgVimeo
     @feed = REXML::Document.new(res)
   end
   
+  def video_id
+    @video_id
+  end
+  
   def title
     REXML::XPath.first( @feed, "//caption" )[0].to_s
   end
   
   def thumbnail
     REXML::XPath.first( @feed, "//thumbnail" )[0].to_s
+  end
+  
+  def duration
+    REXML::XPath.first( @feed, "//duration" )[0].to_s.to_i
   end
   
   def embed_url
@@ -33,7 +41,13 @@ class VgVimeo
   def flv
     request_signature = REXML::XPath.first( @feed, "//request_signature" )[0]
     request_signature_expires = REXML::XPath.first( @feed, "//request_signature_expires" )[0]
-    "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/video.flv"
+    "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/"
+  end
+  
+  def download_url
+    request_signature = REXML::XPath.first( @feed, "//request_signature" )[0]
+    request_signature_expires = REXML::XPath.first( @feed, "//request_signature_expires" )[0]
+    "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/?q=hd"
   end
 
   def service
@@ -42,10 +56,14 @@ class VgVimeo
 
   protected
 
+  # formats: http://vimeo.com/<video_id> or http://vimeo.com/channels/hd#<video_id>
   def parse_url(url)
       uri = URI.parse(url)
       path = uri.path
       videoargs = ''
+            
+      return uri.fragment if uri.fragment
+      
       if uri.path and path.split("/").size > 0
         videoargs = path.split("/")
         raise unless videoargs.size > 0

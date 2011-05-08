@@ -34,6 +34,10 @@ class VgMtvmusic
   def thumbnail
     REXML::XPath.first(@feed, "//media:thumbnail").attributes['url']
   end
+ 
+  def duration
+    nil
+  end
   
   def embed_url
     REXML::XPath.first(@feed, "//media:content[@type='application/x-shockwave-flash']").attributes['url']
@@ -48,6 +52,10 @@ class VgMtvmusic
     res =  Net::HTTP.get(URI.parse("http://api-media.mtvnservices.com/player/embed/includes/mediaGen.jhtml?uri=mgid:uma:video:api.mtvnservices.com:#{@video_id}&vid=#{@video_id}&ref=#{CGI::escape "{ref}"}"))
     search = REXML::Document.new(res)
     REXML::XPath.first(search, "//rendition/src")[0]
+  end
+
+  def download_url
+    nil
   end
 
   def service

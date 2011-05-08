@@ -43,6 +43,14 @@ class VgMetacafe
     end
   end
 
+  def duration
+    nil
+  end
+
+  def download_url
+    nil
+  end
+
   def service
     "Metacafe"
   end

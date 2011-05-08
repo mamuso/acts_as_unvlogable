@@ -21,6 +21,10 @@ class VgMyspace
     REXML::XPath.first(@feed, "//media:thumbnail").attributes['url']
   end
   
+  def duration
+    nil
+  end
+  
   def embed_url
     "http://lads.myspace.com/videos/vplayer.swf?m=#{REXML::XPath.first( @feed, "//myspace:itemID" )[0]}&v=2&type=video"
   end
@@ -31,6 +35,10 @@ class VgMyspace
   
   def flv
     REXML::XPath.first(@feed, "//media:content").attributes['url']
+  end
+
+  def download_url
+    nil
   end
 
   def service
