@@ -33,6 +33,14 @@ class VgCollegehumor
     REXML::XPath.first(@feed, "//video/file")[0]
   end
 
+  def download_url
+    nil
+  end
+
+  def duration
+    nil
+  end
+
   def service
     "CollegeHumor"
   end

@@ -21,6 +21,10 @@ class VgMarca
     REXML::XPath.first( @feed, "//foto" )[0].to_s
   end
   
+  def duration
+    nil
+  end
+  
   def embed_url
     "http://www.marca.com/componentes/flash/embed.swf?ba=0&cvol=1&bt=1&lg=1&vID=#{@video_id}&ba=1"
   end
@@ -31,6 +35,10 @@ class VgMarca
   
   def flv
     REXML::XPath.first(@feed, "//media")[0].to_s
+  end
+
+  def download_url
+    nil
   end
 
   def service

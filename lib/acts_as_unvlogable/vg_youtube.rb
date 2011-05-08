@@ -11,6 +11,7 @@ class VgYoutube
     @url = url
     @video_id = @url.query_param('v')
     @details = object.video_by(@video_id)
+    @details.instance_variable_set(:@noembed, false)
     raise if @details.blank?
   end
   
@@ -20,6 +21,10 @@ class VgYoutube
   
   def thumbnail
     @details.thumbnails.first.url
+  end
+  
+  def duration
+    @details.duration
   end
   
   def embed_url
@@ -39,6 +44,10 @@ class VgYoutube
   def flv
     doc = URI::parse("http://www.youtube.com/get_video_info?&video_id=#{@video_id}").read
     CGI::unescape(doc.split("&fmt_url_map=")[1].split("&")[0]).split("|")[1].split(",")[0]
+  end
+  
+  def download_url
+    flv
   end
 
   def service

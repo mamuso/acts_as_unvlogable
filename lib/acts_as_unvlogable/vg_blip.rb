@@ -7,7 +7,7 @@
 class VgBlip
   
   def initialize(url=nil, options={})
-    @url = url
+    @url = url.split("?").first if url
     res = Net::HTTP.get(URI.parse("#{url}?skin=rss"))
     @feed = REXML::Document.new(res)
   end
@@ -17,7 +17,11 @@ class VgBlip
   end
   
   def thumbnail
-    REXML::XPath.first(@feed, "//blip:smallThumbnail")[0]
+    REXML::XPath.first(@feed, "//blip:smallThumbnail")[0].to_s
+  end
+  
+  def duration
+    nil
   end
   
   def embed_url
@@ -31,6 +35,10 @@ class VgBlip
   
   def flv
     REXML::XPath.first(@feed, "//enclosure").attributes['url']
+  end
+
+  def download_url
+    nil
   end
 
   def service
