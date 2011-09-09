@@ -370,6 +370,27 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://rutube.ru/tracks/abdcd.html?v=523423") }
       end
     end
+    
+# ----------------------------------------------------------
+#   Testing Prostopleer
+# ----------------------------------------------------------
+    context "with a prostopleer url" do
+      setup do
+        @videotron = UnvlogIt.new("http://prostopleer.com/tracks/401758bI6n")
+      end
+      should "initialize a VgProstopleer instance" do
+        assert_equal VgProstopleer, @videotron.instance_values['object'].class
+        assert_equal "http://prostopleer.com/tracks/401758bI6n", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "401758bI6n", @videotron.instance_values['object'].instance_values['track_id']
+        assert_equal "Combichrist - sent to destroy", @videotron.title
+      end
+    end
+
+    context "with an invalid prostopleer url" do
+      should "raise an ArgumentError exception" do
+        assert_raise(ArgumentError) { UnvlogIt.new("http://prostopleer.com/trackszz/401758bI6n") }
+      end
+    end
 
   protected
   
