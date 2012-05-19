@@ -155,27 +155,6 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 
 
 # ----------------------------------------------------------
-#   Testing mtvmusic.com
-# ----------------------------------------------------------
-    context "with a mtvmusic.com video url" do
-      setup do
-        @videotron = UnvlogIt.new("http://www.mtvhive.com/artist/twin_shadow/videos/640381/slow_live") # => Twin Shadow » Slow (Live)
-      end
-      should "initialize a VgMtvmusic instance" do
-        assert_equal VgMtvmusic, @videotron.instance_values['object'].class
-        assert_equal "http://www.mtvhive.com/artist/twin_shadow/videos/640381/slow_live", @videotron.instance_values['object'].instance_values['url']
-        assert_equal "640381", @videotron.instance_values['object'].instance_values['video_id']
-        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
-      end
-      
-      should "return the video properties" do
-        check_video_attributes({:title => "Twin Shadow » Slow (Live)", :service => "MTV Music"})
-      end
-    end
-
-
-
-# ----------------------------------------------------------
 #   Testing vids.myspace.com
 # ----------------------------------------------------------
     context "with a vids.myspace.com video url" do
