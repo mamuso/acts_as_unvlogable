@@ -43,7 +43,13 @@ class VgYoutube
   
   def flv
     doc = URI::parse("http://www.youtube.com/get_video_info?&video_id=#{@video_id}").read
-    CGI::unescape(doc.split("&fmt_url_map=")[1].split("&")[0]).split("|")[1].split(",")[0]
+    CGI::unescape(doc.split("&url_encoded_fmt_stream_map=")[1]).split("url=").each do |u|
+    	u = CGI::unescape(u)
+    	unless u.index("x-flv").nil?
+    		return u.split("&quality").first
+    		break
+    	end
+    end
   end
   
   def download_url

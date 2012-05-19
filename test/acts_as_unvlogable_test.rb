@@ -27,7 +27,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with an existent youtube url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=WZYzvcqgim0") # => The Super Fast Cat Attacks - Ninja Cat
+        @videotron = UnvlogIt.new("http://www.youtube.com/watch?v=MVa4q-YVjD8") # => Keith Moon´s drum kit explodes
       end
       should "initialize a VgYoutube instance" do
         assert_equal VgYoutube, @videotron.instance_values['object'].class
@@ -37,7 +37,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "The Super Fast Cat Attacks - Ninja Cat", :service => "Youtube"})
+        check_video_attributes({:title => "Keith Moon´s drum kit explodes", :service => "Youtube"})
       end
     end
 
