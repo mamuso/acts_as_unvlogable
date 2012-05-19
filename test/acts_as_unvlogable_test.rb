@@ -31,8 +31,8 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
       should "initialize a VgYoutube instance" do
         assert_equal VgYoutube, @videotron.instance_values['object'].class
-        assert_equal "http://www.youtube.com/watch?v=WZYzvcqgim0", @videotron.instance_values['object'].instance_values['url']
-        assert_equal "WZYzvcqgim0", @videotron.instance_values['object'].instance_values['video_id']
+        assert_equal "http://www.youtube.com/watch?v=MVa4q-YVjD8", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "MVa4q-YVjD8", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['details']
       end
       

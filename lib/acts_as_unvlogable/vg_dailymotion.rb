@@ -30,7 +30,8 @@ class VgDailymotion
   end
   
   def flv
-    REXML::XPath.first(@feed, "//media:content[@type='video/x-flv']").attributes['url']
+    doc = URI::parse("http://dailymotion.com/embed/video/#{@video_id}").read
+    doc = URI::parse("#{doc.split("stream_h264_url\":\"")[1].split("\"")[0].gsub("\\", "")}&redirect=0").read
   end 
 
   def download_url
