@@ -10,7 +10,7 @@ class VgVimeo
     # general settings
     @url = url
     @video_id = parse_url(url)
-    res = Net::HTTP.get(URI.parse("http://vimeo.com/moogaloop/load/clip:#{@video_id}/embed?param_server=vimeo.com&param_clip_id=#{@video_id}"))
+    res = Net::HTTP.get(URI.parse("http://vimeo.com/api/v2/video/#{@video_id}.xml"))
     @feed = REXML::Document.new(res)
   end
   
@@ -19,11 +19,11 @@ class VgVimeo
   end
   
   def title
-    REXML::XPath.first( @feed, "//caption" )[0].to_s
+    REXML::XPath.first( @feed, "//title" )[0].to_s
   end
   
   def thumbnail
-    REXML::XPath.first( @feed, "//thumbnail" )[0].to_s
+    REXML::XPath.first( @feed, "//thumbnail_medium" )[0].to_s
   end
   
   def duration
@@ -31,7 +31,7 @@ class VgVimeo
   end
   
   def embed_url
-    "http://vimeo.com/moogaloop.swf?clip_id=#{@video_id}&server=vimeo.com&fullscreen=1&show_title=1&show_byline=1&show_portrait=1"
+    "http://vimeo.com/moogaloop.swf?clip_id=#{@video_id}&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=1&amp;color=ffffff&amp;fullscreen=1&amp;autoplay=0&amp;loop=0"
   end
   
   def embed_html(width=425, height=344, options={})
