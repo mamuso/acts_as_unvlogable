@@ -249,8 +249,6 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         assert_equal "http://qik.com/video/340982", @videotron.instance_values['object'].instance_values['url']
         assert_equal "340982", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['page']
-        assert_not_nil @videotron.instance_values['object'].instance_values['feed_url']
-        assert_not_nil @videotron.instance_values['object'].instance_values['feed']
       end
       
       should "return the video properties" do
