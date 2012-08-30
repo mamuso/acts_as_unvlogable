@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   s.add_development_dependency "shoulda"
-  s.add_development_dependency "ruby-debug"
   s.add_dependency("xml-simple")
   s.add_dependency("youtube_it")
   s.add_dependency("hpricot")

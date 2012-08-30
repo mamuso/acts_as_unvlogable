@@ -1,6 +1,6 @@
 # ----------------------------------------------
 #  Class for Ted Talks (www.ted.com/talks)
-#  http://www.ted.com/index.php/talks/benjamin_wallace_on_the_price_of_happiness.html
+#  http://www.ted.com/talks/benjamin_wallace_on_the_price_of_happiness.html
 # ----------------------------------------------
 
 
@@ -10,7 +10,7 @@ class VgTed
     @url = url
     raise unless URI::parse(url).path.split("/").include? "talks"
     @page = Hpricot(open(url))
-    id = @page.to_s.split("/id/")[1].split("\"")[0]
+    id = @page.to_s.split("ted id=")[1].split("\]")[0]
     @emb = Hpricot(open("http://www.ted.com/talks/embed/id/#{id}"))
     @flashvars = CGI::unescapeHTML(@emb.to_s).split("param name=\"flashvars\" value=\"")[1].split("\"")[0]
     @args = CGI::parse(@flashvars)

@@ -9,32 +9,30 @@ class VgQik
   def initialize(url=nil, options={})
     @url = url
     @video_id = parse_url(url)
-    @page = Hpricot(open("http://qik.com/video/#{@video_id}"))
-    emb = @page.search('//input[@value^="<object"]').first.attributes['value']
-    tx = Hpricot(emb)
-    @feed_url =  CGI::parse(tx.search('//embed').first.attributes['flashvars'].to_s)["rssURL"].to_s
-    res =  Net::HTTP.get(URI::parse(@feed_url))
-    @feed = REXML::Document.new(res)
+    h = {"Content-Type" => "application/json"}
+    @page = Net::HTTP.start("engine.qik.com", "80") do |connection|
+      JSON.parse(connection.post("/api/jsonrpc?apikey=e53d41680124e6d0", {:method => "qik.stream.public_info", :params => [340982]}.to_json, h).body)
+    end
   end
   
   def title
-    REXML::XPath.first(@feed, "//item/title")[0].to_s
+    @page[0]['title']
   end
   
   def thumbnail
-    REXML::XPath.first(@feed, "//item/media:thumbnail").attributes['url']
+    @page[0]['large_thumbnail_url']
   end
   
   def embed_url
-    "http://qik.com/swfs/qikPlayer4.swf?rssURL=#{@feed_url}&autoPlay=false"
+    "http://qik.com/swfs/qikPlayer5.swf?streamID=#{@page[0]['embed_html'].split("streamID=")[1].split("&")[0]}&amp;autoplay=false"
   end
 
   def embed_html(width=425, height=344, options={})
-    "<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0' width='#{width}' height='#{height}' id='qikPlayer' align='middle'><param name='allowScriptAccess' value='sameDomain' /><param name='allowFullScreen' value='true' /><param name='movie' value='#{embed_url}' /><param name='quality' value='high' /><param name='bgcolor' value='#333333' /><embed src='#{embed_url}' quality='high' bgcolor='#333333' width='#{width}' height='#{height}' name='qikPlayer' align='middle' allowScriptAccess='sameDomain' allowFullScreen='true' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer'/></object>"
+    @page[0]['embed_html']
   end
   
   def flv
-    REXML::XPath.first(@feed, "//item/media:content[@type='video/x-flv']").attributes['url']
+    "http://media.qik.com/vod/flvs-play?assetId=#{@page[0]['embed_html'].split("streamID=")[1].split("&")[0]}&profile=flvs-normal"
   end
 
   def download_url

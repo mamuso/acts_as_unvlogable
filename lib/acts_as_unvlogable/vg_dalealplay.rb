@@ -1,3 +1,4 @@
+# encoding: utf-8
 # ----------------------------------------------
 #  Class for dalealplay (dalealplay.com)
 #  http://www.dalealplay.com/informaciondecontenido.php?con=80280
@@ -11,11 +12,11 @@ class VgDalealplay
   def initialize(url=nil, options={})
     @url = url
     @video_id = @url.query_param('con')
-    @page = Hpricot(open(url))
+    @page = open(url) {|f| Hpricot(f.read.encode("UTF-8")) }
   end
   
   def title
-    (Iconv.iconv 'utf-8', 'iso-8859-1', @page.search("//title").inner_html.split(" - www.dalealplay.com")[0]).to_s
+    @page.search("//title").inner_html.split(" - www.dalealplay.com")[0].to_s
   end
   
   def thumbnail

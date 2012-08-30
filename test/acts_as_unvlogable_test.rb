@@ -284,18 +284,18 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with a ted talks video url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.ted.com/index.php/talks/benjamin_wallace_on_the_price_of_happiness.html") # => Benjamin Wallace: Does happiness have a price tag?
+        @videotron = UnvlogIt.new("http://www.ted.com/talks/benjamin_wallace_on_the_price_of_happiness.html") # => Benjamin Wallace: Does happiness have a price tag?
       end
       should "initialize a VgTed instance" do
         assert_equal "VgTed", @videotron.instance_values['object'].class.to_s
-        assert_equal "http://www.ted.com/index.php/talks/benjamin_wallace_on_the_price_of_happiness.html", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "http://www.ted.com/talks/benjamin_wallace_on_the_price_of_happiness.html", @videotron.instance_values['object'].instance_values['url']
         assert_not_nil @videotron.instance_values['object'].instance_values['page']
         assert_not_nil @videotron.instance_values['object'].instance_values['flashvars']
         assert_not_nil @videotron.instance_values['object'].instance_values['args']
       end
       
       should "return the video properties" do
-        check_video_attributes({:title => "Benjamin Wallace on the price of happiness", :service => "Ted Talks"})
+        check_video_attributes({:title => "Benjamin Wallace: The price of happiness", :service => "Ted Talks"})
       end
     end
     

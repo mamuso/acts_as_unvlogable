@@ -39,9 +39,10 @@ class VgVimeo
   end
 
   def flv
-    request_signature = REXML::XPath.first( @feed, "//request_signature" )[0]
-    request_signature_expires = REXML::XPath.first( @feed, "//request_signature_expires" )[0]
-    "http://www.vimeo.com/moogaloop/play/clip:#{@video_id}/#{request_signature}/#{request_signature_expires}/"
+    res = Net::HTTP.get(URI.parse("http://vimeo.com/42966264?action=download"))
+    request_signature = res.split("\"signature\":\"")[1].split("\"")[0]
+    request_cached_timestamp = res.split("\"cached_timestamp\":")[1].split(",")[0]
+    "http://player.vimeo.com/play_redirect?clip_id=#{@video_id}&sig=#{request_signature}&time=#{request_cached_timestamp}&quality=sd&codecs=H264,VP8,VP6&type=moogaloop&embed_location="
   end
   
   def download_url

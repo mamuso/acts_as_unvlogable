@@ -4,7 +4,8 @@ require "bundler/setup"
 require "xmlsimple"
 require "youtube_it"
 require "hpricot"
-require "iconv"
+require "net/http"
+require "json"
 
 require "acts_as_unvlogable/flickr"
 # Extensions
@@ -54,7 +55,7 @@ class UnvlogIt
   end
   
   def flv
-    @object.flv rescue nil
+    @object.flv #rescue nil
   end
   
   def download_url
