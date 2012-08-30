@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'test/unit'
 
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib'
@@ -5,6 +6,7 @@ $LOAD_PATH << File.dirname(__FILE__) + '/../lib'
 require 'acts_as_unvlogable'
 # Gems & other herbs
 require 'shoulda'
+require 'ruby-debug'
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
   
@@ -82,7 +84,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         assert_equal "http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/", @videotron.instance_values['object'].instance_values['url']
         assert_equal 3, @videotron.instance_values['object'].instance_values['args'].size
         assert @videotron.instance_values['object'].instance_values['youtubed']
-        assert VgYoutube, @videotron.instance_values['object'].instance_values['yt'].class
+        assert "VgYoutube", @videotron.instance_values['object'].instance_values['yt'].class.to_s
       end
       
       should "return the video properties" do
@@ -102,7 +104,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport") # => parkour dayyy
       end
       should "initialize a VgDailymotion instance" do
-        assert_equal VgDailymotion, @videotron.instance_values['object'].class
+        assert_equal "VgDailymotion", @videotron.instance_values['object'].class.to_s
         assert_equal "http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport", @videotron.instance_values['object'].instance_values['url']
         assert_equal "x7u5kn_parkour-dayyy_sport", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
@@ -123,7 +125,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://www.collegehumor.com/video:1781938") # => Brohemian Rhapsody
       end
       should "initialize a VgCollegehumor instance" do
-        assert_equal VgCollegehumor, @videotron.instance_values['object'].class
+        assert_equal "VgCollegehumor", @videotron.instance_values['object'].class.to_s
         assert_equal "http://www.collegehumor.com/video:1781938", @videotron.instance_values['object'].instance_values['url']
         assert_equal "1781938", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
@@ -143,7 +145,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://blip.tv/file/678407/") # => Toy Break 26 : Adult Toys
       end
       should "initialize a VgBlip instance" do
-        assert_equal VgBlip, @videotron.instance_values['object'].class
+        assert_equal "VgBlip", @videotron.instance_values['object'].class.to_s
         assert_equal "http://blip.tv/file/678407/", @videotron.instance_values['object'].instance_values['url']
         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
       end
@@ -162,7 +164,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431") # => rocabilis
       end
       should "initialize a VgMyspace instance" do
-        assert_equal VgMyspace, @videotron.instance_values['object'].class
+        assert_equal "VgMyspace", @videotron.instance_values['object'].class.to_s
         assert_equal "http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431", @videotron.instance_values['object'].instance_values['url']
         assert_equal "27111431", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
@@ -182,7 +184,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://11870.com/pro/chic-basic-born/media/b606abfe") # => Chic & Basic Born
       end
       should "initialize a Vg11870 instance" do
-        assert_equal Vg11870, @videotron.instance_values['object'].class
+        assert_equal "Vg11870", @videotron.instance_values['object'].class.to_s
         assert_equal "http://11870.com/pro/chic-basic-born/media/b606abfe", @videotron.instance_values['object'].instance_values['url']
         assert_not_nil @videotron.instance_values['object'].instance_values['page']
         assert_not_nil @videotron.instance_values['object'].instance_values['flashvars']
@@ -202,7 +204,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://www.dalealplay.com/informaciondecontenido.php?con=80280") # => Camelos Semos  Jonathan  Tú si que vales
       end
       should "initialize a VgDalealplay instance" do
-        assert_equal VgDalealplay, @videotron.instance_values['object'].class
+        assert_equal "VgDalealplay", @videotron.instance_values['object'].class.to_s
         assert_equal "http://www.dalealplay.com/informaciondecontenido.php?con=80280", @videotron.instance_values['object'].instance_values['url']
         assert_equal "80280", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['page']
@@ -223,7 +225,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://www.flickr.com/photos/jerovital/4152225414/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) # => la primera vela
       end
       should "initialize a VgFlickr instance" do
-        assert_equal VgFlickr, @videotron.instance_values['object'].class
+        assert_equal "VgFlickr", @videotron.instance_values['object'].class.to_s
         assert_equal "http://www.flickr.com/photos/jerovital/4152225414/", @videotron.instance_values['object'].instance_values['url']
         assert_equal "4152225414", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['details']
@@ -243,7 +245,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://qik.com/video/340982") # => Honolulu Day 8: USS Arizona at Pearl Harbor
       end
       should "initialize a VgQik instance" do
-        assert_equal VgQik, @videotron.instance_values['object'].class
+        assert_equal "VgQik", @videotron.instance_values['object'].class.to_s
         assert_equal "http://qik.com/video/340982", @videotron.instance_values['object'].instance_values['url']
         assert_equal "340982", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['page']
@@ -266,7 +268,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://www.marca.com/tv/?v=DN23wG8c1Rj") # => Pau entra por la puerta grande en el club de los 10.000
       end
       should "initialize a VgMarca instance" do
-        assert_equal VgMarca, @videotron.instance_values['object'].class
+        assert_equal "VgMarca", @videotron.instance_values['object'].class.to_s
         assert_equal "http://www.marca.com/tv/?v=DN23wG8c1Rj", @videotron.instance_values['object'].instance_values['url']
         assert_equal "DN23wG8c1Rj", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
@@ -287,7 +289,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://www.ted.com/index.php/talks/benjamin_wallace_on_the_price_of_happiness.html") # => Benjamin Wallace: Does happiness have a price tag?
       end
       should "initialize a VgTed instance" do
-        assert_equal VgTed, @videotron.instance_values['object'].class
+        assert_equal "VgTed", @videotron.instance_values['object'].class.to_s
         assert_equal "http://www.ted.com/index.php/talks/benjamin_wallace_on_the_price_of_happiness.html", @videotron.instance_values['object'].instance_values['url']
         assert_not_nil @videotron.instance_values['object'].instance_values['page']
         assert_not_nil @videotron.instance_values['object'].instance_values['flashvars']
@@ -314,7 +316,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://vimeo.com/2354261") # => People are strange
       end
       should "initialize a VgVimeo instance" do
-        assert_equal VgVimeo, @videotron.instance_values['object'].class
+        assert_equal "VgVimeo", @videotron.instance_values['object'].class.to_s
         assert_equal "http://vimeo.com/2354261", @videotron.instance_values['object'].instance_values['url']
         assert_equal "2354261", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
@@ -333,7 +335,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://rutube.ru/tracks/1958807.html?v=56cd2f1b50a4d2b69ff455e72f2fae29") # => chipmunks!!
       end
       should "initialize a VgRutube instance" do
-        assert_equal VgRutube, @videotron.instance_values['object'].class
+        assert_equal "VgRutube", @videotron.instance_values['object'].class.to_s
         assert_equal "http://rutube.ru/tracks/1958807.html?v=56cd2f1b50a4d2b69ff455e72f2fae29", @videotron.instance_values['object'].instance_values['url']
         assert_equal "1958807", @videotron.instance_values['object'].instance_values['movie_id']
         assert_equal "56cd2f1b50a4d2b69ff455e72f2fae29", @videotron.instance_values['object'].send(:movie_hash)
@@ -358,7 +360,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
         @videotron = UnvlogIt.new("http://prostopleer.com/tracks/401758bI6n")
       end
       should "initialize a VgProstopleer instance" do
-        assert_equal VgProstopleer, @videotron.instance_values['object'].class
+        assert_equal "VgProstopleer", @videotron.instance_values['object'].class.to_s
         assert_equal "http://prostopleer.com/tracks/401758bI6n", @videotron.instance_values['object'].instance_values['url']
         assert_equal "401758bI6n", @videotron.instance_values['object'].instance_values['track_id']
         assert_equal "Combichrist - sent to destroy", @videotron.title
