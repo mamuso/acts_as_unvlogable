@@ -1,4 +1,4 @@
-require_relative "vg_youtube"
+require "acts_as_unvlogable/vg_youtube"
 
 class VgYoutu < VgYoutube
   def initialize(url=nil, options={})
