@@ -5,35 +5,45 @@
 
 
 class VgVimeo
-  
+
   def initialize(url=nil, options={})
     # general settings
     @url = url
     @video_id = parse_url(url)
+
+    if !(@vimeo_id =~ /^[0-9]+$/)
+      r = Net::HTTP.get_response(URI.parse(url))
+
+      if r.code == "301"
+        @url = "http://vimeo.com#{r.header['location']}"
+        @video_id = parse_url(@url)
+      end
+    end
+
     res = Net::HTTP.get(URI.parse("http://vimeo.com/api/v2/video/#{@video_id}.xml"))
     @feed = REXML::Document.new(res)
   end
-  
+
   def video_id
     @video_id
   end
-  
+
   def title
     REXML::XPath.first( @feed, "//title" )[0].to_s
   end
-  
+
   def thumbnail
     REXML::XPath.first( @feed, "//thumbnail_medium" )[0].to_s
   end
-  
+
   def duration
     REXML::XPath.first( @feed, "//duration" )[0].to_s.to_i
   end
-  
+
   def embed_url
     "http://vimeo.com/moogaloop.swf?clip_id=#{@video_id}&amp;force_embed=1&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=1&amp;color=ffffff&amp;fullscreen=1&amp;autoplay=0&amp;loop=0"
   end
-  
+
   def embed_html(width=425, height=344, options={})
     "<object width='#{width}' height='#{height}'><param name='movie' value='#{embed_url}'></param><param name='allowFullScreen' value='true'></param><param name='allowscriptaccess' value='always'></param><embed src='#{embed_url}' type='application/x-shockwave-flash' allowscriptaccess='always' allowfullscreen='true' width='#{width}' height='#{height}'></embed></object>"
   end
