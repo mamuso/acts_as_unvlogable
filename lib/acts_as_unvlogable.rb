@@ -22,12 +22,7 @@ Dir.glob(videolibs).each {|file| require file}
 class UnvlogIt
   
   def initialize(url=nil, options={})
-    raise ArgumentError.new("We need a video url") if url.blank?
-    @object ||= "vg_#{get_domain(url).downcase}".camelize.constantize.new(url, options) rescue nil
-    raise ArgumentError.new("Unsuported url or service") and return if @object.nil?
-    unless @object.instance_variable_get("@details").nil? || !@object.instance_variable_get("@details").respond_to?("noembed")
-      raise ArgumentError.new("Embedding disabled by request") and return if @object.instance_variable_get("@details").noembed
-    end
+    @object = VideoFactory.new(url, options).load_service
   end
   
   def title
@@ -79,14 +74,44 @@ class UnvlogIt
     }
   end
 
-  
-  def get_domain(url)
-    host = URI::parse(url).host.split(".")
-    unless host.size == 1
-      host[host.size-2]
-    else
-      host[0]
+  class VideoFactory
+    def initialize(url, options = {})
+      raise ArgumentError.new("We need a video url") if url.blank?
+      @url     = url
+      @options = options
+    end
+
+    def load_service
+      @object = service_object
+
+      validate_embed(@object)
+    end
+
+    private
+
+    def validate_embed(object)
+      unless object.instance_variable_get("@details").nil? || !object.instance_variable_get("@details").respond_to?("noembed")
+        if object.instance_variable_get("@details").noembed
+          raise ArgumentError.new("Embedding disabled by request")
+        end
+      end
+      object
+    end
+
+    def service_object
+      class_name = "vg_#{get_domain.downcase}".camelize
+      class_name.constantize.new(@url, @options)
+    rescue NameError
+      raise ArgumentError.new("Unsuported url or service. class: #{class_name}, url: #{@url}")
+    end
+
+    def get_domain
+      host = URI::parse(@url).host.split(".")
+      unless host.size == 1
+        host[host.size-2]
+      else
+        host[0]
+      end
     end
   end
-  
 end
