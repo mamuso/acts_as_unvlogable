@@ -31,7 +31,7 @@ class VgDalealplay
     nil
   end
 
-  def embed_html(width=425, height=344, options={})
+  def embed_html(width=425, height=344, options={}, params={})
     "<object type='application/x-shockwave-flash' width='#{width}' height='#{height}' data='#{embed_url}'><param name='quality' value='best' />	<param name='allowfullscreen' value='true' /><param name='scale' value='showAll' /><param name='movie' value='http#{embed_url}' /></object>"
   end
   

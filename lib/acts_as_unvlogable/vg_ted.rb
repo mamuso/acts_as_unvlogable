@@ -32,7 +32,7 @@ class VgTed
       "http://video.ted.com/assets/player/swf/EmbedPlayer.swf?#{@flashvars}"
   end
 
-  def embed_html(width=425, height=344, options={})
+  def embed_html(width=425, height=344, options={}, params={})
     "<object width='#{width}' height='#{height}'><param name='movie' value='#{embed_url}'></param><param name='allowFullScreen' value='true' /><param name='wmode' value='transparent'></param><param name='bgColor' value='#ffffff'></param><embed src='#{embed_url}' pluginspace='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' wmode='transparent' bgColor='#ffffff'  width='#{width}' height='#{height}' allowFullScreen='true'></embed></object>"
   end
   

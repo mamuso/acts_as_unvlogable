@@ -29,7 +29,7 @@ class VgMyspace
     "http://lads.myspace.com/videos/vplayer.swf?m=#{REXML::XPath.first( @feed, "//myspace:itemID" )[0]}&v=2&type=video"
   end
 
-  def embed_html(width=425, height=344, options={})
+  def embed_html(width=425, height=344, options={}, params={})
     "<embed src='#{embed_url}' type='application/x-shockwave-flash' width='#{width}' height='#{height}'></embed>"
   end
   

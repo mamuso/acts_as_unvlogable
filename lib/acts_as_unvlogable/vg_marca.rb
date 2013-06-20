@@ -29,7 +29,7 @@ class VgMarca
     "http://www.marca.com/componentes/flash/embed.swf?ba=0&cvol=1&bt=1&lg=1&vID=#{@video_id}&ba=1"
   end
 
-  def embed_html(width=425, height=344, options={})
+  def embed_html(width=425, height=344, options={}, params={})
     "<embed width='#{width}' height='#{height}' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' allowfullscreen='true' quality='high' src='#{embed_url}'/>"
   end
   

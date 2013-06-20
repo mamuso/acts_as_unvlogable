@@ -27,7 +27,7 @@ class VgQik
     "http://qik.com/swfs/qikPlayer5.swf?streamID=#{@page[0]['embed_html'].split("streamID=")[1].split("&")[0]}&amp;autoplay=false"
   end
 
-  def embed_html(width=425, height=344, options={})
+  def embed_html(width=425, height=344, options={}, params={})
     @page[0]['embed_html']
   end
   
