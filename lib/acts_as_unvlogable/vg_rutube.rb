@@ -23,7 +23,7 @@ class VgRutube
     "http://video.rutube.ru/#{movie_hash}"
   end
 
-  def embed_html(width=425, height=344, options={})
+  def embed_html(width=425, height=344, options={}, params={})
     # overridden cause we have to change default size if needed
     return <<-"END"
     <object width="#{width}" height="#{height}"><param

@@ -19,8 +19,8 @@ class VgProstopleer
   def title
     @title ||= [pp_data[:singer], pp_data[:song]].join(' - ')
   end
-  
-  def embed_html(width=411, height=28, options = {})
+
+  def embed_html(width=425, height=344, options={}, params={})
     return "<object width=\"#{width}\" height=\"#{height}\"><param name=\"movie\" value=\"http://embed.prostopleer.com/track?id=#{track_id}\"></param><embed src=\"http://embed.prostopleer.com/track?id=#{track_id}\" type=\"application/x-shockwave-flash\" width=\"#{width}\" height=\"#{height}\"></embed></object>"
   end
   
