@@ -16,7 +16,7 @@ class VgDalealplay
   end
   
   def title
-    @page.search("//title").inner_html.split(" - www.dalealplay.com")[0].to_s
+    @page.search("//title").inner_html.split(" - Vídeo Online")[0].to_s
   end
   
   def thumbnail
