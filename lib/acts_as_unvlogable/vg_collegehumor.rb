@@ -9,7 +9,7 @@ class VgCollegehumor
   def initialize(url=nil, options={})
     @url = url
     @video_id = parse_url(url)
-    res = Net::HTTP.get(URI.parse("http://www.collegehumor.com/moogaloop/video:#{@video_id}"))
+    res = Net::HTTP.get(URI.parse("http://www.collegehumor.com/moogaloop/video/#{@video_id}"))
     @feed = REXML::Document.new(res)
   end
   
@@ -46,21 +46,13 @@ class VgCollegehumor
   end
   
   private
-  
+
   def parse_url(url)
       uri = URI.parse(url)
       path = uri.path
-      videoargs = ''
-      if path and path.split(":").size > 0
-        videoargs = path.split(":")
-        raise unless videoargs.size > 0 && videoargs.first == '/video'
-      else
-        raise
-      end
-      videoargs[1]
-    rescue
-      nil
+      videoargs = path.split("/")
+      raise unless videoargs.size > 0 && videoargs[1] == 'video'
+      videoargs[2]
   end
-  
   
 end

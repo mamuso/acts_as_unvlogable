@@ -122,12 +122,12 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 # ----------------------------------------------------------
     context "with a collegehumor video url" do
       setup do
-        @videotron = UnvlogIt.new("http://www.collegehumor.com/video:1781938") # => Brohemian Rhapsody
+        @videotron = UnvlogIt.new("http://www.collegehumor.com/video/3005349/brohemian-rhapsody") # => Brohemian Rhapsody
       end
       should "initialize a VgCollegehumor instance" do
         assert_equal "VgCollegehumor", @videotron.instance_values['object'].class.to_s
-        assert_equal "http://www.collegehumor.com/video:1781938", @videotron.instance_values['object'].instance_values['url']
-        assert_equal "1781938", @videotron.instance_values['object'].instance_values['video_id']
+        assert_equal "http://www.collegehumor.com/video/3005349/brohemian-rhapsody", @videotron.instance_values['object'].instance_values['url']
+        assert_equal "3005349", @videotron.instance_values['object'].instance_values['video_id']
         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
       end
       
