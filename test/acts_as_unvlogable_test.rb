@@ -45,7 +45,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
 
     context "with an existent youtube url that can not be embedded" do
         should "raise an ArgumentError" do
-          assert_raise(ArgumentError, "Embedding disabled by request") { UnvlogIt.new("http://www.youtube.com/watch?v=3Oec8RuwVVs") }# => The Killers - Read My Mind 
+          assert_raise(ArgumentError, "Embedding disabled by request") { UnvlogIt.new("http://www.youtube.com/watch?v=6TT19cB0NTM") }# => Oh! Yeah! by Chickenfoot from the Tonight Show w Conan O'Brien 
         end
     end
     

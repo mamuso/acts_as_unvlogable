@@ -3,16 +3,20 @@
 #  http://www.youtube.com/watch?v=25AsfkriHQc
 # ----------------------------------------------
 
-
 class VgYoutube
   
   def initialize(url=nil, options={})
     object = YouTubeIt::Client.new({})
     @url = url
     @video_id = @url.query_param('v')
-    @details = object.video_by(@video_id)
-    @details.instance_variable_set(:@noembed, false)
-    raise if @details.blank?
+    begin
+      @details = object.video_by(@video_id)
+      raise if @details.blank?
+      raise ArgumentError, "Embedding disabled by request" unless @details.embeddable?
+      @details.instance_variable_set(:@noembed, false)
+    rescue
+      raise ArgumentError, "Unsuported url or service"
+    end
   end
   
   def title
