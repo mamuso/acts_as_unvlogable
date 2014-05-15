@@ -6,7 +6,6 @@ $LOAD_PATH << File.dirname(__FILE__) + '/../lib'
 require 'acts_as_unvlogable'
 # Gems & other herbs
 require 'shoulda'
-require 'ruby-debug'
 
 class ActsAsUnvlogableTest < Test::Unit::TestCase
   

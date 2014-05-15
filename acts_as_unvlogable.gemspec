@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = ActsAsUnvlogable::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Manuel Muñoz", "Fernando Blat", "Alberto Romero"]
-  s.email       = ["mamusino@gmail.com", "ferblape@gmail.com", "denegro@gmail.com"]
+  s.email       = ["mamuso@mamuso.net", "ferblape@gmail.com", "denegro@gmail.com"]
   s.homepage    = "https://github.com/mamuso/acts_as_unvlogable"
   s.summary     = %q{An easy way to include external video services in a rails app}
   s.description = %q{An easy way to include external video services in a rails app. This gem provides you wrappers for the most common video services, such as Youtube, Vimeo, Flickr, and so on...}
