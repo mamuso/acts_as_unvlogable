@@ -3,8 +3,6 @@
 #  http://prostopleer.com/tracks/401758bI6n
 # ----------------------------------------------
 
-require 'hpricot'
-
 class VgProstopleer
   
   attr_accessor :track_id

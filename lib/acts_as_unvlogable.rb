@@ -1,13 +1,16 @@
 require "rubygems"
 require "bundler/setup"
-
-require "xmlsimple"
-require "youtube_it"
-require "hpricot"
 require "net/http"
-require "json"
 
-require "acts_as_unvlogable/flickr"
+# youtube_it it's needed for the youtube service
+require "youtube_it"
+
+# require "xmlsimple"
+# require "hpricot"
+# require "json"
+# require "acts_as_unvlogable/flickr"
+
+
 # Extensions
 if defined?(ActiveSupport).nil?
   require "acts_as_unvlogable/string_base"
@@ -15,12 +18,14 @@ if defined?(ActiveSupport).nil?
 end
 require "acts_as_unvlogable/string_extend"
 
-# Video classes
+
+# Video Services
 videolibs = File.join(File.dirname(__FILE__), "acts_as_unvlogable", "vg_*.rb")
 Dir.glob(videolibs).each {|file| require file}
 
+
 class UnvlogIt
-  
+
   def initialize(url=nil, options={})
     @object = VideoFactory.new(url, options).load_service
   end
@@ -48,14 +53,6 @@ class UnvlogIt
   def embed_html(width=425, height=344, options={}, params={})
     @object.embed_html(width, height, options, params) rescue nil
   end
-  
-  def flv
-    @object.flv #rescue nil
-  end
-  
-  def download_url
-    @object.download_url rescue nil
-  end
 
   def service
     @object.service rescue nil
@@ -67,8 +64,8 @@ class UnvlogIt
       :thumbnail => @object.thumbnail,
       :embed_url => @object.embed_url,
       :embed_html => @object.embed_html(width, height),
-      :flv => @object.flv,
-      :download_url => @object.download_url,
+      :flv => nil,              # Deprecated
+      :download_url => nil,     # Deprecated
       :service => @object.service,
       :duration => @object.duration
     }
@@ -83,13 +80,13 @@ class UnvlogIt
 
     def load_service
       @object = service_object
-
       validate_embed(@object)
     end
 
     private
 
     def validate_embed(object)
+      puts object.instance_variable_get("@details")
       unless object.instance_variable_get("@details").nil? || !object.instance_variable_get("@details").respond_to?("noembed")
         if object.instance_variable_get("@details").noembed
           raise ArgumentError.new("Embedding disabled by request")
@@ -102,7 +99,7 @@ class UnvlogIt
       class_name = "vg_#{get_domain.downcase}".camelize
       class_name.constantize.new(@url, @options)
     rescue NameError
-      raise ArgumentError.new("Unsuported url or service. class: #{class_name}, url: #{@url}")
+      raise ArgumentError.new("Unsuported url or service")
     end
 
     def get_domain
