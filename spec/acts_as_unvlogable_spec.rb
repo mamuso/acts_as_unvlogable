@@ -44,6 +44,21 @@ describe UnvlogIt do
     }
   end
 
+  context "with a shortened youtube URL" do
+    let(:videotron) { UnvlogIt.new("http://youtu.be/4pzMBtPMUq8") } # => Keith Moon´s drum kit explodes
+
+    it "initialize a VgYoutube instance" do
+      VgYoutu.should eq(videotron.instance_values['object'].class)
+      "http://www.youtube.com/watch?&v=4pzMBtPMUq8".should eq(videotron.instance_values['object'].instance_values['url'])
+      "4pzMBtPMUq8".should eq(videotron.instance_values['object'].instance_values['video_id'])
+      videotron.instance_values['object'].instance_values['details'].should_not be_nil
+    end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "APM? Capítol 349 -09/04/14- (HD)", :service => "Youtube"})
+    end
+  end
+
   protected
   
   def check_video_attributes(options={})
