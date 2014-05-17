@@ -1,7 +1,5 @@
-Acts as unvlogable
-==================
+# Acts as unvlogable [![Build Status](https://travis-ci.org/mamuso/acts_as_unvlogable.svg?branch=refactor)](https://travis-ci.org/mamuso/acts_as_unvlogable) [![Coverage Status](https://coveralls.io/repos/mamuso/acts_as_unvlogable/badge.png?branch=refactor)](https://coveralls.io/r/mamuso/acts_as_unvlogable?branch=refactor)
 
-[![Build Status](https://travis-ci.org/mamuso/acts_as_unvlogable.svg?branch=refactor)](https://travis-ci.org/mamuso/acts_as_unvlogable) [![Coverage Status](https://coveralls.io/repos/mamuso/acts_as_unvlogable/badge.png?branch=refactor)](https://coveralls.io/r/mamuso/acts_as_unvlogable?branch=refactor)
 
 What the hell is this!
 ----------------------
@@ -36,15 +34,6 @@ Install it!
         gem "acts_as_unvlogable"
         
 2. Optionally you can create the `config/unvlogable.yml` to store keys for the different services. You have in the plugin a [sample file](http://github.com/mamuso/acts_as_unvlogable/tree/master/unvlogable_sample.yml). At this moment you only need specify keys for flickr.
-
-
-Dependencies
-------------
-
-The plugin depends on [youtube-it](https://github.com/kylejginavan/youtube_it), [xml-simple](http://xml-simple.rubyforge.org/) and [hpricot](https://code.whytheluckystiff.net/hpricot/).
-
-We have included a modified version of the flickr gem to skip the gem dependency and manage video capabilities.
-
 
 Use it!
 -------

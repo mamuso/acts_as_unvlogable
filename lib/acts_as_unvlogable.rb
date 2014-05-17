@@ -54,6 +54,14 @@ class UnvlogIt
   def service
     @object.service rescue nil
   end
+
+  # Deprecated
+  def flv
+  end
+
+  # Deprecated
+  def download_url
+  end
   
   def video_details(width=425, height=344)
     {
