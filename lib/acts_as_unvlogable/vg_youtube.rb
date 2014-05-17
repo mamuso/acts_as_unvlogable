@@ -12,8 +12,7 @@ class VgYoutube
     begin
       @details = object.video_by(@video_id)
       raise if @details.blank?
-      raise ArgumentError, "Embedding disabled by request" unless @details.embeddable?
-      @details.instance_variable_set(:@noembed, false)
+      @details.instance_variable_set(:@noembed, false) unless !@details.embeddable?
     rescue
       raise ArgumentError, "Unsuported url or service"
     end

@@ -86,9 +86,8 @@ class UnvlogIt
     private
 
     def validate_embed(object)
-      puts object.instance_variable_get("@details")
       unless object.instance_variable_get("@details").nil? || !object.instance_variable_get("@details").respond_to?("noembed")
-        if object.instance_variable_get("@details").noembed
+        if !object.instance_variable_get("@details").embeddable?
           raise ArgumentError.new("Embedding disabled by request")
         end
       end

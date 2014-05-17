@@ -1,6 +1,8 @@
 Acts as unvlogable
 ==================
 
+[![Build Status](https://travis-ci.org/mamuso/acts_as_unvlogable.svg?branch=refactor)](https://travis-ci.org/mamuso/acts_as_unvlogable) [![Coverage Status](https://img.shields.io/coveralls/mamuso/acts_as_unvlogable.svg)](https://coveralls.io/r/mamuso/acts_as_unvlogable?branch=refactor)
+
 What the hell is this!
 ----------------------
 
@@ -15,14 +17,12 @@ To include [this video](http://www.youtube.com/watch?v=GPQnbtldFyo) in [this pos
         @aha.thumbnail => "http://i4.ytimg.com/vi/GPQnbtldFyo/default.jpg"
         @aha.embed_url => "http://www.youtube.com/v/GPQnbtldFyo"
         @aha.embed_html(width, height) => "<object [...]</object>"
-        @aha.flv => "http://...flv"
         # all together :)
         @aha.video_details(width, height) => {
                                                 :title => ...,
                                                 :thumbnail => ...,
                                                 :embed_url => ...,
                                                 :embed_html => ...,
-                                                :flv => ...
                                               }
         
 With this plugin we have an unique way to manage multiple services :)
@@ -81,10 +81,7 @@ Then we have methods to know the 'basics' for use this video on your application
           videotron.embed_html(400, 300)
           => "<object width='400' height='300'><param name='mo [...] 300'></embed></object>"
 
--   __flv:__ Gets the flv url. In this edition we implement this method in all the services, but is possible that we can't get the flv in some scenarios. Remember that in some services the flv url expires and in most of their terms don't allow use the flv without its player.
-
-          videotron.flv
-          => "http://www.vimeo.com/moogaloop/play/clip:1785993/ [...] 8ee400/video.flv"
+-   __flv:__ **DEPRECATED** 
 
 -   __video\_details(width, height):__ All together :), returns all the previous elements in a hash. Width and height can be specified to build the embed\_html.
 
