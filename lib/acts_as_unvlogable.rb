@@ -1,8 +1,5 @@
-require "rubygems"
 require "bundler/setup"
 require "net/http"
-
-# youtube_it it's needed for the youtube service
 require "youtube_it"
 
 # require "xmlsimple"

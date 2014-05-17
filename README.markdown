@@ -1,7 +1,7 @@
 Acts as unvlogable
 ==================
 
-[![Build Status](https://travis-ci.org/mamuso/acts_as_unvlogable.svg?branch=refactor)](https://travis-ci.org/mamuso/acts_as_unvlogable) [![Coverage Status](https://img.shields.io/coveralls/mamuso/acts_as_unvlogable.svg)](https://coveralls.io/r/mamuso/acts_as_unvlogable?branch=refactor)
+[![Build Status](https://travis-ci.org/mamuso/acts_as_unvlogable.svg?branch=refactor)](https://travis-ci.org/mamuso/acts_as_unvlogable) [![Coverage Status](https://coveralls.io/repos/mamuso/acts_as_unvlogable/badge.png?branch=refactor)](https://coveralls.io/r/mamuso/acts_as_unvlogable?branch=refactor)
 
 What the hell is this!
 ----------------------
