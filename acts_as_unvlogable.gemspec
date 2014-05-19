@@ -22,6 +22,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bundler', '~> 1.3'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
-  s.add_runtime_dependency("nokogiri", "~> 1.6.0")
+  s.add_runtime_dependency("nokogiri")
   s.add_runtime_dependency("youtube_it")
 end

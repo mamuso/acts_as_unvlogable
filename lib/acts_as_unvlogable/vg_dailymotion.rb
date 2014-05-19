@@ -22,11 +22,11 @@ class VgDailymotion
   end
   
   def embed_url
-    REXML::XPath.first(@feed, "//media:content[@type='application/x-shockwave-flash']").attributes['url']
+    REXML::XPath.first(@feed, "//media:content[@type='text/html']").attributes['url']
   end
 
   def embed_html(width=425, height=344, options={}, params={})
-    "<object width='#{width}' height='#{height}'><param name='movie' value='#{embed_url}&related=1'></param><param name='allowFullScreen' value='true'></param><param name='allowScriptAccess' value='always'></param><embed src='#{embed_url}&related=1' type='application/x-shockwave-flash' width='#{width}' height='#{height}' allowFullScreen='true' allowScriptAccess='always'></embed></object>"
+    "<iframe frameborder='0' width='#{width}' height='#{height}' src='#{embed_url}' allowfullscreen></iframe>"
   end
   
   def flv

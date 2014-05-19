@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "net/http"
+require 'rexml/document'
 require "youtube_it"
 
 # require "xmlsimple"
@@ -7,8 +8,6 @@ require "youtube_it"
 # require "json"
 # require "acts_as_unvlogable/flickr"
 
-
-# Extensions
 if defined?(ActiveSupport).nil?
   require "acts_as_unvlogable/string_base"
   require "acts_as_unvlogable/object_base"
