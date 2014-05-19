@@ -95,67 +95,68 @@ describe UnvlogIt do
     end
   end
 
-# ----------------------------------------------------------
-#   Testing dailymotion
-# ----------------------------------------------------------
+  # ----------------------------------------------------------
+  #   Testing dailymotion
+  # ----------------------------------------------------------
 
   context "with an existent dailymotion url" do
-    let(:videotron) { UnvlogIt.new("http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport/") } # => parkour dayyy
+      let(:videotron) { UnvlogIt.new("http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport/") } # => parkour dayyy
 
-    it "initialize a VgDailymotion instance" do
-      VgDailymotion.should eq(videotron.instance_values['object'].class)
-      "http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport/".should eq(videotron.instance_values['object'].instance_values['url'])
-      "x7u5kn_parkour-dayyy_sport".should eq(videotron.instance_values['object'].instance_values['video_id'])
+      it "initialize a VgDailymotion instance" do
+        VgDailymotion.should eq(videotron.instance_values['object'].class)
+        "http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport/".should eq(videotron.instance_values['object'].instance_values['url'])
+        "x7u5kn_parkour-dayyy_sport".should eq(videotron.instance_values['object'].instance_values['video_id'])
+        videotron.instance_values['object'].instance_values['feed'].should_not be_nil
+      end
+
+      it "returns the video properties" do
+        check_video_attributes({:title => "parkour dayyy", :service => "Dailymotion"})
+      end
+    end
+
+  # ----------------------------------------------------------
+  #   Testing collegehumor
+  # ----------------------------------------------------------
+
+  context "with an existent collegehumor url" do
+    let(:videotron) { UnvlogIt.new("http://www.collegehumor.com/video/3005349/brohemian-rhapsody/") } # => Brohemian Rhapsody
+
+    it "initialize a VgCollegehumor instance" do
+      VgCollegehumor.should eq(videotron.instance_values['object'].class)
+      "http://www.collegehumor.com/video/3005349/brohemian-rhapsody/".should eq(videotron.instance_values['object'].instance_values['url'])
+      "3005349".should eq(videotron.instance_values['object'].instance_values['video_id'])
       videotron.instance_values['object'].instance_values['feed'].should_not be_nil
     end
 
     it "returns the video properties" do
-      check_video_attributes({:title => "parkour dayyy", :service => "Dailymotion"})
+      check_video_attributes({:title => "Brohemian Rhapsody", :service => "CollegeHumor"})
     end
   end
 
-# # ----------------------------------------------------------
-# #   Testing collegehumor
-# # ----------------------------------------------------------
-#     context "with a collegehumor video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://www.collegehumor.com/video/3005349/brohemian-rhapsody") # => Brohemian Rhapsody
-#       end
-#       should "initialize a VgCollegehumor instance" do
-#         assert_equal "VgCollegehumor", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://www.collegehumor.com/video/3005349/brohemian-rhapsody", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "3005349", @videotron.instance_values['object'].instance_values['video_id']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
-#       end
+  # ----------------------------------------------------------
+  #   Testing blip.tv
+  # ----------------------------------------------------------
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "Brohemian Rhapsody", :service => "CollegeHumor"})
-#       end
-#     end
+  context "with an existent blip.tv url" do
+    let(:videotron) { UnvlogIt.new("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535") } # => Sarah's Super Bowl Spread – Healthy Recipe - Classic Buffalo Wing Dip
 
+    it "initialize a VgBlip instance" do
+      VgBlip.should eq(videotron.instance_values['object'].class)
+      "http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535".should eq(videotron.instance_values['object'].instance_values['url'])
+      videotron.instance_values['object'].instance_values['feed'].should_not be_nil
+    end
 
-# # ----------------------------------------------------------
-# #   Testing blip.tv
-# # ----------------------------------------------------------
-#     context "with a blip.tv video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://blip.tv/file/678407/") # => Toy Break 26 : Adult Toys
-#       end
-#       should "initialize a VgBlip instance" do
-#         assert_equal "VgBlip", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://blip.tv/file/678407/", @videotron.instance_values['object'].instance_values['url']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
-#       end
+    it "returns the video properties" do
+      check_video_attributes({:title => "Sarah's Super Bowl Spread &#8211; Healthy Recipe - Classic Buffalo Wing Dip", :service => "Blip.tv"})
+    end
+  end
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "Toy Break 26 : Adult Toys", :service => "Blip.tv"})
-#       end
-#     end
+  # ----------------------------------------------------------
+  #   Testing vids.myspace.com
+  # ----------------------------------------------------------
 
 
-# # ----------------------------------------------------------
-# #   Testing vids.myspace.com
-# # ----------------------------------------------------------
+  
 #     context "with a vids.myspace.com video url" do
 #       setup do
 #         @videotron = UnvlogIt.new("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431") # => rocabilis
@@ -373,7 +374,6 @@ protected
 def check_video_attributes(options={})
   options[:title].should eq(videotron.title) unless (options.blank? || options[:title].blank?)
   options[:service].should eq(videotron.service) unless (options.blank? || options[:service].blank?)
-
   videotron.thumbnail.should_not be_nil
   if options.blank? || options[:noembed].blank?
     videotron.embed_url.should_not be_nil
