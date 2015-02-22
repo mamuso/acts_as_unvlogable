@@ -133,65 +133,65 @@ describe UnvlogIt do
     end
   end
 
-  # # ----------------------------------------------------------
-  # #   Testing blip.tv
-  # # ----------------------------------------------------------
+  # ----------------------------------------------------------
+  #   Testing blip.tv
+  # ----------------------------------------------------------
 
-  # context "with an existent blip.tv url" do
-  #   let(:videotron) { UnvlogIt.new("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535") } # => Sarah's Super Bowl Spread – Healthy Recipe - Classic Buffalo Wing Dip
+  context "with an existent blip.tv url" do
+    let(:videotron) { UnvlogIt.new("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535") } # => Sarah's Super Bowl Spread – Healthy Recipe - Classic Buffalo Wing Dip
 
-  #   it "initialize a VgBlip instance" do
-  #     VgBlip.should eq(videotron.instance_values['object'].class)
-  #     "http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535".should eq(videotron.instance_values['object'].instance_values['url'])
-  #     videotron.instance_values['object'].instance_values['feed'].should_not be_nil
-  #   end
+    it "initialize a VgBlip instance" do
+      expect(VgBlip).to eq(videotron.instance_values['object'].class)
+      expect("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
+    end
 
-  #   it "returns the video properties" do
-  #     check_video_attributes({:title => "Sarah's Super Bowl Spread &#8211; Healthy Recipe - Classic Buffalo Wing Dip", :service => "Blip.tv"})
-  #   end
-  # end
+    it "returns the video properties" do
+      check_video_attributes({:title => "Sarah's Super Bowl Spread &#8211; Healthy Recipe - Classic Buffalo Wing Dip", :service => "Blip.tv"})
+    end
+  end
 
   # ----------------------------------------------------------
   #   Testing vids.myspace.com
   # ----------------------------------------------------------
-
-
   
-#     context "with a vids.myspace.com video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431") # => rocabilis
-#       end
-#       should "initialize a VgMyspace instance" do
-#         assert_equal "VgMyspace", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "27111431", @videotron.instance_values['object'].instance_values['video_id']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
-#       end
+  # Service changed, check the new urls
+  # https://myspace.com/jimmykimmellive/video/mastodon-the-motherload-/109586961
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "rocabilis", :service => "Myspace"})
-#       end
-#     end
+  # context "with a vids.myspace.com video url" do
+  #   let(:videotron) { UnvlogIt.new("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431") } # => rocabilis
+
+  #   it "initialize a VgMyspace instance" do
+  #     expect(VgBlip).to eq(videotron.instance_values['object'].class)
+  #     expect("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431").to eq(videotron.instance_values['object'].instance_values['url'])
+  #     expect("27111431").to eq(videotron.instance_values['object'].instance_values['video_id'])
+  #     expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
+  #   end
+
+  #   it "returns the video properties" do
+  #     check_video_attributes({:title => "rocabilis", :service => "Myspace"})
+  #   end
+  # end
 
 
-# # ----------------------------------------------------------
-# #   Testing 11870.com
-# # ----------------------------------------------------------
-#     context "with an 11870.com video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://11870.com/pro/chic-basic-born/media/b606abfe") # => Chic & Basic Born
-#       end
-#       should "initialize a Vg11870 instance" do
-#         assert_equal "Vg11870", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://11870.com/pro/chic-basic-born/media/b606abfe", @videotron.instance_values['object'].instance_values['url']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['page']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['flashvars']
-#       end
+# ----------------------------------------------------------
+#   Testing 11870.com
+# ----------------------------------------------------------
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "Chic & Basic Born", :service => "11870.com"})
-#       end
-#     end
+  context "with an existent 11870.com url" do
+    let(:videotron) { Vg11870.new("http://11870.com/pro/chic-basic-born/media/b606abfe") } # => Chic & Basic Born
+
+    it "initialize a Vg11870 instance" do
+      expect(Vg11870).to eq(videotron.instance_values['object'].class)
+      expect("https://11870.com/pro/chic-basic-born/media/b606abfe").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect(videotron.instance_values['object'].instance_values['page']).to_not be_nil
+      expect(videotron.instance_values['object'].instance_values['flashvars']).to_not be_nil
+    end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "Chic & Basic Born", :service => "11870.com"})
+    end
+  end
 
 
 # # ----------------------------------------------------------

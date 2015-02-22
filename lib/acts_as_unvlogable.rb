@@ -27,7 +27,7 @@ class UnvlogIt
   end
   
   def title
-    @object.title #rescue nil
+    @object.title rescue nil
   end
   
   def thumbnail

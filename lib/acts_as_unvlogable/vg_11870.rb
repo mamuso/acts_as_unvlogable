@@ -7,17 +7,16 @@
 class Vg11870
   
   def initialize(url=nil, options={})
-    @url = url
-    @page = Hpricot(open(url))
-    @flashvars = CGI::parse(@page.to_s.split("flashvars=&quot;")[1].split("&quot;")[0])
+    @url = url.sub "http:", "https:"
+    @page = Nokogiri::HTML(open(@url))
   end
   
   def title
-    CGI::unescapeHTML @page.search("//h1[@class='fn name']/a").first.inner_html
+    CGI::unescapeHTML @page.xpath("//span[@itemprop='name']")
   end
   
   def thumbnail
-    @flashvars['image']
+    @page.xpath("//img[@itemprop='image']").first["src"]
   end
   
   def duration
@@ -25,8 +24,7 @@ class Vg11870
   end
   
   def embed_url
-    query = @flashvars.map {|k,v| "&#{k}=#{v}"}
-    "http://11870.com/multimedia/flvplayer.swf?#{query}"
+    "https://s3-eu-west-1.amazonaws.com/static.11870.com/11870/player.swf?netstreambasepath=#{@url}&id=video&file=#{}&image=#{}"
   end
 
   def embed_html(width=425, height=344, options={}, params={})
