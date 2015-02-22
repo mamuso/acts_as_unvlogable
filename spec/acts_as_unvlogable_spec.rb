@@ -103,10 +103,10 @@ describe UnvlogIt do
       let(:videotron) { UnvlogIt.new("http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport/") } # => parkour dayyy
 
       it "initialize a VgDailymotion instance" do
-        VgDailymotion.should eq(videotron.instance_values['object'].class)
-        "http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport/".should eq(videotron.instance_values['object'].instance_values['url'])
-        "x7u5kn_parkour-dayyy_sport".should eq(videotron.instance_values['object'].instance_values['video_id'])
-        videotron.instance_values['object'].instance_values['feed'].should_not be_nil
+        expect(VgDailymotion).to eq(videotron.instance_values['object'].class)
+        expect("http://www.dailymotion.com/video/x7u5kn_parkour-dayyy_sport/").to eq(videotron.instance_values['object'].instance_values['url'])
+        expect("x7u5kn_parkour-dayyy_sport").to eq(videotron.instance_values['object'].instance_values['video_id'])
+        expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
       end
 
       it "returns the video properties" do
@@ -114,24 +114,24 @@ describe UnvlogIt do
       end
     end
 
-  # # ----------------------------------------------------------
-  # #   Testing collegehumor
-  # # ----------------------------------------------------------
+  # ----------------------------------------------------------
+  #   Testing collegehumor
+  # ----------------------------------------------------------
 
-  # context "with an existent collegehumor url" do
-  #   let(:videotron) { UnvlogIt.new("http://www.collegehumor.com/video/3005349/brohemian-rhapsody/") } # => Brohemian Rhapsody
+  context "with an existent collegehumor url" do
+    let(:videotron) { UnvlogIt.new("http://www.collegehumor.com/video/3005349/brohemian-rhapsody/") } # => Brohemian Rhapsody
 
-  #   it "initialize a VgCollegehumor instance" do
-  #     VgCollegehumor.should eq(videotron.instance_values['object'].class)
-  #     "http://www.collegehumor.com/video/3005349/brohemian-rhapsody/".should eq(videotron.instance_values['object'].instance_values['url'])
-  #     "3005349".should eq(videotron.instance_values['object'].instance_values['video_id'])
-  #     videotron.instance_values['object'].instance_values['feed'].should_not be_nil
-  #   end
+    it "initialize a VgCollegehumor instance" do
+      expect(VgCollegehumor).to eq(videotron.instance_values['object'].class)
+      expect("http://www.collegehumor.com/video/3005349/brohemian-rhapsody/").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("3005349").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
+    end
 
-  #   it "returns the video properties" do
-  #     check_video_attributes({:title => "Brohemian Rhapsody", :service => "CollegeHumor"})
-  #   end
-  # end
+    it "returns the video properties" do
+      check_video_attributes({:title => "Brohemian Rhapsody", :service => "CollegeHumor"})
+    end
+  end
 
   # # ----------------------------------------------------------
   # #   Testing blip.tv
