@@ -8,11 +8,8 @@ branches:
   only:
     - refactor
 
-<<<<<<< HEAD
 script: "bundle exec rspec"
 
-=======
->>>>>>> master
 notifications:
   email:
     recipients:
