@@ -102,7 +102,6 @@ Broken services
 
 These services were implemented but due to changes in the website they don't work anymore. Any patch for fixing them would be great ;)
 
--   [Qik](http://qik.com/)
 -   [MTV](http://www.mtvhive.com/)
 
 You can detect new broken services when running the tests.

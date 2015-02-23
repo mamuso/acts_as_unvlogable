@@ -233,26 +233,6 @@ describe UnvlogIt do
 #     end
 
 
-# # ----------------------------------------------------------
-# #   Testing qik.com
-# # ----------------------------------------------------------
-#     context "with a qik.com video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://qik.com/video/340982") # => Honolulu Day 8: USS Arizona at Pearl Harbor
-#       end
-#       should "initialize a VgQik instance" do
-#         assert_equal "VgQik", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://qik.com/video/340982", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "340982", @videotron.instance_values['object'].instance_values['video_id']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['page']
-#       end
-
-#       should "return the video properties" do
-#         check_video_attributes({:title => "Honolulu Day 8: USS Arizona at Pearl Harbor", :service => "Qik"})
-#       end
-#     end
-
-
 
 # # ----------------------------------------------------------
 # #   Testing www.marca.tv
