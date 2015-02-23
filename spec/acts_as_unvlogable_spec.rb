@@ -235,27 +235,6 @@ describe UnvlogIt do
 
 
 # # ----------------------------------------------------------
-# #   Testing www.marca.tv
-# # ----------------------------------------------------------
-#     context "with a www.marca.tv video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://www.marca.com/tv/?v=DN23wG8c1Rj") # => Pau entra por la puerta grande en el club de los 10.000
-#       end
-#       should "initialize a VgMarca instance" do
-#         assert_equal "VgMarca", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://www.marca.com/tv/?v=DN23wG8c1Rj", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "DN23wG8c1Rj", @videotron.instance_values['object'].instance_values['video_id']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
-#       end
-
-#       should "return the video properties" do
-#         check_video_attributes({:title => "Pau entra por la puerta grande en el club de los 10.000", :service => "Marca.tv"})
-#       end
-#     end
-
-
-
-# # ----------------------------------------------------------
 # #   Testing ted talks
 # # ----------------------------------------------------------
 #     context "with a ted talks video url" do

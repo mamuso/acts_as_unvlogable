@@ -93,7 +93,6 @@ At this moment we support the following video services:
 -   [Myspace](http://vids.myspace.com/)
 -   [Ted Talks](http://www.ted.com/talks/)
 -   [11870.com](http://11870.com/)
--   [Marca.tv](http://www.marca.tv/)
 -   [Dalealplay](http://www.dalealplay.com/)
 -   [RuTube](http://www.rutube.ru/)
 
