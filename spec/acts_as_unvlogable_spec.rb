@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe UnvlogIt do
@@ -179,13 +180,12 @@ describe UnvlogIt do
 # ----------------------------------------------------------
 
   context "with an existent 11870.com url" do
-    let(:videotron) { Vg11870.new("http://11870.com/pro/chic-basic-born/media/b606abfe") } # => Chic & Basic Born
+    let(:videotron) { UnvlogIt.new("http://11870.com/pro/chic-basic-born/media/b606abfe") } # => Chic & Basic Born
 
     it "initialize a Vg11870 instance" do
       expect(Vg11870).to eq(videotron.instance_values['object'].class)
       expect("https://11870.com/pro/chic-basic-born/media/b606abfe").to eq(videotron.instance_values['object'].instance_values['url'])
       expect(videotron.instance_values['object'].instance_values['page']).to_not be_nil
-      expect(videotron.instance_values['object'].instance_values['flashvars']).to_not be_nil
     end
 
     it "returns the video properties" do

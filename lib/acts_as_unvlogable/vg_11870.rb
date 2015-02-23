@@ -12,7 +12,7 @@ class Vg11870
   end
   
   def title
-    CGI::unescapeHTML @page.xpath("//span[@itemprop='name']")
+    CGI::unescapeHTML @page.xpath("//span[@itemprop='name']").first.text.strip
   end
   
   def thumbnail
@@ -24,7 +24,7 @@ class Vg11870
   end
   
   def embed_url
-    "https://s3-eu-west-1.amazonaws.com/static.11870.com/11870/player.swf?netstreambasepath=#{@url}&id=video&file=#{}&image=#{}"
+    "https://s3-eu-west-1.amazonaws.com/static.11870.com/11870/player.swf?netstreambasepath=#{@url}&id=video&file=#{flv}&image=#{thumbnail}"
   end
 
   def embed_html(width=425, height=344, options={}, params={})
@@ -32,7 +32,7 @@ class Vg11870
   end
   
   def flv
-    @flashvars['file']
+    @page.xpath("//div[@id='video']/span").first.text.strip
   end
  
   def download_url
