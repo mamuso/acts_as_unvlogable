@@ -12,19 +12,19 @@ class VgDalealplay
   def initialize(url=nil, options={})
     @url = url
     @video_id = @url.query_param('con')
-    @page = open(url) {|f| Hpricot(f.read.encode("UTF-8")) }
+    @page = Nokogiri::HTML(open(@url))
   end
   
   def title
-    @page.search("//title").inner_html.split(" - Vídeo Online")[0].to_s
+    @page.xpath("//title").first.text.split(" - Video Online")[0].to_s
   end
   
   def thumbnail
-    "http://images-00.dalealplay.com/contenidos2/#{@video_id}/captura.jpg"
+    @page.xpath("//meta[@itemprop='image']").first["content"]
   end
   
   def embed_url
-    @page.search("//link[@rel='video_src']").first.attributes["href"].sub("autoStart=true", "autoStart=false")
+    @page.xpath("//meta[@itemprop='embedUrl']").first["content"]
   end
 
   def duration
@@ -32,11 +32,11 @@ class VgDalealplay
   end
 
   def embed_html(width=425, height=344, options={}, params={})
-    "<object type='application/x-shockwave-flash' width='#{width}' height='#{height}' data='#{embed_url}'><param name='quality' value='best' />	<param name='allowfullscreen' value='true' /><param name='scale' value='showAll' /><param name='movie' value='http#{embed_url}' /></object>"
+    "<iframe frameborder='0' marginwidth='0' marginheight ='0' id='videodap' scrolling='no' width='#{width}' height='#{height}' src='#{embed_url}'></iframe>"
   end
   
   def flv
-    "http://videos.dalealplay.com/contenidos3/#{CGI::parse(URI::parse(embed_url).query)['file']}"
+    @page.xpath("//meta[@itemprop='contentUrl']").first["content"]
   end
 
   def download_url

@@ -178,7 +178,6 @@ describe UnvlogIt do
 # ----------------------------------------------------------
 #   Testing 11870.com
 # ----------------------------------------------------------
-
   context "with an existent 11870.com url" do
     let(:videotron) { UnvlogIt.new("http://11870.com/pro/chic-basic-born/media/b606abfe") } # => Chic & Basic Born
 
@@ -194,24 +193,23 @@ describe UnvlogIt do
   end
 
 
-# # ----------------------------------------------------------
-# #   Testing dalealplay.com
-# # ----------------------------------------------------------
-#     context "with a dalealplay.com video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://www.dalealplay.com/informaciondecontenido.php?con=80280") # => Camelos Semos  Jonathan  Tú si que vales
-#       end
-#       should "initialize a VgDalealplay instance" do
-#         assert_equal "VgDalealplay", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://www.dalealplay.com/informaciondecontenido.php?con=80280", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "80280", @videotron.instance_values['object'].instance_values['video_id']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['page']
-#       end
+# ----------------------------------------------------------
+#   Testing dalealplay.com
+# ----------------------------------------------------------
+  context "with an existent dalealplay.com url" do
+    let(:videotron) { UnvlogIt.new("http://www.dalealplay.com/informaciondecontenido.php?con=80280") } # => Camelos Semos  Jonathan  Tú si que vales
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "Camelos.Semos. Jonathan. Tú si que vales.", :service => "dalealplay"}) 
-#       end
-#     end
+    it "initialize a VgDalealplay instance" do
+      expect(VgDalealplay).to eq(videotron.instance_values['object'].class)
+      expect("http://www.dalealplay.com/informaciondecontenido.php?con=80280").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("80280").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['page']).to_not be_nil
+    end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "Camelos.Semos. Jonathan. Tú si que vales.", :service => "dalealplay"})
+    end
+  end
 
 
 
