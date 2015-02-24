@@ -2,11 +2,7 @@ require "bundler/setup"
 require "net/http"
 require 'rexml/document'
 require "youtube_it"
-
-# require "xmlsimple"
-# require "hpricot"
-# require "json"
-# require "acts_as_unvlogable/flickr"
+require "nokogiri"
 
 if defined?(ActiveSupport).nil?
   require "acts_as_unvlogable/string_base"

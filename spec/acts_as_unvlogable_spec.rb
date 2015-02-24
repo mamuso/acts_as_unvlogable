@@ -257,24 +257,20 @@ describe UnvlogIt do
   end
 
 
-# # ----------------------------------------------------------
-# #   Testing vimeo
-# # ----------------------------------------------------------
-#     context "with a vimeo video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://vimeo.com/2354261") # => People are strange
-#       end
-#       should "initialize a VgVimeo instance" do
-#         assert_equal "VgVimeo", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://vimeo.com/2354261", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "2354261", @videotron.instance_values['object'].instance_values['video_id']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['feed']
-#       end
+# ----------------------------------------------------------
+#   Testing vimeo
+# ----------------------------------------------------------
+  context "with an existent vimeo url" do
+    let(:videotron) { UnvlogIt.new("http://vimeo.com/119318850") } # => Gotham City SF // A Timelapse Film
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "People are strange", :service => "Vimeo"})
-#       end
-#     end
+    it "initialize a VgVimeo instance" do
+      expect(VgVimeo).to eq(videotron.instance_values['object'].class)
+      expect("http://vimeo.com/119318850").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("119318850").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
+    end
+  end
+
 
 # # ----------------------------------------------------------
 # #   Testing RuTube
