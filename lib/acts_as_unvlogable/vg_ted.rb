@@ -8,20 +8,16 @@ class VgTed
   
   def initialize(url=nil, options={})
     @url = url
-    raise unless URI::parse(url).path.split("/").include? "talks"
-    @page = Hpricot(open(url))
-    id = @page.to_s.split("ted id=")[1].split("\]")[0]
-    @emb = Hpricot(open("http://www.ted.com/talks/embed/id/#{id}"))
-    @flashvars = CGI::unescapeHTML(@emb.to_s).split("param name=\"flashvars\" value=\"")[1].split("\"")[0]
-    @args = CGI::parse(@flashvars)
+    raise ArgumentError.new("Unsuported url or service") unless URI::parse(url).path.split("/").include? "talks"
+    @page = Nokogiri::HTML(open(@url))
   end
   
   def title
-    @page.search("//h1/span").first.inner_html.strip
+    @page.xpath("//meta[@property='og:title']").first["content"].strip
   end
   
   def thumbnail
-    "#{@args['su']}"
+    @page.xpath("//meta[@property='og:image']").first["content"].strip
   end
   
   def duration
@@ -29,15 +25,15 @@ class VgTed
   end
   
   def embed_url
-      "http://video.ted.com/assets/player/swf/EmbedPlayer.swf?#{@flashvars}"
+    @page.xpath("//link[@itemprop='embedURL']").first["href"].strip
   end
 
   def embed_html(width=425, height=344, options={}, params={})
-    "<object width='#{width}' height='#{height}'><param name='movie' value='#{embed_url}'></param><param name='allowFullScreen' value='true' /><param name='wmode' value='transparent'></param><param name='bgColor' value='#ffffff'></param><embed src='#{embed_url}' pluginspace='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' wmode='transparent' bgColor='#ffffff'  width='#{width}' height='#{height}' allowFullScreen='true'></embed></object>"
+    "<iframe src='#{embed_url}' width='#{width}' height='#{height}' frameborder='0' scrolling='no' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>"
   end
   
   def flv
-    "#{@args['vu'].to_s}"
+    nil
   end
   
   def download_url

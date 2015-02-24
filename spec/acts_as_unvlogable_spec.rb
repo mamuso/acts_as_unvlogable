@@ -233,32 +233,28 @@ describe UnvlogIt do
 #     end
 
 
+# ----------------------------------------------------------
+#   Testing ted talks
+# ----------------------------------------------------------
+  context "with an existent ted talks url" do
+    let(:videotron) { UnvlogIt.new("http://www.ted.com/talks/benjamin_wallace_on_the_price_of_happiness") } # => Benjamin Wallace: Does happiness have a price tag?
 
-# # ----------------------------------------------------------
-# #   Testing ted talks
-# # ----------------------------------------------------------
-#     context "with a ted talks video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://www.ted.com/talks/benjamin_wallace_on_the_price_of_happiness.html") # => Benjamin Wallace: Does happiness have a price tag?
-#       end
-#       should "initialize a VgTed instance" do
-#         assert_equal "VgTed", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://www.ted.com/talks/benjamin_wallace_on_the_price_of_happiness.html", @videotron.instance_values['object'].instance_values['url']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['page']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['flashvars']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['args']
-#       end
+    it "initialize a VgTed instance" do
+      expect(VgTed).to eq(videotron.instance_values['object'].class)
+      expect("http://www.ted.com/talks/benjamin_wallace_on_the_price_of_happiness").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect(videotron.instance_values['object'].instance_values['page']).to_not be_nil
+    end
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "Benjamin Wallace: The price of happiness", :service => "Ted Talks"})
-#       end
-#     end
+    it "returns the video properties" do
+      check_video_attributes({:title => "The price of happiness", :service => "Ted Talks"})
+    end
+  end
 
-#     context "with an invalid ted talks video url" do
-#       should "raise an ArgumentError exception" do
-#         assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://www.ted.com/index.php/wadus.html") }
-#       end
-#     end
+  context "with a non existent ted talks url" do
+    it "should raise an error" do
+      expect{ UnvlogIt.new("http://www.ted.com/index.php/wadus.html") }.to raise_error(ArgumentError, "Unsuported url or service")
+    end
+  end
 
 
 # # ----------------------------------------------------------
