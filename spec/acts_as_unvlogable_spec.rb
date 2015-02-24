@@ -301,26 +301,26 @@ describe UnvlogIt do
 #       end
 #     end
 
-# # ----------------------------------------------------------
-# #   Testing Prostopleer
-# # ----------------------------------------------------------
-#     context "with a prostopleer url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://prostopleer.com/tracks/401758bI6n")
-#       end
-#       should "initialize a VgProstopleer instance" do
-#         assert_equal "VgProstopleer", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://prostopleer.com/tracks/401758bI6n", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "401758bI6n", @videotron.instance_values['object'].instance_values['track_id']
-#         assert_equal "Combichrist - sent to destroy", @videotron.title
-#       end
-#     end
+# ----------------------------------------------------------
+#   Testing Prostopleer
+# ----------------------------------------------------------
+  context "with an existent pleer url" do
+    let(:videotron) { UnvlogIt.new("http://pleer.com/tracks/3370305QRJl") } # => La mala rodriguez, Nach Scratch SFDK - Dominicana
 
-#     context "with an invalid prostopleer url" do
-#       should "raise an ArgumentError exception" do
-#         assert_raise(ArgumentError) { UnvlogIt.new("http://prostopleer.com/trackszz/401758bI6n") }
-#       end
-#     end
+    it "initialize a VgPleer instance" do
+      expect(VgPleer).to eq(videotron.instance_values['object'].class)
+      expect("http://pleer.com/tracks/3370305QRJl").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("3370305QRJl").to eq(videotron.instance_values['object'].instance_values['track_id'])
+      expect("La mala rodriguez, Nach Scratch  SFDK - Dominicana").to eq(videotron.title)
+    end
+  end
+
+  context "with an invalid pleer url" do
+    it "should raise an error" do
+      expect{ UnvlogIt.new("http://prostopleer.com/trackszz/401758bI6n") }.to raise_error(ArgumentError, "Unsuported url or service")
+    end
+  end
+
 
 # ----------------------------------------------------------
 #   Testing Wistia

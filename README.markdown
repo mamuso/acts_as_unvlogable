@@ -96,6 +96,8 @@ At this moment we support the following video services:
 -   [Dalealplay](http://www.dalealplay.com/)
 -   [RuTube](http://www.rutube.ru/)
 -   [Wistia](http://wistia.com/)
+-   [Pleer — Audio](http://pleer.com/)
+
 
 Broken services
 ---------------
