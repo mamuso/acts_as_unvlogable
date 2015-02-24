@@ -269,6 +269,10 @@ describe UnvlogIt do
       expect("119318850").to eq(videotron.instance_values['object'].instance_values['video_id'])
       expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
     end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "Gotham City SF // A Timelapse Film", :service => "Vimeo"})
+    end
   end
 
 
@@ -317,6 +321,35 @@ describe UnvlogIt do
 #         assert_raise(ArgumentError) { UnvlogIt.new("http://prostopleer.com/trackszz/401758bI6n") }
 #       end
 #     end
+
+# ----------------------------------------------------------
+#   Testing Wistia
+# ----------------------------------------------------------
+  context "with an existent wistia url" do
+    let(:videotron) { UnvlogIt.new("https://home.wistia.com/medias/e4a27b971d") } # => Brendan - Make It Clap
+
+    it "initialize a VgWistia instance" do
+      expect(VgWistia).to eq(videotron.instance_values['object'].class)
+      expect("https://home.wistia.com/medias/e4a27b971d").to eq(videotron.instance_values['object'].instance_values['url'])
+    end
+
+    it "returns the video properties" do
+      check_video_attributes({
+          :title         => "Brendan - Make It Clap",
+          :service       => "Wistia, Inc.",
+          :duration      => 16.43,
+          :thumbnail     => "https://embed-ssl.wistia.com/deliveries/2d2c14e15face1e0cc7aac98ebd5b6f040b950b5.jpg?image_crop_resized=640x360"
+      })
+    end
+  end
+
+  context "with a non existent wistia url" do
+    it "should raise an error" do
+      expect{ UnvlogIt.new("https://gadabouting.wistia.com/medias/inexistent") }.to raise_error(ArgumentError, "Unsuported url or service")
+    end
+  end
+
+
 
 protected
 

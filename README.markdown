@@ -95,6 +95,7 @@ At this moment we support the following video services:
 -   [11870.com](http://11870.com/)
 -   [Dalealplay](http://www.dalealplay.com/)
 -   [RuTube](http://www.rutube.ru/)
+-   [Wistia](http://wistia.com/)
 
 Broken services
 ---------------

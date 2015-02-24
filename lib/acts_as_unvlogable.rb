@@ -1,8 +1,11 @@
 require "bundler/setup"
+require "cgi"
+require "json"
 require "net/http"
 require 'rexml/document'
 require "youtube_it"
 require "nokogiri"
+
 
 if defined?(ActiveSupport).nil?
   require "acts_as_unvlogable/string_base"
