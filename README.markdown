@@ -110,6 +110,7 @@ At this moment we support the following video services:
 -   [Marca.tv](http://www.marca.tv/)
 -   [Dalealplay](http://www.dalealplay.com/)
 -   [RuTube](http://www.rutube.ru/)
+-   [Wistia](http://wistia.com/)
 
 Broken services
 ---------------

@@ -371,13 +371,46 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       end
     end
 
+# ----------------------------------------------------------
+#   Testing Wistia
+# ----------------------------------------------------------
+    context "with a wistia url" do
+      setup do
+        @url = "https://home.wistia.com/medias/e4a27b971d"
+        @videotron = UnvlogIt.new(@url)
+        @instance = @videotron.instance_values['object']
+      end
+      should "initialize a VgWistia instance" do
+        assert_equal VgWistia, @instance.class
+        assert_equal @url, @instance.instance_values['url']
+        assert_not_nil @instance.instance_values['details']
+      end
+
+      should "return the video properties" do
+        check_video_attributes({
+          :flv           => false, # do not try flv format
+          :video_details => false, # do not try #video_details
+          :noembed       => false, # avoid calling `#embed_url`
+          :title         => "Brendan - Make It Clap",
+          :service       => "Wistia, Inc.",
+          :duration      => 16.43,
+          :thumbnail     => "https://embed-ssl.wistia.com/deliveries/2d2c14e15face1e0cc7aac98ebd5b6f040b950b5.jpg?image_crop_resized=640x360"})
+      end
+    end
+
+    context "with an inexistent wistia url" do
+      should "raise an ArgumentError" do
+        assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("https://gadabouting.wistia.com/medias/inexistent") }
+      end
+    end
+
   protected
-  
+
   def check_video_attributes(options={})
     assert_equal "#{options[:title]}", @videotron.title unless (options.blank? || options[:title].blank?)
     assert_equal "#{options[:service]}", @videotron.service unless (options.blank? || options[:service].blank?)
     assert_not_nil @videotron.thumbnail
-    if options.blank? || options[:noembed].blank?
+    if options.blank? || options[:noembed].nil?
       assert_not_nil @videotron.embed_url
       assert_not_nil @videotron.embed_html
     elsif options[:noembed]
@@ -386,7 +419,7 @@ class ActsAsUnvlogableTest < Test::Unit::TestCase
       assert_nil @videotron.video_details[:embed_url]
       assert_nil @videotron.video_details[:embed_html]
     end
-    assert_not_nil @videotron.flv
-    assert_equal Hash, @videotron.video_details.class
+    assert_not_nil(@videotron.flv) if options[:flv].nil?
+    assert_equal(Hash, @videotron.video_details.class) if options[:video_details].nil?
   end
 end
