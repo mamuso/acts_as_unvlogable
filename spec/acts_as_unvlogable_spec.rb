@@ -276,30 +276,44 @@ describe UnvlogIt do
   end
 
 
-# # ----------------------------------------------------------
-# #   Testing RuTube
-# # ----------------------------------------------------------
-#     context "with a rutube video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://rutube.ru/tracks/1958807.html?v=56cd2f1b50a4d2b69ff455e72f2fae29") # => chipmunks!!
-#       end
-#       should "initialize a VgRutube instance" do
-#         assert_equal "VgRutube", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://rutube.ru/tracks/1958807.html?v=56cd2f1b50a4d2b69ff455e72f2fae29", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "1958807", @videotron.instance_values['object'].instance_values['movie_id']
-#         assert_equal "56cd2f1b50a4d2b69ff455e72f2fae29", @videotron.instance_values['object'].send(:movie_hash)
-#       end
+# ----------------------------------------------------------
+#   Testing RuTube
+# ----------------------------------------------------------
+  context "with an existent rutube url" do
+    let(:videotron) { UnvlogIt.new("http://rutube.ru/video/520685fa20c456e200e683f3df17b131/") } # => chipmunks!!
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "Запасливые бурундуки"})
-#       end
-#     end
+    it "initialize a VgRutube instance" do
+      expect(VgRutube).to eq(videotron.instance_values['object'].class)
+      expect("http://rutube.ru/video/520685fa20c456e200e683f3df17b131/").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect(videotron.instance_values['object'].instance_values['page']).to_not be_nil
+    end
 
-#     context "with an invalid rutube video url" do
-#       should "raise an ArgumentError exception" do
-#         assert_raise(ArgumentError, "Unsuported url or service") { UnvlogIt.new("http://rutube.ru/tracks/abdcd.html?v=523423") }
-#       end
-#     end
+    it "returns the video properties" do
+      check_video_attributes({:title => "Запасливые бурундуки", :service => "Rutube"})
+    end
+  end
+
+    # context "with a rutube video url" do
+    #   setup do
+    #     @videotron = UnvlogIt.new("http://rutube.ru/tracks/1958807.html?v=56cd2f1b50a4d2b69ff455e72f2fae29") # => chipmunks!!
+    #   end
+    #   should "initialize a VgRutube instance" do
+    #     assert_equal "VgRutube", @videotron.instance_values['object'].class.to_s
+    #     assert_equal "http://rutube.ru/tracks/1958807.html?v=56cd2f1b50a4d2b69ff455e72f2fae29", @videotron.instance_values['object'].instance_values['url']
+    #     assert_equal "1958807", @videotron.instance_values['object'].instance_values['movie_id']
+    #     assert_equal "56cd2f1b50a4d2b69ff455e72f2fae29", @videotron.instance_values['object'].send(:movie_hash)
+    #   end
+
+    #   should "return the video properties" do
+    #     check_video_attributes({:title => "Запасливые бурундуки"})
+    #   end
+    # end
+
+  context "with an invalid rutube url" do
+    it "should raise an error" do
+      expect{ UnvlogIt.new("http://rutube.ru/tracks/abdcd.html?v=523423") }.to raise_error(ArgumentError, "Unsuported url or service")
+    end
+  end
 
 # ----------------------------------------------------------
 #   Testing Prostopleer
