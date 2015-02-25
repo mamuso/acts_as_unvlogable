@@ -99,17 +99,6 @@ At this moment we support the following video services:
 -   [Pleer — Audio](http://pleer.com/)
 
 
-Broken services
----------------
-
-These services were implemented but due to changes in the website they don't work anymore. Any patch for fixing them would be great ;)
-
--   [MTV](http://www.mtvhive.com/)
-
-You can detect new broken services when running the tests.
-
-We are always open to incude new services.
-
 And... what else?
 -----------------
 If you find a bug or want to suggest a new video service, please tell it to us in [a ticket](http://github.com/mamuso/acts_as_unvlogable/issues).
