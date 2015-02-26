@@ -230,22 +230,6 @@ describe UnvlogIt do
     end
   end
 
-    # context "with a flickr.com video url" do
-    #   setup do
-    #     @videotron = UnvlogIt.new("http://www.flickr.com/photos/jerovital/4152225414/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) # => la primera vela
-    #   end
-    #   should "initialize a VgFlickr instance" do
-    #     assert_equal "VgFlickr", @videotron.instance_values['object'].class.to_s
-    #     assert_equal "http://www.flickr.com/photos/jerovital/4152225414/", @videotron.instance_values['object'].instance_values['url']
-    #     assert_equal "4152225414", @videotron.instance_values['object'].instance_values['video_id']
-    #     assert_not_nil @videotron.instance_values['object'].instance_values['details']
-    #   end
-
-    #   should "return the video properties" do
-    #     check_video_attributes({:title => "flipando en los columpios", :service => "Flickr"})
-    #   end
-    # end
-
 
 # ----------------------------------------------------------
 #   Testing ted talks
