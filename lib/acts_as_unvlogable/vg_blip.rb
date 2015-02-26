@@ -32,10 +32,6 @@ class VgBlip
     "<iframe src='#{embed_url}.x?p=1' width='#{width}' height='#{height}' frameborder='0' allowfullscreen></iframe>"
   end
   
-  def flv
-    REXML::XPath.first(@feed, "//enclosure").attributes['url']
-  end
-
   def download_url
     nil
   end

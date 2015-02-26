@@ -29,10 +29,6 @@ class VgCollegehumor
     "<iframe src='#{embed_url}' width='#{width}' height='#{height}' frameborder='0' webkitAllowFullScreen allowFullScreen></iframe>"
   end
   
-  def flv
-    REXML::XPath.first(@feed, "//video/file")[0]
-  end
-
   def download_url
     nil
   end

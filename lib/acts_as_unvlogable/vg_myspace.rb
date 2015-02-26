@@ -31,10 +31,6 @@ class VgMyspace
     "<iframe width='#{width}' height='#{height}' src='#{embed_url}' frameborder='0' allowtransparency='true' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>"
   end
   
-  def flv
-    nil
-  end
-
   def download_url
     nil
   end

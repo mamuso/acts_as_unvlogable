@@ -35,10 +35,6 @@ class VgDalealplay
     "<iframe frameborder='0' marginwidth='0' marginheight ='0' id='videodap' scrolling='no' width='#{width}' height='#{height}' src='#{embed_url}'></iframe>"
   end
   
-  def flv
-    @page.xpath("//meta[@itemprop='contentUrl']").first["content"]
-  end
-
   def download_url
     nil
   end

@@ -29,11 +29,6 @@ class VgDailymotion
     "<iframe frameborder='0' width='#{width}' height='#{height}' src='#{embed_url}' allowfullscreen></iframe>"
   end
   
-  def flv
-    doc = URI::parse("http://dailymotion.com/embed/video/#{@video_id}").read
-    doc = URI::parse("#{doc.split("stream_h264_url\":\"")[1].split("\"")[0].gsub("\\", "")}&redirect=0").read
-  end 
-
   def download_url
     nil
   end

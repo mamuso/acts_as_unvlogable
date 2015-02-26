@@ -303,7 +303,7 @@ describe UnvlogIt do
       expect("http://pleer.com/tracks/3370305QRJl").to eq(videotron.instance_values['object'].instance_values['url'])
       expect("3370305QRJl").to eq(videotron.instance_values['object'].instance_values['track_id'])
       expect("Pleer").to eq(videotron.service)
-      expect(videotron.embed_url).not_to be_nil
+      expect(videotron.embed_html).not_to be_nil
       expect("La mala rodriguez, Nach Scratch  SFDK - Dominicana").to eq(videotron.title)
     end
   end
