@@ -152,27 +152,22 @@ describe UnvlogIt do
     end
   end
 
-  # ----------------------------------------------------------
-  #   Testing vids.myspace.com
-  # ----------------------------------------------------------
-  
-  # Service changed, check the new urls
-  # https://myspace.com/jimmykimmellive/video/mastodon-the-motherload-/109586961
+# ----------------------------------------------------------
+#   Testing myspace.com
+# ----------------------------------------------------------
+  context "with an existent myspace.com url" do
+    let(:videotron) { UnvlogIt.new("https://myspace.com/jimmykimmellive/video/mastodon-the-motherload-/109586961") } # => Mastodon - The Motherload
 
-  # context "with a vids.myspace.com video url" do
-  #   let(:videotron) { UnvlogIt.new("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431") } # => rocabilis
+    it "initialize a VgMyspace instance" do
+      expect(VgMyspace).to eq(videotron.instance_values['object'].class)
+      expect("https://myspace.com/jimmykimmellive/video/mastodon-the-motherload-/109586961").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect(videotron.instance_values['object'].instance_values['page']).to_not be_nil
+    end
 
-  #   it "initialize a VgMyspace instance" do
-  #     expect(VgBlip).to eq(videotron.instance_values['object'].class)
-  #     expect("http://vids.myspace.com/index.cfm?fuseaction=vids.individual&VideoID=27111431").to eq(videotron.instance_values['object'].instance_values['url'])
-  #     expect("27111431").to eq(videotron.instance_values['object'].instance_values['video_id'])
-  #     expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
-  #   end
-
-  #   it "returns the video properties" do
-  #     check_video_attributes({:title => "rocabilis", :service => "Myspace"})
-  #   end
-  # end
+    it "returns the video properties" do
+      check_video_attributes({:title => "Mastodon - The Motherload", :service => "Myspace"})
+    end
+  end
 
 
 # ----------------------------------------------------------
