@@ -21,10 +21,6 @@ class VgWistia
     "<iframe src='#{embed_url}' allowtransparency='true' frameborder='0' scrolling='no' class='wistia_embed' name='wistia_embed' allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width='#{width}' height='#{height}'></iframe>"
   end
 
-  def flv
-    nil
-  end
-
   private
 
   def fetch_video_details!

@@ -37,10 +37,6 @@ class VgVimeo
   def embed_html(width=425, height=344, options={}, params={})
     "<iframe src='#{embed_url}' width='#{width}' height='#{height}' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>" 
   end
-
-  def flv
-    nil
-  end
   
   def download_url
     nil

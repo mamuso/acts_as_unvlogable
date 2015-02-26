@@ -32,10 +32,6 @@ class VgTed
     "<iframe src='#{embed_url}' width='#{width}' height='#{height}' frameborder='0' scrolling='no' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>"
   end
   
-  def flv
-    nil
-  end
-  
   def download_url
     nil
   end

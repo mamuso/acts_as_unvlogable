@@ -21,10 +21,6 @@ class VgRutube
     "<iframe width='#{width}' height='#{height}' src='#{embed_url}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowfullscreen></iframe>"
   end
 
-  def flv
-    nil
-  end
-
   def download_url
     nil
   end
