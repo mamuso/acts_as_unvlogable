@@ -347,8 +347,6 @@ describe UnvlogIt do
     end
   end
 
-
-
 protected
 
 def check_video_attributes(options={})

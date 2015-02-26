@@ -16,7 +16,7 @@ class VgDalealplay
   end
   
   def title
-    @page.xpath("//title").first.text.split(" - Video Online")[0].to_s
+    @page.xpath("//h1").first.text
   end
   
   def thumbnail
