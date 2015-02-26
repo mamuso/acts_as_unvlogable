@@ -46,7 +46,7 @@ class Flickr
   attr_reader :api_key, :auth_token
   attr_accessor :user
   
-  HOST_URL = 'http://flickr.com'
+  HOST_URL = 'https://flickr.com'
   API_PATH = '/services/rest'
 
   # Flickr, annoyingly, uses a number of representations to specify the size 

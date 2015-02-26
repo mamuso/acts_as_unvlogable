@@ -5,6 +5,7 @@ require "net/http"
 require 'rexml/document'
 require "youtube_it"
 require "nokogiri"
+require "acts_as_unvlogable/flickr"
 
 
 if defined?(ActiveSupport).nil?

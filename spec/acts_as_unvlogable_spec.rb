@@ -212,25 +212,39 @@ describe UnvlogIt do
   end
 
 
+# ----------------------------------------------------------
+#   Testing flickr.com
+# ----------------------------------------------------------
+  context "with a flickr.com video url" do
+    let(:videotron) { UnvlogIt.new("http://www.flickr.com/photos/jerovital/4152225414/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) }# => flipando en los columpios
 
-# # ----------------------------------------------------------
-# #   Testing flickr.com
-# # ----------------------------------------------------------
-#     context "with a flickr.com video url" do
-#       setup do
-#         @videotron = UnvlogIt.new("http://www.flickr.com/photos/jerovital/4152225414/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) # => la primera vela
-#       end
-#       should "initialize a VgFlickr instance" do
-#         assert_equal "VgFlickr", @videotron.instance_values['object'].class.to_s
-#         assert_equal "http://www.flickr.com/photos/jerovital/4152225414/", @videotron.instance_values['object'].instance_values['url']
-#         assert_equal "4152225414", @videotron.instance_values['object'].instance_values['video_id']
-#         assert_not_nil @videotron.instance_values['object'].instance_values['details']
-#       end
+    it "initialize a VgFlickr instance" do
+      expect(VgFlickr).to eq(videotron.instance_values['object'].class)
+      expect("http://www.flickr.com/photos/jerovital/4152225414/").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("4152225414").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['details']).to_not be_nil
+    end
 
-#       should "return the video properties" do
-#         check_video_attributes({:title => "flipando en los columpios", :service => "Flickr"})
-#       end
-#     end
+    it "returns the video properties" do
+      check_video_attributes({:title => "flipando en los columpios", :service => "Flickr"})
+    end
+  end
+
+    # context "with a flickr.com video url" do
+    #   setup do
+    #     @videotron = UnvlogIt.new("http://www.flickr.com/photos/jerovital/4152225414/", {:key => "065b2eff5e604e2a408c01af1f27a982" }) # => la primera vela
+    #   end
+    #   should "initialize a VgFlickr instance" do
+    #     assert_equal "VgFlickr", @videotron.instance_values['object'].class.to_s
+    #     assert_equal "http://www.flickr.com/photos/jerovital/4152225414/", @videotron.instance_values['object'].instance_values['url']
+    #     assert_equal "4152225414", @videotron.instance_values['object'].instance_values['video_id']
+    #     assert_not_nil @videotron.instance_values['object'].instance_values['details']
+    #   end
+
+    #   should "return the video properties" do
+    #     check_video_attributes({:title => "flipando en los columpios", :service => "Flickr"})
+    #   end
+    # end
 
 
 # ----------------------------------------------------------
