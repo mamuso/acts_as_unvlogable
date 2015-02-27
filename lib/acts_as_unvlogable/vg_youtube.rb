@@ -1,6 +1,6 @@
 # ----------------------------------------------
 #  Class for Youtube (youtube.com)
-#  http://www.youtube.com/watch?v=25AsfkriHQc
+#  http://www.youtube.com/watch?v=MVa4q-YVjD8
 # ----------------------------------------------
 
 class VgYoutube
@@ -12,8 +12,7 @@ class VgYoutube
     begin
       @details = object.video_by(@video_id)
       raise if @details.blank?
-      raise ArgumentError, "Embedding disabled by request" unless @details.embeddable?
-      @details.instance_variable_set(:@noembed, false)
+      @details.instance_variable_set(:@noembed, false) unless !@details.embeddable?
     rescue
       raise ArgumentError, "Unsuported url or service"
     end
@@ -35,31 +34,11 @@ class VgYoutube
     @details.media_content.first.url if @details.noembed == false
   end
   
-  # options 
-  #   You can read more about the youtube player options in 
-  #   http://code.google.com/intl/en/apis/youtube/player_parameters.html
-  #   Use them in options (ex {:rel => 0, :color1 => '0x333333'})
-  #
+  # iframe embed — https://developers.google.com/youtube/player_parameters#Manual_IFrame_Embeds
   def embed_html(width=425, height=344, options={}, params={})
-    "<object width='#{width}' height='#{height}'><param name='movie' value='#{embed_url}#{options.map {|k,v| "&#{k}=#{v}"}}'></param><param name='allowFullScreen' value='true'></param><param name='allowscriptaccess' value='always'></param>#{params.map{|k,v|"<param name='#{k}' value='#{v}'></param>"}.join}<embed src='#{embed_url}#{options.map {|k,v| "&#{k}=#{v}"}}' type='application/x-shockwave-flash' allowscriptaccess='always' allowfullscreen='true' width='#{width}' height='#{height}' #{params.map {|k,v| "#{k}=#{v}"}.join(" ")}></embed></object>" if @details.noembed == false
+    "<iframe id='ytplayer' type='text/html' width='#{width}' height='#{height}' src='#{embed_url}#{options.map {|k,v| "&#{k}=#{v}"}}' frameborder='0'/>" if @details.noembed == false
   end
   
-  
-  def flv
-    doc = URI::parse("http://www.youtube.com/get_video_info?&video_id=#{@video_id}").read
-    CGI::unescape(doc.split("&url_encoded_fmt_stream_map=")[1]).split("url=").each do |u|
-    	u = CGI::unescape(u)
-    	unless u.index("x-flv").nil?
-    		return u.split("&quality").first
-    		break
-    	end
-    end
-  end
-  
-  def download_url
-    flv
-  end
-
   def service
     "Youtube"
   end

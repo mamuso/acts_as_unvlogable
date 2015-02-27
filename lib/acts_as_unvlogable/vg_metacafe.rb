@@ -9,8 +9,6 @@ class VgMetacafe
   def initialize(url=nil, options={})
     @url = url
     @args = parse_url(url)
-    
-    #is the video 'youtubed'?
     @youtubed = @args[1].index("yt-").nil? ? false : true
     @yt = @youtubed ? VgYoutube.new("http://www.youtube.com/watch?v=#{@args[1].sub('yt-', '')}") : nil
   end
@@ -28,26 +26,10 @@ class VgMetacafe
   end
 
   def embed_html(width=425, height=344, options={}, params={})
-    "<embed src='#{embed_url}' width='#{width}' height='#{height}' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash'></embed>"
+    "<iframe src='#{embed_url}' width='#{width}' height='#{height}' allowFullScreen frameborder=0></iframe>"
   end
   
-  def flv
-    if @youtubed
-      @yt.flv
-    else
-      params = Hash.new
-      open(self.embed_url) {|f|
-        params = CGI::parse(f.base_uri.request_uri.split("?")[1])
-      }
-      CGI::unescape "#{ params['mediaURL']}?__gda__=#{params['gdaKey']}"
-    end
-  end
-
   def duration
-    nil
-  end
-
-  def download_url
     nil
   end
 
@@ -64,7 +46,6 @@ class VgMetacafe
       if path and path.split("/").size >=1
         @args = path.split("/")
         @args.delete("watch")
-        
         raise unless @args.size > 0
       else
         raise

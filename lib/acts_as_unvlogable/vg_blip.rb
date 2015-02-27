@@ -17,7 +17,7 @@ class VgBlip
   end
   
   def thumbnail
-    REXML::XPath.first(@feed, "//blip:smallThumbnail")[0].to_s
+    REXML::XPath.first(@feed, "//media:thumbnail").attributes['url']
   end
   
   def duration
@@ -25,18 +25,13 @@ class VgBlip
   end
   
   def embed_url
-    emb = REXML::XPath.first(@feed, "//media:player")[0].to_s
-    emb.split("src=\"")[1].split("\"")[0]
+    emb = REXML::XPath.first(@feed, "//blip:embedUrl")[0].to_s
   end
 
   def embed_html(width=425, height=344, options={}, params={})
-    "<embed src='#{embed_url}' type='application/x-shockwave-flash' width='#{width}' height='#{height}' allowscriptaccess='always' allowfullscreen='true'></embed>"
+    "<iframe src='#{embed_url}.x?p=1' width='#{width}' height='#{height}' frameborder='0' allowfullscreen></iframe>"
   end
   
-  def flv
-    REXML::XPath.first(@feed, "//enclosure").attributes['url']
-  end
-
   def download_url
     nil
   end

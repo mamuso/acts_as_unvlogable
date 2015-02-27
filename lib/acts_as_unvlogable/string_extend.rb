@@ -1,4 +1,3 @@
-
 class String
   def query_param(param_name)
     raise ArgumentError.new("param name can't be nil") if param_name.blank?

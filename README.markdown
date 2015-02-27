@@ -1,5 +1,5 @@
-Acts as unvlogable
-==================
+# Acts as unvlogable [![Build Status](https://travis-ci.org/mamuso/acts_as_unvlogable.svg?branch=master)](https://travis-ci.org/mamuso/acts_as_unvlogable) [![Coverage Status](https://coveralls.io/repos/mamuso/acts_as_unvlogable/badge.png?branch=master)](https://coveralls.io/r/mamuso/acts_as_unvlogable?branch=master)
+
 
 What the hell is this!
 ----------------------
@@ -15,14 +15,12 @@ To include [this video](http://www.youtube.com/watch?v=GPQnbtldFyo) in [this pos
         @aha.thumbnail => "http://i4.ytimg.com/vi/GPQnbtldFyo/default.jpg"
         @aha.embed_url => "http://www.youtube.com/v/GPQnbtldFyo"
         @aha.embed_html(width, height) => "<object [...]</object>"
-        @aha.flv => "http://...flv"
         # all together :)
         @aha.video_details(width, height) => {
                                                 :title => ...,
                                                 :thumbnail => ...,
                                                 :embed_url => ...,
                                                 :embed_html => ...,
-                                                :flv => ...
                                               }
         
 With this plugin we have an unique way to manage multiple services :)
@@ -36,15 +34,6 @@ Install it!
         gem "acts_as_unvlogable"
         
 2. Optionally you can create the `config/unvlogable.yml` to store keys for the different services. You have in the plugin a [sample file](http://github.com/mamuso/acts_as_unvlogable/tree/master/unvlogable_sample.yml). At this moment you only need specify keys for flickr.
-
-
-Dependencies
-------------
-
-The plugin depends on [youtube-it](https://github.com/kylejginavan/youtube_it), [xml-simple](http://xml-simple.rubyforge.org/) and [hpricot](https://code.whytheluckystiff.net/hpricot/).
-
-We have included a modified version of the flickr gem to skip the gem dependency and manage video capabilities.
-
 
 Use it!
 -------
@@ -81,10 +70,7 @@ Then we have methods to know the 'basics' for use this video on your application
           videotron.embed_html(400, 300)
           => "<object width='400' height='300'><param name='mo [...] 300'></embed></object>"
 
--   __flv:__ Gets the flv url. In this edition we implement this method in all the services, but is possible that we can't get the flv in some scenarios. Remember that in some services the flv url expires and in most of their terms don't allow use the flv without its player.
-
-          videotron.flv
-          => "http://www.vimeo.com/moogaloop/play/clip:1785993/ [...] 8ee400/video.flv"
+-   __flv:__ **DEPRECATED** 
 
 -   __video\_details(width, height):__ All together :), returns all the previous elements in a hash. Width and height can be specified to build the embed\_html.
 
@@ -107,22 +93,11 @@ At this moment we support the following video services:
 -   [Myspace](http://vids.myspace.com/)
 -   [Ted Talks](http://www.ted.com/talks/)
 -   [11870.com](http://11870.com/)
--   [Marca.tv](http://www.marca.tv/)
 -   [Dalealplay](http://www.dalealplay.com/)
 -   [RuTube](http://www.rutube.ru/)
 -   [Wistia](http://wistia.com/)
+-   [Pleer — Audio](http://pleer.com/)
 
-Broken services
----------------
-
-These services were implemented but due to changes in the website they don't work anymore. Any patch for fixing them would be great ;)
-
--   [Qik](http://qik.com/)
--   [MTV](http://www.mtvhive.com/)
-
-You can detect new broken services when running the tests.
-
-We are always open to incude new services.
 
 And... what else?
 -----------------

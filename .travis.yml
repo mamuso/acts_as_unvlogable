@@ -6,7 +6,10 @@ rvm:
 
 branches:
   only:
+    - master
     - refactor
+
+script: "bundle exec rspec"
 
 notifications:
   email:

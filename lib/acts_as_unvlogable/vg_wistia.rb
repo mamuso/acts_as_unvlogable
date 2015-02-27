@@ -3,16 +3,7 @@
 #  https://home.wistia.com/medias/e4a27b971d
 # ----------------------------------------------
 
-# We are using Wistia's SEO embed
-# http://wistia.com/doc/construct-an-embed-code#video_seo_embed_tutorial
-
-require "cgi"
-require "json"
-require "net/http"
-
 class VgWistia
-  class NotAvailable < StandardError; end
-
   attr_reader :title, :thumbnail, :duration, :service
 
   def initialize(url=nil, options={})
@@ -22,15 +13,12 @@ class VgWistia
   end
 
   def embed_url
-    raise NotAvailable, "Please use `#embed_html` instead"
+    iframe = Nokogiri::HTML(@details["html"])
+    iframe.xpath("//iframe").first["src"]
   end
 
-  def flv
-    raise NotAvailable, "flv format not available. Please use `#embed_html` instead"
-  end
-
-  def embed_html(*args)
-    @embed_html
+  def embed_html(width=425, height=344, options={}, params={})
+    "<iframe src='#{embed_url}' allowtransparency='true' frameborder='0' scrolling='no' class='wistia_embed' name='wistia_embed' allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width='#{width}' height='#{height}'></iframe>"
   end
 
   private
@@ -40,7 +28,7 @@ class VgWistia
       res = Net::HTTP.get(URI.parse(wistia_oembed_endpoint))
       @details = JSON.parse(res)
     rescue JSON::ParserError
-      raise ArgumentError, "Unsupported url or service"
+      raise ArgumentError.new("Unsuported url or service")
     end
   end
 
@@ -48,12 +36,11 @@ class VgWistia
     @title      = @details["title"]
     @thumbnail  = @details["thumbnail_url"]
     @duration   = @details["duration"]
-    @embed_html = @details["html"]
     @service    = @details["provider_name"]
   end
 
   def encoded_url
-    CGI::escape(@url + "?embedType=seo")
+    CGI::escape(@url)
   end
 
   def wistia_oembed_endpoint

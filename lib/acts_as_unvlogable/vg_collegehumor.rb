@@ -22,17 +22,13 @@ class VgCollegehumor
   end
   
   def embed_url
-    "http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=#{@video_id}&fullscreen=1"
+    "http://www.collegehumor.com/e/#{@video_id}"
   end
 
   def embed_html(width=425, height=344, options={}, params={})
-    "<object type='application/x-shockwave-flash' data='#{embed_url}' width='#{width}' height='#{height}'><param name='allowfullscreen' value='true'/><param name='wmode' value='transparent'/><param name='AllowScriptAccess' value='true'/><param name='movie' quality='best' value='#{embed_url}'/><embed src='#{embed_url}' type='application/x-shockwave-flash' wmode='transparent' width='#{width}' height='#{height}' allowScriptAccess='always'></embed></object>"
+    "<iframe src='#{embed_url}' width='#{width}' height='#{height}' frameborder='0' webkitAllowFullScreen allowFullScreen></iframe>"
   end
   
-  def flv
-    REXML::XPath.first(@feed, "//video/file")[0]
-  end
-
   def download_url
     nil
   end
