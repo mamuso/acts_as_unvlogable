@@ -3,7 +3,7 @@ require "cgi"
 require "json"
 require "net/http"
 require 'rexml/document'
-require "youtube_it"
+require "yt"
 require "nokogiri"
 require "acts_as_unvlogable/flickr"
 

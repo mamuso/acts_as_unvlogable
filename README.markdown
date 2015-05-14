@@ -33,7 +33,9 @@ Install it!
 
         gem "acts_as_unvlogable"
         
-2. Optionally you can create the `config/unvlogable.yml` to store keys for the different services. You have in the plugin a [sample file](http://github.com/mamuso/acts_as_unvlogable/tree/master/unvlogable_sample.yml). At this moment you only need specify keys for flickr.
+2. Optionally you can create the `config/unvlogable.yml` to store keys for the different services. You have in the plugin a [sample file](http://github.com/mamuso/acts_as_unvlogable/tree/master/unvlogable_sample.yml).
+
+2.1. 'yt' gem will need an API key from google in order to get the youtube video information properly, without dealing with API limits. They explain it better than me [here](https://github.com/Fullscreen/yt#apps-that-do-not-require-user-interactions)
 
 Use it!
 -------

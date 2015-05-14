@@ -19,7 +19,7 @@ describe UnvlogIt do
   # ----------------------------------------------------------
 
   context "with an existent youtube url" do
-    let(:videotron) { UnvlogIt.new("http://www.youtube.com/watch?v=MVa4q-YVjD8") } # => Keith Moon´s drum kit explodes
+    let(:videotron) { UnvlogIt.new("http://www.youtube.com/watch?v=MVa4q-YVjD8", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) } # => Keith Moon´s drum kit explodes
 
     it "initialize a VgYoutube instance" do
       expect(VgYoutube).to eq(videotron.instance_values['object'].class)
@@ -35,18 +35,18 @@ describe UnvlogIt do
 
   context "with an existent youtube url that can not be embedded" do
     it {
-      expect { UnvlogIt.new("https://www.youtube.com/watch?v=-PZYZ6fJbr4") }.to raise_error(ArgumentError, "Embedding disabled by request")
+      expect { UnvlogIt.new("https://www.youtube.com/watch?v=-PZYZ6fJbr4", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) }.to raise_error(ArgumentError, "Unsuported url or service")
     }
   end
 
   context "with an inexistent youtube url" do
     it {
-      expect { UnvlogIt.new("http://www.youtube.com/watch?v=inexistente") }.to raise_error(ArgumentError, "Unsuported url or service")
+      expect { UnvlogIt.new("http://www.youtube.com/watch?v=inexistente", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) }.to raise_error(ArgumentError, "Unsuported url or service")
     }
   end
 
   context "with a shortened youtube URL" do
-    let(:videotron) { UnvlogIt.new("http://youtu.be/4pzMBtPMUq8") } # => Keith Moon´s drum kit explodes
+    let(:videotron) { UnvlogIt.new("http://youtu.be/4pzMBtPMUq8", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) } # => Keith Moon´s drum kit explodes
 
     it "initialize a VgYoutube instance" do
       expect(VgYoutu).to eq(videotron.instance_values['object'].class)
@@ -81,7 +81,7 @@ describe UnvlogIt do
   end
 
   context "with an existent 'youtubed' metacafe url" do
-    let(:videotron) { UnvlogIt.new("http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/") } # => Pop Rocks and Coke Myth
+    let(:videotron) { UnvlogIt.new("http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) } # => Pop Rocks and Coke Myth
 
     it "initialize a VgMetacafe instance" do
       expect(VgMetacafe).to eq(videotron.instance_values['object'].class)

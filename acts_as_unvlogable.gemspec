@@ -6,6 +6,7 @@ Gem::Specification.new do |s|
   s.name        = "acts_as_unvlogable"
   s.version     = ActsAsUnvlogable::VERSION
   s.platform    = Gem::Platform::RUBY
+  s.required_ruby_version = '>= 1.9.3'
   s.authors     = ["Manuel Muñoz", "Fernando Blat", "Alberto Romero"]
   s.email       = ["mamuso@mamuso.net", "ferblape@gmail.com", "denegro@gmail.com"]
   s.homepage    = "https://github.com/mamuso/acts_as_unvlogable"
@@ -24,5 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec'
   s.add_runtime_dependency("nokogiri")
   s.add_runtime_dependency("xml-simple")
-  s.add_runtime_dependency("youtube_it")
+  s.add_runtime_dependency("yt")
 end
