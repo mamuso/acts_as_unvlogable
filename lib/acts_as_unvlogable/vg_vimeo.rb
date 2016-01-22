@@ -31,7 +31,7 @@ class VgVimeo
   end
 
   def embed_url
-    "http://http://player.vimeo.com/video/#{@video_id}"
+    "http://player.vimeo.com/video/#{@video_id}"
   end
 
   def embed_html(width=425, height=344, options={}, params={})
