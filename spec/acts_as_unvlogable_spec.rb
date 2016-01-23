@@ -19,7 +19,7 @@ describe UnvlogIt do
   # ----------------------------------------------------------
 
   context "with an existent youtube url" do
-    let(:videotron) { UnvlogIt.new("http://www.youtube.com/watch?v=MVa4q-YVjD8", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) } # => Keith Moon´s drum kit explodes
+    let(:videotron) { UnvlogIt.new("http://www.youtube.com/watch?v=MVa4q-YVjD8", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) } # => Keith Moon´s drum kit explodes
 
     it "initialize a VgYoutube instance" do
       expect(VgYoutube).to eq(videotron.instance_values['object'].class)
@@ -35,18 +35,18 @@ describe UnvlogIt do
 
   context "with an existent youtube url that can not be embedded" do
     it {
-      expect { UnvlogIt.new("https://www.youtube.com/watch?v=-PZYZ6fJbr4", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) }.to raise_error(ArgumentError, "Unsuported url or service")
+      expect { UnvlogIt.new("https://www.youtube.com/watch?v=-PZYZ6fJbr4", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) }.to raise_error(ArgumentError, "Unsuported url or service")
     }
   end
 
   context "with an inexistent youtube url" do
     it {
-      expect { UnvlogIt.new("http://www.youtube.com/watch?v=inexistente", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) }.to raise_error(ArgumentError, "Unsuported url or service")
+      expect { UnvlogIt.new("http://www.youtube.com/watch?v=inexistente", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) }.to raise_error(ArgumentError, "Unsuported url or service")
     }
   end
 
   context "with a shortened youtube URL" do
-    let(:videotron) { UnvlogIt.new("http://youtu.be/4pzMBtPMUq8", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) } # => Keith Moon´s drum kit explodes
+    let(:videotron) { UnvlogIt.new("http://youtu.be/4pzMBtPMUq8", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) } # => Keith Moon´s drum kit explodes
 
     it "initialize a VgYoutube instance" do
       expect(VgYoutu).to eq(videotron.instance_values['object'].class)
@@ -81,7 +81,7 @@ describe UnvlogIt do
   end
 
   context "with an existent 'youtubed' metacafe url" do
-    let(:videotron) { UnvlogIt.new("http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/", {:key => "AIzaSyCWdV1zQpyD1X1OdheU6UqfV3JR6JQXY9A" }) } # => Pop Rocks and Coke Myth
+    let(:videotron) { UnvlogIt.new("http://www.metacafe.com/watch/yt-r07zdVLOWBA/pop_rocks_and_coke_myth/", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) } # => Pop Rocks and Coke Myth
 
     it "initialize a VgMetacafe instance" do
       expect(VgMetacafe).to eq(videotron.instance_values['object'].class)
@@ -135,22 +135,22 @@ describe UnvlogIt do
   end
 
   # ----------------------------------------------------------
-  #   Testing blip.tv
+  #   Testing blip.tv => transformed to maker TV
   # ----------------------------------------------------------
 
-  context "with an existent blip.tv url" do
-    let(:videotron) { UnvlogIt.new("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535") } # => Sarah's Super Bowl Spread – Healthy Recipe - Classic Buffalo Wing Dip
+  # context "with an existent blip.tv url" do
+  #   let(:videotron) { UnvlogIt.new("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535") } # => Sarah's Super Bowl Spread – Healthy Recipe - Classic Buffalo Wing Dip
 
-    it "initialize a VgBlip instance" do
-      expect(VgBlip).to eq(videotron.instance_values['object'].class)
-      expect("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535").to eq(videotron.instance_values['object'].instance_values['url'])
-      expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
-    end
+  #   it "initialize a VgBlip instance" do
+  #     expect(VgBlip).to eq(videotron.instance_values['object'].class)
+  #     expect("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535").to eq(videotron.instance_values['object'].instance_values['url'])
+  #     expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
+  #   end
 
-    it "returns the video properties" do
-      check_video_attributes({:title => "Sarah's Super Bowl Spread &#8211; Healthy Recipe - Classic Buffalo Wing Dip", :service => "Blip.tv"})
-    end
-  end
+  #   it "returns the video properties" do
+  #     check_video_attributes({:title => "Sarah's Super Bowl Spread &#8211; Healthy Recipe - Classic Buffalo Wing Dip", :service => "Blip.tv"})
+  #   end
+  # end
 
 # ----------------------------------------------------------
 #   Testing myspace.com
@@ -192,11 +192,11 @@ describe UnvlogIt do
 #   Testing dalealplay.com
 # ----------------------------------------------------------
   context "with an existent dalealplay.com url" do
-    let(:videotron) { UnvlogIt.new("http://www.dalealplay.com/informaciondecontenido.php?con=80280") } # => Camelos Semos  Jonathan  Tú si que vales
+    let(:videotron) { UnvlogIt.new("http://www.dalealplay.es/videos/CamelosSemos-Jonathan-Tu-si-que-vales_80280") } # => Camelos Semos  Jonathan  Tú si que vales
 
     it "initialize a VgDalealplay instance" do
       expect(VgDalealplay).to eq(videotron.instance_values['object'].class)
-      expect("http://www.dalealplay.com/informaciondecontenido.php?con=80280").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("http://www.dalealplay.es/videos/CamelosSemos-Jonathan-Tu-si-que-vales_80280").to eq(videotron.instance_values['object'].instance_values['url'])
       expect("80280").to eq(videotron.instance_values['object'].instance_values['video_id'])
       expect(videotron.instance_values['object'].instance_values['page']).to_not be_nil
     end

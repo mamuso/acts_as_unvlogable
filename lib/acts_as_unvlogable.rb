@@ -3,6 +3,8 @@ require "cgi"
 require "json"
 require "net/http"
 require 'rexml/document'
+require 'active_support'
+require 'active_support/core_ext/hash'
 require "yt"
 require "nokogiri"
 require "acts_as_unvlogable/flickr"

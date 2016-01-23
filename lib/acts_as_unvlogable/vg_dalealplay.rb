@@ -8,10 +8,10 @@
 
 
 class VgDalealplay
-  
+
   def initialize(url=nil, options={})
     @url = url
-    @video_id = @url.query_param('con')
+    @video_id = parse_url(@url)
     @page = Nokogiri::HTML(open(@url))
   end
   
@@ -20,7 +20,7 @@ class VgDalealplay
   end
   
   def thumbnail
-    @page.xpath("//meta[@itemprop='image']").first["content"]
+    @page.xpath("//meta[@itemprop='thumbnailUrl']").first["content"]
   end
   
   def embed_url
@@ -42,5 +42,21 @@ class VgDalealplay
   def service
     "dalealplay"
   end
+
+  def parse_url(url)
+    uri = URI.parse(url)
+    path = uri.path
+    videoargs = ''
+    if path
+      videoargs = path.split('_')[-1]
+      raise unless videoargs.size > 0
+    else
+      raise
+    end
+    videoargs
+  rescue
+    nil
+  end
+
   
 end

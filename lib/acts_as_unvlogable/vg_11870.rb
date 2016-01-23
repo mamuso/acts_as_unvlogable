@@ -12,7 +12,7 @@ class Vg11870
   end
   
   def title
-    CGI::unescapeHTML @page.xpath("//span[@itemprop='name']").first.text.strip
+    CGI::unescapeHTML @page.xpath("//h2[@class='fn p-name']/a/span").first.text.strip
   end
   
   def thumbnail
