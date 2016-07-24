@@ -46,17 +46,17 @@ describe UnvlogIt do
   end
 
   context "with a shortened youtube URL" do
-    let(:videotron) { UnvlogIt.new("http://youtu.be/4pzMBtPMUq8", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) } # => Keith Moon´s drum kit explodes
+    let(:videotron) { UnvlogIt.new("https://youtu.be/U46Yo_6z_F4", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) } # => Keith Moon´s drum kit explodes
 
     it "initialize a VgYoutube instance" do
       expect(VgYoutu).to eq(videotron.instance_values['object'].class)
-      expect("http://www.youtube.com/watch?&v=4pzMBtPMUq8").to eq(videotron.instance_values['object'].instance_values['url'])
-      expect("4pzMBtPMUq8").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect("https://www.youtube.com/watch?&v=U46Yo_6z_F4").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("U46Yo_6z_F4").to eq(videotron.instance_values['object'].instance_values['video_id'])
       expect(videotron.instance_values['object'].instance_values['details']).to_not be_nil
     end
 
     it "returns the video properties" do
-      check_video_attributes({:title => "APM? Capítol 349 -09/04/14- (HD)", :service => "Youtube"})
+      check_video_attributes({:title => "Adam Savage's One Day Builds: LEGO Sisyphus Automata!", :service => "Youtube"})
     end
   end
 
