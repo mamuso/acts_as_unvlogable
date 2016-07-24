@@ -87,11 +87,13 @@ At this moment we support the following video services:
 
 -   [Youtube](http://www.youtube.com/)
 -   [Vimeo](http://vimeo.com/)
+-   [Vine](http://vine.co/)
+-   [Giphy](http://giphy.com/)
+-   [Gfycat](http://gfycat.com/)
 -   [Flickr (videos)](http://flickr.com/)
 -   [Metacafe](http://metacafe.com/)
 -   [Dailymotion](http://dailymotion.com/)
 -   [Collegehumor](http://collegehumor.com/)
--   ~~[Blip.tv](http://blip.tv/)~~ Transformed into maker.tv
 -   [Myspace](http://vids.myspace.com/)
 -   [Ted Talks](http://www.ted.com/talks/)
 -   [11870.com](http://11870.com/)
