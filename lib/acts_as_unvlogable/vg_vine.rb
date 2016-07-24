@@ -19,7 +19,7 @@ class VgVine
   end
 
   def embed_url
-    @embed_url = "#{@url}/embed/simple"
+    @embed_url ||= "#{@url}/embed/simple"
   end
 
   def embed_html(width=600, height=600, options={}, params={})

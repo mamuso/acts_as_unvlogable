@@ -286,6 +286,54 @@ describe UnvlogIt do
   end
 
 # ----------------------------------------------------------
+#   Testing gfycat
+# ----------------------------------------------------------
+  context "with an existent gfycat url" do
+    let(:videotron) { UnvlogIt.new("https://gfycat.com/WarmheartedAnyFairyfly") } 
+
+    it "initialize a VgGfycat instance" do
+      expect(VgGfycat).to eq(videotron.instance_values['object'].class)
+      expect("https://gfycat.com/WarmheartedAnyFairyfly").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("WarmheartedAnyFairyfly").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['json']).to_not be_nil
+    end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "", :service => "Gfycat"})
+    end
+  end
+
+  context "with an detail gfycat url" do
+    let(:videotron) { UnvlogIt.new("https://gfycat.com/detail/DelectableParchedCopperbutterfly?tagname=Trending&tvmode=1") } 
+
+    it "initialize a VgGfycat instance" do
+      expect(VgGfycat).to eq(videotron.instance_values['object'].class)
+      expect("https://gfycat.com/detail/DelectableParchedCopperbutterfly?tagname=Trending&tvmode=1").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("DelectableParchedCopperbutterfly").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['json']).to_not be_nil
+    end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "Ryan Williams landed a 1080 frontflip", :service => "Gfycat"})
+    end
+  end
+
+  context "with an search gfycat url" do
+    let(:videotron) { UnvlogIt.new("https://gfycat.com/gifs/search/cats/detail/BeneficialFavorableBunting") } 
+
+    it "initialize a VgGfycat instance" do
+      expect(VgGfycat).to eq(videotron.instance_values['object'].class)
+      expect("https://gfycat.com/gifs/search/cats/detail/BeneficialFavorableBunting").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("BeneficialFavorableBunting").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['json']).to_not be_nil
+    end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "High Five Cat", :service => "Gfycat"})
+    end
+  end
+
+# ----------------------------------------------------------
 #   Testing RuTube
 # ----------------------------------------------------------
   context "with an existent rutube url" do
