@@ -134,24 +134,6 @@ describe UnvlogIt do
     end
   end
 
-  # ----------------------------------------------------------
-  #   Testing blip.tv => transformed to maker TV
-  # ----------------------------------------------------------
-
-  # context "with an existent blip.tv url" do
-  #   let(:videotron) { UnvlogIt.new("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535") } # => Sarah's Super Bowl Spread – Healthy Recipe - Classic Buffalo Wing Dip
-
-  #   it "initialize a VgBlip instance" do
-  #     expect(VgBlip).to eq(videotron.instance_values['object'].class)
-  #     expect("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535").to eq(videotron.instance_values['object'].instance_values['url'])
-  #     expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
-  #   end
-
-  #   it "returns the video properties" do
-  #     check_video_attributes({:title => "Sarah's Super Bowl Spread &#8211; Healthy Recipe - Classic Buffalo Wing Dip", :service => "Blip.tv"})
-  #   end
-  # end
-
 # ----------------------------------------------------------
 #   Testing myspace.com
 # ----------------------------------------------------------
