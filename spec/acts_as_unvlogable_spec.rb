@@ -46,17 +46,17 @@ describe UnvlogIt do
   end
 
   context "with a shortened youtube URL" do
-    let(:videotron) { UnvlogIt.new("http://youtu.be/4pzMBtPMUq8", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) } # => Keith Moon´s drum kit explodes
+    let(:videotron) { UnvlogIt.new("https://youtu.be/U46Yo_6z_F4", {:key => "AIzaSyAN2GQvZobD6qbsM0EI-Wy44LXVqbarz3Q" }) } # => Keith Moon´s drum kit explodes
 
     it "initialize a VgYoutube instance" do
       expect(VgYoutu).to eq(videotron.instance_values['object'].class)
-      expect("http://www.youtube.com/watch?&v=4pzMBtPMUq8").to eq(videotron.instance_values['object'].instance_values['url'])
-      expect("4pzMBtPMUq8").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect("https://www.youtube.com/watch?&v=U46Yo_6z_F4").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("U46Yo_6z_F4").to eq(videotron.instance_values['object'].instance_values['video_id'])
       expect(videotron.instance_values['object'].instance_values['details']).to_not be_nil
     end
 
     it "returns the video properties" do
-      check_video_attributes({:title => "APM? Capítol 349 -09/04/14- (HD)", :service => "Youtube"})
+      check_video_attributes({:title => "Adam Savage's One Day Builds: LEGO Sisyphus Automata!", :service => "Youtube"})
     end
   end
 
@@ -133,24 +133,6 @@ describe UnvlogIt do
       check_video_attributes({:title => "Brohemian Rhapsody", :service => "CollegeHumor"})
     end
   end
-
-  # ----------------------------------------------------------
-  #   Testing blip.tv => transformed to maker TV
-  # ----------------------------------------------------------
-
-  # context "with an existent blip.tv url" do
-  #   let(:videotron) { UnvlogIt.new("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535") } # => Sarah's Super Bowl Spread – Healthy Recipe - Classic Buffalo Wing Dip
-
-  #   it "initialize a VgBlip instance" do
-  #     expect(VgBlip).to eq(videotron.instance_values['object'].class)
-  #     expect("http://blip.tv/sarahrdtv/sarah-s-super-bowl-spread-healthy-recipe-classic-buffalo-wing-dip-6717535").to eq(videotron.instance_values['object'].instance_values['url'])
-  #     expect(videotron.instance_values['object'].instance_values['feed']).to_not be_nil
-  #   end
-
-  #   it "returns the video properties" do
-  #     check_video_attributes({:title => "Sarah's Super Bowl Spread &#8211; Healthy Recipe - Classic Buffalo Wing Dip", :service => "Blip.tv"})
-  #   end
-  # end
 
 # ----------------------------------------------------------
 #   Testing myspace.com
@@ -268,6 +250,24 @@ describe UnvlogIt do
     end
   end
 
+  # ----------------------------------------------------------
+  #   Testing vine
+  # ----------------------------------------------------------
+
+  context "with an existent vine url" do
+      let(:videotron) { UnvlogIt.new("https://vine.co/v/5WvdIEvMOap") } # => Gotta catch em all #PokemonGo
+
+      it "initialize a VgVine instance" do
+        expect(VgVine).to eq(videotron.instance_values['object'].class)
+        expect("https://vine.co/v/5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['url'])
+        expect("5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['video_id'])
+        expect(videotron.instance_values['object'].instance_values['json']).to_not be_nil
+      end
+      
+      it "returns the video properties" do
+        check_video_attributes({:title => "Gotta catch em all #PokemonGo", :service => "Vine"})
+      end
+    end
 
 # ----------------------------------------------------------
 #   Testing RuTube
@@ -296,11 +296,11 @@ describe UnvlogIt do
 #   Testing Prostopleer
 # ----------------------------------------------------------
   context "with an existent pleer url" do
-    let(:videotron) { UnvlogIt.new("http://pleer.com/tracks/3370305QRJl") } # => La mala rodriguez, Nach Scratch SFDK - Dominicana
+    let(:videotron) { UnvlogIt.new("http://pleer.net/tracks/3370305QRJl") } # => La mala rodriguez, Nach Scratch SFDK - Dominicana
 
     it "initialize a VgPleer instance" do
       expect(VgPleer).to eq(videotron.instance_values['object'].class)
-      expect("http://pleer.com/tracks/3370305QRJl").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("http://pleer.net/tracks/3370305QRJl").to eq(videotron.instance_values['object'].instance_values['url'])
       expect("3370305QRJl").to eq(videotron.instance_values['object'].instance_values['track_id'])
       expect("Pleer").to eq(videotron.service)
       expect(videotron.embed_html).not_to be_nil

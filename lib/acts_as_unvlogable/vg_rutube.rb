@@ -9,6 +9,7 @@ class VgRutube
   def title
     @page.xpath("//meta[@property='og:title']").first["content"].strip
   end
+  
   def thumbnail
     @page.xpath("//meta[@property='og:image']").first["content"].strip
   end
