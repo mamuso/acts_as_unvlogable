@@ -250,24 +250,23 @@ describe UnvlogIt do
     end
   end
 
-  # ----------------------------------------------------------
-  #   Testing vine
-  # ----------------------------------------------------------
-
+# ----------------------------------------------------------
+#   Testing vine
+# ----------------------------------------------------------
   context "with an existent vine url" do
-      let(:videotron) { UnvlogIt.new("https://vine.co/v/5WvdIEvMOap") } # => Gotta catch em all #PokemonGo
+    let(:videotron) { UnvlogIt.new("https://vine.co/v/5WvdIEvMOap") } # => Gotta catch em all #PokemonGo
 
-      it "initialize a VgVine instance" do
-        expect(VgVine).to eq(videotron.instance_values['object'].class)
-        expect("https://vine.co/v/5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['url'])
-        expect("5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['video_id'])
-        expect(videotron.instance_values['object'].instance_values['json']).to_not be_nil
-      end
-      
-      it "returns the video properties" do
-        check_video_attributes({:title => "Gotta catch em all #PokemonGo", :service => "Vine"})
-      end
+    it "initialize a VgVine instance" do
+      expect(VgVine).to eq(videotron.instance_values['object'].class)
+      expect("https://vine.co/v/5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['json']).to_not be_nil
     end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "Gotta catch em all #PokemonGo", :service => "Vine"})
+    end
+  end
 
 # ----------------------------------------------------------
 #   Testing RuTube
