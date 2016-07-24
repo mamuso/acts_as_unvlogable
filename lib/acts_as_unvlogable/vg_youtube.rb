@@ -6,10 +6,8 @@
 class VgYoutube
   
   def initialize(url=nil, options={})
-    settings ||= YAML.load_file(RAILS_ROOT + '/config/unvlogable.yml') rescue {}
-    Yt.configure do |config|
-      config.api_key = options.nil? || options[:key].nil? ? settings['youtube_key'] : options[:key]
-    end
+    settings ||= YAML.load_file(Rails.root.join 'config/unvlogable.yml')[Rails.env] rescue {}
+    Yt.configuration.api_key = options.nil? || options[:key].nil? ? settings['youtube_key'] : options[:key]
 
     @url = url
     @video_id = @url.query_param('v')
