@@ -23,7 +23,7 @@ class VgVine
   end
 
   def embed_html(width=600, height=600, options={}, params={})
-    "<iframe id='ytplayer' type='text/html' width='#{width}' height='#{height}' src='#{@embed_url}' frameborder='0'/><script src='https://platform.vine.co/static/scripts/embed.js'></script>"
+    "<iframe id='vineplayer' type='text/html' width='#{width}' height='#{height}' src='#{@embed_url}' frameborder='0'/><script src='https://platform.vine.co/static/scripts/embed.js'></script>"
   end
 
   def download_url

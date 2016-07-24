@@ -250,24 +250,40 @@ describe UnvlogIt do
     end
   end
 
-  # ----------------------------------------------------------
-  #   Testing vine
-  # ----------------------------------------------------------
-
+# ----------------------------------------------------------
+#   Testing vine
+# ----------------------------------------------------------
   context "with an existent vine url" do
-      let(:videotron) { UnvlogIt.new("https://vine.co/v/5WvdIEvMOap") } # => Gotta catch em all #PokemonGo
+    let(:videotron) { UnvlogIt.new("https://vine.co/v/5WvdIEvMOap") } # => Gotta catch em all #PokemonGo
 
-      it "initialize a VgVine instance" do
-        expect(VgVine).to eq(videotron.instance_values['object'].class)
-        expect("https://vine.co/v/5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['url'])
-        expect("5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['video_id'])
-        expect(videotron.instance_values['object'].instance_values['json']).to_not be_nil
-      end
-      
-      it "returns the video properties" do
-        check_video_attributes({:title => "Gotta catch em all #PokemonGo", :service => "Vine"})
-      end
+    it "initialize a VgVine instance" do
+      expect(VgVine).to eq(videotron.instance_values['object'].class)
+      expect("https://vine.co/v/5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("5WvdIEvMOap").to eq(videotron.instance_values['object'].instance_values['video_id'])
+      expect(videotron.instance_values['object'].instance_values['json']).to_not be_nil
     end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "Gotta catch em all #PokemonGo", :service => "Vine"})
+    end
+  end
+
+# ----------------------------------------------------------
+#   Testing giphy
+# ----------------------------------------------------------
+  context "with an existent giphy url" do
+    let(:videotron) { UnvlogIt.new("http://giphy.com/gifs/sistersmovie-sisters-tgif-movie-3o8doKOr3E5hvVT8Sk") } 
+
+    it "initialize a VgGiphy instance" do
+      expect(VgGiphy).to eq(videotron.instance_values['object'].class)
+      expect("http://giphy.com/gifs/sistersmovie-sisters-tgif-movie-3o8doKOr3E5hvVT8Sk").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("3o8doKOr3E5hvVT8Sk").to eq(videotron.instance_values['object'].instance_values['video_id'])
+    end
+
+    it "returns the video properties" do
+      check_video_attributes({:title => "", :service => "Giphy"})
+    end
+  end
 
 # ----------------------------------------------------------
 #   Testing RuTube
@@ -295,8 +311,21 @@ describe UnvlogIt do
 # ----------------------------------------------------------
 #   Testing Prostopleer
 # ----------------------------------------------------------
-  context "with an existent pleer url" do
+  context "with an existent pleer.net url" do
     let(:videotron) { UnvlogIt.new("http://pleer.net/tracks/3370305QRJl") } # => La mala rodriguez, Nach Scratch SFDK - Dominicana
+
+    it "initialize a VgPleer instance" do
+      expect(VgPleer).to eq(videotron.instance_values['object'].class)
+      expect("http://pleer.net/tracks/3370305QRJl").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("3370305QRJl").to eq(videotron.instance_values['object'].instance_values['track_id'])
+      expect("Pleer").to eq(videotron.service)
+      expect(videotron.embed_html).not_to be_nil
+      expect("La mala rodriguez, Nach Scratch  SFDK - Dominicana").to eq(videotron.title)
+    end
+  end
+
+  context "with an existent pleer.com url" do
+    let(:videotron) { UnvlogIt.new("http://pleer.com/tracks/3370305QRJl") } # => La mala rodriguez, Nach Scratch SFDK - Dominicana
 
     it "initialize a VgPleer instance" do
       expect(VgPleer).to eq(videotron.instance_values['object'].class)
