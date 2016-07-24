@@ -2,6 +2,7 @@ class VgPleer
   attr_accessor :track_id
   
   def initialize(url, options={})
+    url = url.sub(/pleer.com/, 'pleer.net') #addressing permanent redirection
     @uri = URI.parse(url)
     @track_id = @uri.path.match(/tracks\/([\w\d]+)/)[1]
     @url = url

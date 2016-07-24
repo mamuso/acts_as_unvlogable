@@ -296,11 +296,11 @@ describe UnvlogIt do
 #   Testing Prostopleer
 # ----------------------------------------------------------
   context "with an existent pleer url" do
-    let(:videotron) { UnvlogIt.new("http://pleer.com/tracks/3370305QRJl") } # => La mala rodriguez, Nach Scratch SFDK - Dominicana
+    let(:videotron) { UnvlogIt.new("http://pleer.net/tracks/3370305QRJl") } # => La mala rodriguez, Nach Scratch SFDK - Dominicana
 
     it "initialize a VgPleer instance" do
       expect(VgPleer).to eq(videotron.instance_values['object'].class)
-      expect("http://pleer.com/tracks/3370305QRJl").to eq(videotron.instance_values['object'].instance_values['url'])
+      expect("http://pleer.net/tracks/3370305QRJl").to eq(videotron.instance_values['object'].instance_values['url'])
       expect("3370305QRJl").to eq(videotron.instance_values['object'].instance_values['track_id'])
       expect("Pleer").to eq(videotron.service)
       expect(videotron.embed_html).not_to be_nil
